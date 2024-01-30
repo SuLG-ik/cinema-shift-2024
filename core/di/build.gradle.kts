@@ -49,4 +49,6 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(projects.core.dataGraphql)
+    implementation(projects.features.filmList.data)
+    implementation(projects.features.filmList.domain)
 }

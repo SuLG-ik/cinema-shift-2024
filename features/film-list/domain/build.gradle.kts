@@ -43,6 +43,8 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 
+    implementation(libs.koin.core)
+
     implementation(projects.features.filmList.data)
 
     testImplementation(libs.junit)
