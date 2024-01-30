@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
@@ -57,6 +58,10 @@ dependencies {
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.coroutines)
     implementation(libs.decompose.compose)
+
+    implementation(libs.serialization.core)
+
+    implementation(projects.features.filmList.component)
 
     api(projects.core.component)
 
