@@ -21,6 +21,7 @@ include(":uikit")
 include(":features:film-list:ui")
 include(":features:film-list:domain")
 include(":features:film-list:data")
+include(":features:film-list:presentation")
 
 include(":core:data-graphql")
 include(":core:di")
