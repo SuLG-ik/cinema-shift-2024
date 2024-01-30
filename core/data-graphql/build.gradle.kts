@@ -58,6 +58,7 @@ dependencies {
 apollo {
     service("service") {
         packageNamesFromFilePaths()
+        generateApolloMetadata.set(true)
         introspection {
             endpointUrl.set("https://shift-backend.onrender.com/graphql")
             schemaFile.set(file("src/main/graphql/schema.graphqls"))
