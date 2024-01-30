@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "CinemaApp"
 include(":app")
 include(":uikit")
+
+include(":features:film-list:ui")
