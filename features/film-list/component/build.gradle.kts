@@ -25,6 +25,13 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,12 +49,18 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
 
     implementation(libs.koin.core)
 
     implementation(libs.mvikotlin.core)
+    implementation(libs.mvikotlin.coroutines)
+    implementation(libs.decompose.compose)
 
-    api(projects.features.filmList.domain)
+    api(projects.features.filmList.presentation)
+    api(projects.features.filmList.ui)
+    api(projects.core.component)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
