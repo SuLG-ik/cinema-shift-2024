@@ -52,4 +52,5 @@ dependencies {
     implementation(projects.core.mvi)
     implementation(projects.features.filmList.data)
     implementation(projects.features.filmList.domain)
+    implementation(projects.features.filmList.presentation)
 }

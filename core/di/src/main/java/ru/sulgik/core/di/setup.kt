@@ -8,6 +8,7 @@ import ru.sulgik.core.data.graphQlModule
 import ru.sulgik.core.mvi.mviKotlinModule
 import ru.sulgik.filmlist.data.filmListDataModule
 import ru.sulgik.filmlist.domain.filmListDomainModule
+import ru.sulgik.filmlist.presentation.filmListPresentationModule
 
 fun Application.startDI() {
     startKoin {
@@ -18,6 +19,7 @@ fun Application.startDI() {
             mviKotlinModule,
             filmListDataModule,
             filmListDomainModule,
+            filmListPresentationModule,
         )
     }
 }
