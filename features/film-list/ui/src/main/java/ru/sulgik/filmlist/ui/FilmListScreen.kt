@@ -3,6 +3,7 @@ package ru.sulgik.filmlist.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -11,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.UIKitContainedButton
+import ru.sulgik.uikit.UIKitRemoteImage
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
 data class Film(
@@ -56,6 +59,7 @@ fun FilmItem(
         Column(
             modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
         ) {
+            FilmImage(film, modifier = Modifier.sizeIn(maxHeight = 220.dp))
             FilmItemTitle(film)
             FilmRating(film.userRating)
             FilmAboutButton(onClick = {}, modifier = Modifier.fillMaxWidth())
@@ -87,6 +91,18 @@ fun FilmRating(
     ) {
         Text("Kinoposik – ${rating.kinopoisk}", style = MaterialTheme.typography.bodySmall)
     }
+}
+
+@Composable
+fun FilmImage(
+    film: Film,
+    modifier: Modifier = Modifier,
+) {
+    UIKitRemoteImage(
+        url = film.imageUrl,
+        contentDescription = stringResource(R.string.film_s_image),
+        modifier = modifier,
+    )
 }
 
 @Composable
