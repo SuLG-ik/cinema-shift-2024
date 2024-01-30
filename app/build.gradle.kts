@@ -50,6 +50,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.decompose.android)
+    implementation(projects.features.root.component)
+    implementation(projects.core.di)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

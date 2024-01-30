@@ -46,7 +46,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 
-    implementation(libs.koin.core)
+    api(libs.koin.core)
 
     api(libs.mvikotlin.core)
     api(libs.decompose.core)

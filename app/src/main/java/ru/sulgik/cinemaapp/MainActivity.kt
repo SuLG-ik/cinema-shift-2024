@@ -10,11 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
 import ru.sulgik.cinemaapp.ui.theme.CinemaAppTheme
+import ru.sulgik.core.component.withDI
+import ru.sulgik.host.component.RootComponent
+import ru.sulgik.host.component.RootUI
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val component = RootComponent(defaultComponentContext().withDI())
         setContent {
             CinemaAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +27,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    RootUI(
+                        component = component,
+                        modifier = Modifier.fillMaxSize(),
+                    )
                 }
             }
         }
