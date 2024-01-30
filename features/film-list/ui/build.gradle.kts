@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    implementation(project(":uikit"))
+    implementation(projects.uikit)
     implementation(libs.coil.core)
     implementation(libs.coil.compose)
 

@@ -48,5 +48,5 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
 
-    implementation(project(":core:data-graphql"))
+    implementation(projects.core.dataGraphql)
 }
