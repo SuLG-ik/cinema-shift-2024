@@ -21,3 +21,37 @@ fun FilmItemPreview() {
         modifier = Modifier.width(240.dp)
     )
 }
+
+@Preview
+@Composable
+fun FilmListPreview() {
+    FilmListScreen(
+        films = listOf(
+            Film(
+                title = "integer",
+                subtitle = "fabellas",
+                userRating = Film.UserRating(imdb = 14.15f, kinopoisk = 16.17f),
+                genres = listOf(),
+                countryName = null,
+                imageUrl = "http://www.bing.com/search?q=noluisse",
+            ),
+            Film(
+                title = "veri",
+                subtitle = "mucius",
+                userRating = Film.UserRating(imdb = 22.23f, kinopoisk = 24.25f),
+                genres = listOf(),
+                countryName = null,
+                imageUrl = "https://www.google.com/#q=senectus"
+            ),
+            Film(
+                title = "",
+                subtitle = "",
+                userRating = Film.UserRating(imdb = 0.0f, kinopoisk = 0.0f),
+                genres = listOf(),
+                countryName = null,
+                imageUrl = ""
+            )
+        ),
+        modifier = Modifier.width(240.dp)
+    )
+}
