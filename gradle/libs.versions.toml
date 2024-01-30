@@ -12,6 +12,8 @@ coil = "3.0.0-alpha03"
 apollo-graphql = "4.0.0-beta.4"
 koin = "3.5.3"
 mvikotlin = "4.0.0-alpha02"
+decompose = "3.0.0-alpha05"
+essenty = "2.0.0-alpha04"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -36,6 +38,10 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 mvikotlin-core = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
 mvikotlin-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
+decompose-core = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-compose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+essenty-core = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
+essenty-compose = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
