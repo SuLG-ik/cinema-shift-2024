@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.apolloGraphql)
 }
 
 android {
-    namespace = "ru.sulgik.core.data"
+    namespace = "ru.sulgik.core.di"
     compileSdk = 34
 
     defaultConfig {
@@ -24,10 +23,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com/graphql\"")
-        }
-        debug {
-            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com/graphql\"")
         }
     }
     buildFeatures {
@@ -50,17 +45,8 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.apollo.runtime)
-
     implementation(libs.koin.core)
-}
+    implementation(libs.koin.android)
 
-apollo {
-    service("service") {
-        packageNamesFromFilePaths()
-        introspection {
-            endpointUrl.set("https://shift-backend.onrender.com/graphql")
-            schemaFile.set(file("src/main/graphql/schema.graphqls"))
-        }
-    }
+    implementation(project(":core:data-graphql"))
 }

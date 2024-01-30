@@ -22,3 +22,4 @@ include(":features:film-list:domain")
 include(":features:film-list:data")
 
 include(":core:data-graphql")
+include(":core:di")
