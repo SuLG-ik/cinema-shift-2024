@@ -2,6 +2,6 @@ package ru.sulgik.filmlist.data
 
 interface RemoteFilmListRepository {
 
-    fun getAllFilms(): List<RemoteFilm>
+    suspend fun getAllFilms(): List<RemoteFilm>
 
 }
