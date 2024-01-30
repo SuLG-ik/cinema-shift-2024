@@ -25,3 +25,4 @@ include(":features:film-list:presentation")
 
 include(":core:data-graphql")
 include(":core:di")
+include(":core:mvi")

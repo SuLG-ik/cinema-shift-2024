@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.core.di"
+    namespace = "ru.sulgik.core.mvi"
     compileSdk = 34
 
     defaultConfig {
@@ -45,11 +45,13 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+
     implementation(libs.koin.core)
-    implementation(libs.koin.android)
+
+    implementation(libs.mvikotlin.core)
+    implementation(libs.mvikotlin.main)
 
     implementation(projects.core.dataGraphql)
-    implementation(projects.core.mvi)
     implementation(projects.features.filmList.data)
     implementation(projects.features.filmList.domain)
 }

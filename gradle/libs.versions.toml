@@ -34,6 +34,7 @@ apollo-runtime = { module = "com.apollographql.apollo3:apollo-runtime", version.
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 mvikotlin-core = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
+mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
 mvikotlin-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 
 [plugins]
