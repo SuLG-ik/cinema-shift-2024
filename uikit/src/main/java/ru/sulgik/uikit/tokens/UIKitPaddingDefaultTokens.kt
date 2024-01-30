@@ -1,4 +1,4 @@
-package ru.sulgik.uikit
+package ru.sulgik.uikit.tokens
 
 import androidx.compose.ui.unit.dp
 
