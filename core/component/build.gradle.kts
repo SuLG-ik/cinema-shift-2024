@@ -51,6 +51,7 @@ dependencies {
     api(libs.mvikotlin.core)
     api(libs.decompose.core)
     api(libs.essenty.coroutines)
+    api(libs.essenty.core)
 
     implementation(projects.core.dataGraphql)
     implementation(projects.features.filmList.data)
