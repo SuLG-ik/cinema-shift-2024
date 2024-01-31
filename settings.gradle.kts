@@ -30,6 +30,14 @@ include(":features:film-info:data")
 include(":features:film-info:presentation")
 include(":features:film-info:component")
 
+include(":features:tickets:root:component")
+include(":features:tickets:schedule:ui")
+include(":features:tickets:schedule:component")
+include(":features:tickets:schedule:presentation")
+include(":features:tickets:domain")
+include(":features:tickets:data")
+include(":features:tickets:presentation")
+
 
 include(":features:root:component")
 
@@ -38,3 +46,4 @@ include(":core:di")
 include(":core:mvi")
 include(":core:component")
 include(":core:images")
+include(":core:datetime")

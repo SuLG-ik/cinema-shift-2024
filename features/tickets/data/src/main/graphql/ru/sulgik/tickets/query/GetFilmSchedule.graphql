@@ -1,0 +1,28 @@
+query GetFilmSchedule($id: String!) {
+    getFilmSchedule(filmId: $id) {
+        schedules {
+            date
+            seances {
+                time
+                hall {
+                    name
+                    places {
+                        price
+                        type
+                    }
+                }
+                payedTickets {
+                    _id
+                    column
+                    filmId
+                    phone
+                    row
+                    seance {
+                        date
+                        time
+                    }
+                }
+            }
+        }
+    }
+}

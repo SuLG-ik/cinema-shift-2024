@@ -10,6 +10,8 @@ interface Films {
     sealed interface Child {
         data class FilmList(val component: ru.sulgik.filmlist.component.FilmList) : Child
         data class FilmInfo(val component: ru.sulgik.filminfo.component.FilmInfo) : Child
+        data class TicketOrder(val component: ru.sulgik.tickets.host.component.TicketsRoot) : Child
+
     }
 
 }
