@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.apolloGraphql)
 }
 
 android {
-    namespace = "ru.sulgik.core.di"
+    namespace = "ru.sulgik.core.images"
     compileSdk = 34
 
     defaultConfig {
@@ -22,6 +23,18 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+            buildConfigField(
+                "String",
+                "REMOTE_URL",
+                "\"https://shift-backend.onrender.com\""
+            )
+        }
+        debug {
+            buildConfigField(
+                "String",
+                "REMOTE_URL",
+                "\"https://shift-backend.onrender.com\""
             )
         }
     }
@@ -45,13 +58,6 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(projects.core.images)
 
-    implementation(projects.core.dataGraphql)
-    implementation(projects.core.mvi)
-    implementation(projects.features.filmList.data)
-    implementation(projects.features.filmList.domain)
-    implementation(projects.features.filmList.presentation)
+    implementation(libs.koin.core)
 }
