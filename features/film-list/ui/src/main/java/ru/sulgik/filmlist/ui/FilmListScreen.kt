@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
+import ru.sulgik.uikit.film.FilmDetails
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
 data class Film(
@@ -92,13 +93,13 @@ fun FilmItem(
         Column(
             modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
         ) {
-            FilmImage(
-                film, modifier = Modifier
-                    .sizeIn(maxHeight = 300.dp)
-                    .fillMaxWidth()
+            FilmDetails(
+                title = film.title,
+                subtitle = film.subtitle,
+                image = film.imageUrl,
+                ratingImdb = film.userRating.imdb,
+                ratingKinopoisk = film.userRating.kinopoisk,
             )
-            FilmItemTitle(film)
-            FilmRating(film.userRating)
             FilmAboutButton(onClick = {}, modifier = Modifier.fillMaxWidth())
         }
     }
