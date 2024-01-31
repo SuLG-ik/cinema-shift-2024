@@ -1,0 +1,1054 @@
+type Address {
+  appartament: String!
+
+  comment: String
+
+  house: String!
+
+  street: String!
+}
+
+input AddressInput {
+  appartament: String!
+
+  comment: String
+
+  house: String!
+
+  street: String!
+}
+
+type BaseResponse {
+  reason: String
+
+  success: Boolean!
+}
+
+"""
+The `Boolean` scalar type represents `true` or `false`.
+"""
+scalar Boolean
+
+input CalculateDeliveryPackageDto {
+  height: Float!
+
+  length: Float!
+
+  weight: Float!
+
+  width: Float!
+}
+
+input CalculateDeliveryPointDto {
+  latitude: Float!
+
+  longitude: Float!
+}
+
+type CalculateDeliveryResponse {
+  options: [DeliveryOption!]!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type CinemaOrder {
+  _id: String!
+
+  filmName: String!
+
+  orderNumber: Float!
+
+  phone: String!
+
+  status: CinemaOrderStatus!
+
+  tickets: [Ticket!]!
+}
+
+input CinemaOrderInput {
+  _id: String!
+
+  filmName: String!
+
+  orderNumber: Float!
+
+  phone: String!
+
+  status: CinemaOrderStatus!
+
+  tickets: [TicketInput!]!
+}
+
+enum CinemaOrderStatus {
+  CANCELED
+
+  PAYED
+}
+
+input CinemaPersonInput {
+  fullName: String!
+
+  id: String!
+
+  professions: [Profession!]!
+}
+
+type Country {
+  code: String!
+
+  code2: String!
+
+  id: Float!
+
+  name: String!
+}
+
+input CountryInput {
+  code: String!
+
+  code2: String!
+
+  id: Float!
+
+  name: String!
+}
+
+input CreateDeliveryOrderAddressDto {
+  appartament: String!
+
+  comment: String
+
+  house: String!
+
+  street: String!
+}
+
+input CreateDeliveryOrderDeliveryOptionDto {
+  days: Float!
+
+  id: String!
+
+  name: String!
+
+  price: Float!
+
+  type: DeliveryOptionType!
+}
+
+input CreateDeliveryOrderPersonDto {
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String
+
+  phone: String!
+}
+
+input CreateDeliveryOrderPointDto {
+  id: String!
+
+  latitude: Float!
+
+  longitude: Float!
+
+  name: String!
+}
+
+input CreatePaymentDebitCardDto {
+  cvv: String!
+
+  expireDate: String!
+
+  pan: String!
+}
+
+input CreatePaymentPersonDto {
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String
+
+  phone: String!
+}
+
+input CreatePaymentSeanceDto {
+  date: String!
+
+  time: String!
+}
+
+input CreatePaymentTicketsDto {
+  column: Float!
+
+  row: Float!
+}
+
+type DeliverResponse {
+  order: DeliveryOrder!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type DeliveryOption {
+  days: Float!
+
+  id: String!
+
+  name: String!
+
+  price: Float!
+
+  type: DeliveryOptionType!
+}
+
+enum DeliveryOptionType {
+  DEFAULT
+
+  EXPRESS
+}
+
+input DeliveryOpttionInput {
+  days: Float!
+
+  id: String!
+
+  name: String!
+
+  price: Float!
+
+  type: DeliveryOptionType!
+}
+
+type DeliveryOrder {
+  _id: String!
+
+  cancellable: Boolean!
+
+  payer: Payer!
+
+  receiver: DeliveryPerson!
+
+  receiverAddress: Address!
+
+  receiverPoint: DeliveryPoint!
+
+  sender: DeliveryPerson!
+
+  senderAddress: Address!
+
+  senderPoint: DeliveryPoint!
+
+  status: DeliveryStatus!
+}
+
+input DeliveryOrderInput {
+  _id: String!
+
+  cancellable: Boolean!
+
+  payer: Payer!
+
+  receiver: DeliveryPersonInput!
+
+  receiverAddress: AddressInput!
+
+  receiverPoint: DeliveryPointInput!
+
+  sender: DeliveryPersonInput!
+
+  senderAddress: AddressInput!
+
+  senderPoint: DeliveryPointInput!
+
+  status: DeliveryStatus!
+}
+
+type DeliveryOrderResponse {
+  order: DeliveryOrder!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type DeliveryOrdersResponse {
+  orders: [DeliveryOrder!]!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type DeliveryPackageType {
+  height: Float!
+
+  id: String!
+
+  length: Float!
+
+  name: String!
+
+  weight: Float!
+
+  width: Float!
+}
+
+input DeliveryPackageTypeInput {
+  height: Float!
+
+  id: String!
+
+  length: Float!
+
+  name: String!
+
+  weight: Float!
+
+  width: Float!
+}
+
+type DeliveryPackageTypesResponse {
+  packages: [DeliveryPackageType!]!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type DeliveryPerson {
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String
+
+  phone: String!
+}
+
+input DeliveryPersonInput {
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String
+
+  phone: String!
+}
+
+type DeliveryPoint {
+  id: String!
+
+  latitude: Float!
+
+  longitude: Float!
+
+  name: String!
+}
+
+input DeliveryPointInput {
+  id: String!
+
+  latitude: Float!
+
+  longitude: Float!
+
+  name: String!
+}
+
+type DeliveryPointsResponse {
+  points: [DeliveryPoint!]!
+
+  reason: String
+
+  success: Boolean!
+}
+
+enum DeliveryStatus {
+  CANCELED
+
+  IN_PROCESSING
+
+  ON_MY_WAY
+
+  SUCCESS
+
+  WAITING_COURIER
+}
+
+type Film {
+  actors: [FilmPerson!]!
+
+  ageRating: Rating!
+
+  country: Country
+
+  description: String!
+
+  directors: [FilmPerson!]!
+
+  genres: [String!]!
+
+  id: String!
+
+  img: String!
+
+  name: String!
+
+  originalName: String!
+
+  releaseDate: String!
+
+  runtime: Float!
+
+  userRatings: FilmUserRaiting!
+}
+
+type FilmHall {
+  name: String!
+
+  places: [[FilmHallCell!]!]!
+}
+
+type FilmHallCell {
+  price: Float!
+
+  type: FilmHallCellType!
+}
+
+input FilmHallCellInput {
+  price: Float!
+
+  type: FilmHallCellType!
+}
+
+enum FilmHallCellType {
+  BLOCKED
+
+  COMFORT
+
+  ECONOM
+}
+
+input FilmHallInput {
+  name: String!
+
+  places: [[FilmHallCellInput!]!]!
+}
+
+input FilmInput {
+  actors: [CinemaPersonInput!]! = []
+
+  ageRating: Rating!
+
+  country: CountryInput
+
+  description: String!
+
+  directors: [CinemaPersonInput!]! = []
+
+  genres: [String!]! = []
+
+  id: String!
+
+  img: String!
+
+  name: String!
+
+  originalName: String!
+
+  releaseDate: String!
+
+  runtime: Float!
+
+  userRatings: FilmUserRaitingInput!
+}
+
+type FilmPerson {
+  fullName: String!
+
+  id: String!
+
+  professions: [Profession!]!
+}
+
+type FilmResponse {
+  film: Film!
+
+  reason: String
+
+  success: Boolean!
+}
+
+type FilmTicketSeance {
+  date: String!
+
+  time: String!
+}
+
+input FilmTicketSeanceInput {
+  date: String!
+
+  time: String!
+}
+
+type FilmUserRaiting {
+  imdb: String!
+
+  kinopoisk: String!
+}
+
+input FilmUserRaitingInput {
+  imdb: String!
+
+  kinopoisk: String!
+}
+
+type FilmsResponse {
+  films: [Film!]!
+
+  reason: String
+
+  success: Boolean!
+}
+
+"""
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+"""
+scalar Float
+
+type Mutation {
+  calculateDelivery(package: CalculateDeliveryPackageDto!, receiverPoint: CalculateDeliveryPointDto!, senderPoint: CalculateDeliveryPointDto!): CalculateDeliveryResponse!
+
+  cancelCinemaOrder(orderId: String!): BaseResponse!
+
+  cancelDeliveryOrder(orderId: String!): BaseResponse!
+
+  createCinemaPayment(debitCard: CreatePaymentDebitCardDto!, filmId: String!, person: CreatePaymentPersonDto!, seance: CreatePaymentSeanceDto!, tickets: [CreatePaymentTicketsDto!]!): PaymentResponse!
+
+  createDeliveryOrder(option: CreateDeliveryOrderDeliveryOptionDto!, payer: Payer!, receiver: CreateDeliveryOrderPersonDto!, receiverAddress: CreateDeliveryOrderAddressDto!, receiverPoint: CreateDeliveryOrderPointDto!, sender: CreateDeliveryOrderPersonDto!, senderAddress: CreateDeliveryOrderAddressDto!, senderPoint: CreateDeliveryOrderPointDto!): DeliverResponse!
+
+  createOtp(phone: String!): OtpResponse!
+
+  signin(code: Float!, phone: String!): SignInResponse!
+
+  updateProfile(phone: String!, profile: UpdateProfileProfileDto!): UpdateProfileResponse!
+}
+
+type Otp {
+  _id: String!
+
+  code: Float!
+
+  created: String!
+
+  phone: String!
+
+  retryDelay: Float!
+}
+
+input OtpInput {
+  _id: String!
+
+  code: Float!
+
+  created: String!
+
+  phone: String!
+
+  retryDelay: Float!
+}
+
+type OtpResponse {
+  reason: String
+
+  retryDelay: Float!
+
+  success: Boolean!
+}
+
+enum Payer {
+  RECEIVER
+
+  SENDER
+}
+
+type PaymentResponse {
+  order: String!
+
+  reason: String
+
+  success: Boolean!
+}
+
+enum Profession {
+  ACTOR
+
+  DIRECTOR
+}
+
+type Query {
+  getCinemaOrders: TicketsResponse!
+
+  getCinemaToday: FilmsResponse!
+
+  getDeliveryOrder(orderId: String!): DeliveryOrderResponse!
+
+  getDeliveryOrders: DeliveryOrdersResponse!
+
+  getDeliveryPackageTypes: DeliveryPackageTypesResponse!
+
+  getDeliveryPoints: DeliveryPointsResponse!
+
+  getFilm(filmId: String!): FilmResponse!
+
+  getFilmSchedule(filmId: String!): ScheduleResponse!
+
+  session: SessionResponse!
+}
+
+enum Rating {
+  G
+
+  NC17
+
+  PG
+
+  PG13
+
+  R
+}
+
+type Schedule {
+  date: String!
+
+  seances: [ScheduleSeance!]!
+}
+
+type ScheduleResponse {
+  reason: String
+
+  schedules: [Schedule!]!
+
+  success: Boolean!
+}
+
+type ScheduleSeance {
+  hall: FilmHall!
+
+  payedTickets: [Ticket!]!
+
+  time: String!
+}
+
+type SessionResponse {
+  reason: String
+
+  success: Boolean!
+
+  user: User!
+}
+
+type SignInResponse {
+  reason: String
+
+  success: Boolean!
+
+  token: String!
+
+  user: User!
+}
+
+"""
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+"""
+scalar String
+
+type Ticket {
+  _id: String!
+
+  column: Float!
+
+  filmId: String!
+
+  phone: String!
+
+  row: Float!
+
+  seance: FilmTicketSeance!
+}
+
+input TicketInput {
+  _id: String!
+
+  column: Float!
+
+  filmId: String!
+
+  phone: String!
+
+  row: Float!
+
+  seance: FilmTicketSeanceInput!
+}
+
+type TicketsResponse {
+  reason: String
+
+  success: Boolean!
+
+  tickets: [Ticket!]!
+}
+
+input UpdateProfileProfileDto {
+  city: String!
+
+  email: String!
+
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String!
+}
+
+type UpdateProfileResponse {
+  reason: String
+
+  success: Boolean!
+
+  user: User!
+}
+
+type User {
+  _id: String!
+
+  city: String!
+
+  email: String!
+
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String!
+
+  phone: String!
+}
+
+input UserInput {
+  _id: String!
+
+  city: String!
+
+  email: String!
+
+  firstname: String!
+
+  lastname: String!
+
+  middlename: String!
+
+  phone: String!
+}
+
+"""
+A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.
+
+In some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.
+"""
+type __Directive {
+  name: String!
+
+  description: String
+
+  isRepeatable: Boolean!
+
+  locations: [__DirectiveLocation!]!
+
+  args(includeDeprecated: Boolean = false): [__InputValue!]!
+}
+
+"""
+A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.
+"""
+enum __DirectiveLocation {
+  """
+  Location adjacent to a query operation.
+  """
+  QUERY
+
+  """
+  Location adjacent to a mutation operation.
+  """
+  MUTATION
+
+  """
+  Location adjacent to a subscription operation.
+  """
+  SUBSCRIPTION
+
+  """
+  Location adjacent to a field.
+  """
+  FIELD
+
+  """
+  Location adjacent to a fragment definition.
+  """
+  FRAGMENT_DEFINITION
+
+  """
+  Location adjacent to a fragment spread.
+  """
+  FRAGMENT_SPREAD
+
+  """
+  Location adjacent to an inline fragment.
+  """
+  INLINE_FRAGMENT
+
+  """
+  Location adjacent to a variable definition.
+  """
+  VARIABLE_DEFINITION
+
+  """
+  Location adjacent to a schema definition.
+  """
+  SCHEMA
+
+  """
+  Location adjacent to a scalar definition.
+  """
+  SCALAR
+
+  """
+  Location adjacent to an object type definition.
+  """
+  OBJECT
+
+  """
+  Location adjacent to a field definition.
+  """
+  FIELD_DEFINITION
+
+  """
+  Location adjacent to an argument definition.
+  """
+  ARGUMENT_DEFINITION
+
+  """
+  Location adjacent to an interface definition.
+  """
+  INTERFACE
+
+  """
+  Location adjacent to a union definition.
+  """
+  UNION
+
+  """
+  Location adjacent to an enum definition.
+  """
+  ENUM
+
+  """
+  Location adjacent to an enum value definition.
+  """
+  ENUM_VALUE
+
+  """
+  Location adjacent to an input object type definition.
+  """
+  INPUT_OBJECT
+
+  """
+  Location adjacent to an input object field definition.
+  """
+  INPUT_FIELD_DEFINITION
+}
+
+"""
+One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.
+"""
+type __EnumValue {
+  name: String!
+
+  description: String
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.
+"""
+type __Field {
+  name: String!
+
+  description: String
+
+  args(includeDeprecated: Boolean = false): [__InputValue!]!
+
+  type: __Type!
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.
+"""
+type __InputValue {
+  name: String!
+
+  description: String
+
+  type: __Type!
+
+  """
+  A GraphQL-formatted string representing the default value for this input value.
+  """
+  defaultValue: String
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.
+"""
+type __Schema {
+  description: String
+
+  """
+  A list of all types supported by this server.
+  """
+  types: [__Type!]!
+
+  """
+  The type that query operations will be rooted at.
+  """
+  queryType: __Type!
+
+  """
+  If this server supports mutation, the type that mutation operations will be rooted at.
+  """
+  mutationType: __Type
+
+  """
+  If this server support subscription, the type that subscription operations will be rooted at.
+  """
+  subscriptionType: __Type
+
+  """
+  A list of all directives supported by this server.
+  """
+  directives: [__Directive!]!
+}
+
+"""
+The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+
+Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+"""
+type __Type {
+  kind: __TypeKind!
+
+  name: String
+
+  description: String
+
+  specifiedByURL: String
+
+  fields(includeDeprecated: Boolean = false): [__Field!]
+
+  interfaces: [__Type!]
+
+  possibleTypes: [__Type!]
+
+  enumValues(includeDeprecated: Boolean = false): [__EnumValue!]
+
+  inputFields(includeDeprecated: Boolean = false): [__InputValue!]
+
+  ofType: __Type
+}
+
+"""
+An enum describing what kind of type a given `__Type` is.
+"""
+enum __TypeKind {
+  """
+  Indicates this type is a scalar.
+  """
+  SCALAR
+
+  """
+  Indicates this type is an object. `fields` and `interfaces` are valid fields.
+  """
+  OBJECT
+
+  """
+  Indicates this type is an interface. `fields`, `interfaces`, and `possibleTypes` are valid fields.
+  """
+  INTERFACE
+
+  """
+  Indicates this type is a union. `possibleTypes` is a valid field.
+  """
+  UNION
+
+  """
+  Indicates this type is an enum. `enumValues` is a valid field.
+  """
+  ENUM
+
+  """
+  Indicates this type is an input object. `inputFields` is a valid field.
+  """
+  INPUT_OBJECT
+
+  """
+  Indicates this type is a list. `ofType` is a valid field.
+  """
+  LIST
+
+  """
+  Indicates this type is a non-null. `ofType` is a valid field.
+  """
+  NON_NULL
+}
+
+"""
+Marks an element of a GraphQL schema as no longer supported.
+"""
+directive @deprecated ("Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https:\/\/commonmark.org\/)." reason: String = "No longer supported") on ARGUMENT_DEFINITION|ENUM_VALUE|FIELD_DEFINITION|INPUT_FIELD_DEFINITION
+
+"""
+Directs the executor to include this field or fragment only when the `if` argument is true.
+"""
+directive @include ("Included when true." if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+Directs the executor to skip this field or fragment when the `if` argument is true.
+"""
+directive @skip ("Skipped when true." if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+Exposes a URL that specifies the behavior of this scalar.
+"""
+directive @specifiedBy ("The URL that specifies the behavior of this scalar." url: String!) on SCALAR
+
+schema {
+  query: Query
+  mutation: Mutation
+}

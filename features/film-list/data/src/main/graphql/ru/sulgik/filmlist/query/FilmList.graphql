@@ -1,0 +1,22 @@
+query LoadFilmList {
+    getCinemaToday {
+        films {
+            id
+            name
+            originalName
+            genres
+            img
+            userRatings {
+                kinopoisk
+                imdb
+            }
+            directors {
+                fullName
+            }
+            country {
+                name
+            }
+            releaseDate
+        }
+    }
+}
