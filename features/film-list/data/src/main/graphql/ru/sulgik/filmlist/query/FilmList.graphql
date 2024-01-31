@@ -2,6 +2,7 @@ query LoadFilmList {
     getCinemaToday {
         films {
             name
+            originalName
             genres
             img
             userRatings {

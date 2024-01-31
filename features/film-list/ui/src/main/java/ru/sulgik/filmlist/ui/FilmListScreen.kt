@@ -2,6 +2,7 @@ package ru.sulgik.filmlist.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -12,10 +13,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
+import ru.sulgik.uikit.tokens.UIKitContainedButtonTokens
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
 data class Film(
@@ -40,8 +44,8 @@ fun FilmListScreen(
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
-
-    ) {
+        contentPadding = PaddingValues(UIKitPaddingDefaultTokens.DefaultContentPadding)
+        ) {
         items(films) {
             FilmItem(
                 film = it,
@@ -57,12 +61,15 @@ fun FilmItem(
     modifier: Modifier = Modifier,
 ) {
     Card(
+        shape = MaterialTheme.shapes.large,
         modifier = modifier,
     ) {
         Column(
-            modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
+            modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
         ) {
-            FilmImage(film, modifier = Modifier.sizeIn(maxHeight = 220.dp))
+            FilmImage(film, modifier = Modifier
+                .sizeIn(maxHeight = 300.dp)
+                .fillMaxWidth())
             FilmItemTitle(film)
             FilmRating(film.userRating)
             FilmAboutButton(onClick = {}, modifier = Modifier.fillMaxWidth())
@@ -104,7 +111,8 @@ fun FilmImage(
     UIKitRemoteImage(
         url = film.imageUrl,
         contentDescription = stringResource(R.string.film_s_image),
-        modifier = modifier,
+        contentScale = ContentScale.Crop,
+        modifier = modifier.clip(MaterialTheme.shapes.large),
     )
 }
 
@@ -116,7 +124,7 @@ fun FilmItemTitle(
     Column(
         modifier = modifier,
     ) {
-        Text(film.title, style = MaterialTheme.typography.bodyLarge)
-        Text(film.subtitle, style = MaterialTheme.typography.bodySmall)
+        Text(film.title, style = MaterialTheme.typography.headlineMedium)
+        Text(film.subtitle, style = MaterialTheme.typography.bodyLarge)
     }
 }

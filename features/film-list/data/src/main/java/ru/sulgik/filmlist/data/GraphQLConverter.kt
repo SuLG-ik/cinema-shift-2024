@@ -10,7 +10,7 @@ fun LoadFilmListQuery.Data.convert(): List<RemoteFilm> {
 
 fun LoadFilmListQuery.Film.convert(): RemoteFilm {
     return RemoteFilm(
-        title = name, subtitle = name,
+        title = name, subtitle = originalName,
         userRating = RemoteFilm.UserRating(
             imdb = userRatings.imdb.toFloat(),
             kinopoisk = userRatings.kinopoisk.toFloat()
