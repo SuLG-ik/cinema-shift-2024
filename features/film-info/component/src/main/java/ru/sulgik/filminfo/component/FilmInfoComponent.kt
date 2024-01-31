@@ -13,12 +13,16 @@ import ru.sulgik.filminfo.presentation.FilmInfoStore
 
 class FilmInfoComponent(
     componentContext: DIComponentContext,
-    filmId: String
+    filmId: String,
+    private val onSchedule: () -> Unit,
 ) : AppComponentContext(componentContext), FilmInfo {
 
     private val coroutineScope = coroutineScope()
 
     private val store: FilmInfoStore = getStore(FilmInfoStore.Params(filmId))
+    override fun onSchedule() {
+        onSchedule.invoke()
+    }
 
     override val state: StateFlow<FilmInfo.State> = store.stateFlow.map { it.convert() }
         .stateIn(coroutineScope, SharingStarted.Lazily, store.state.convert())

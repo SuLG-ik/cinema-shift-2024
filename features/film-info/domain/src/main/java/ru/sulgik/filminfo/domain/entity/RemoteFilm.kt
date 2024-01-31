@@ -3,6 +3,7 @@ package ru.sulgik.filminfo.domain.entity
 data class Film(
     val title: String,
     val subtitle: String,
+    val description: String,
     val userRating: UserRating,
     val genres: List<String>,
     val countryName: String?,

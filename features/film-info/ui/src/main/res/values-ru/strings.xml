@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="more_info">Подробнее</string>
-    <string name="film_s_image">Изображение фильма</string>
+    <string name="view_schedule">Посмотреть расписание</string>
 </resources>

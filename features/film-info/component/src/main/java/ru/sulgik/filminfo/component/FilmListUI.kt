@@ -15,6 +15,7 @@ fun FilmInfoUI(
     val state = component.state.collectAsState()
     FilmScreen(
         film = state.value.film?.convert(),
+        onSchedule = component::onSchedule,
         modifier = modifier,
     )
 }
@@ -23,6 +24,7 @@ private fun FilmEntity.convert(): Film {
     return Film(
         title = title,
         subtitle = subtitle,
+        description = description,
         userRating = Film.UserRating(
             userRating.imdb,
             userRating.kinopoisk,

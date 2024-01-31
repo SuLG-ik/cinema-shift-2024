@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializable
 import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.diChildStack
-import ru.sulgik.filminfo.component.FilmInfo
 import ru.sulgik.filminfo.component.FilmInfoComponent
 import ru.sulgik.filmlist.component.FilmListComponent
 
@@ -33,6 +32,7 @@ class FilmsComponent(componentContext: DIComponentContext) : AppComponentContext
                 FilmInfoComponent(
                     componentContext = diComponentContext,
                     filmId = config.filmId,
+                    onSchedule = this::onSchedule,
                 )
             )
 
@@ -47,6 +47,11 @@ class FilmsComponent(componentContext: DIComponentContext) : AppComponentContext
 
     private fun onFilmAbout(filmId: String) {
         navigation.bringToFront(FilmsComponent.Config.FilmInfo(filmId))
+    }
+
+
+    private fun onSchedule() {
+
     }
 
 
