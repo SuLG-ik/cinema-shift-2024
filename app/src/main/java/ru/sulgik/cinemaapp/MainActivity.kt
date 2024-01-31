@@ -8,29 +8,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import coil3.ImageLoader
 import com.arkivanov.decompose.defaultComponentContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import ru.sulgik.cinemaapp.ui.theme.CinemaAppTheme
 import ru.sulgik.core.component.withDI
 import ru.sulgik.host.component.RootComponent
 import ru.sulgik.host.component.RootUI
+import ru.sulgik.uikit.LocalImageLoader
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val component = RootComponent(defaultComponentContext().withDI())
+        val imageLoader = get<ImageLoader>()
         setContent {
             CinemaAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    RootUI(
-                        component = component,
+                CompositionLocalProvider(LocalImageLoader provides imageLoader) {
+                    Surface(
                         modifier = Modifier.fillMaxSize(),
-                    )
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        RootUI(
+                            component = component,
+                            modifier = Modifier.fillMaxSize(),
+                        )
+                    }
                 }
             }
         }

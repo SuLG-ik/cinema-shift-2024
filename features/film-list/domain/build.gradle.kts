@@ -45,6 +45,7 @@ dependencies {
 
     implementation(libs.koin.core)
 
+    implementation(projects.core.images)
     implementation(projects.features.filmList.data)
 
     testImplementation(libs.junit)

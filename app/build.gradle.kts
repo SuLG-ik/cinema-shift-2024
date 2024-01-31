@@ -53,10 +53,12 @@ dependencies {
     implementation(libs.decompose.android)
     implementation(projects.features.root.component)
     implementation(projects.core.di)
+    implementation(projects.uikit)
 
     implementation(libs.compose.activity)
 
     implementation(libs.core.ktx)
+    implementation(libs.coil.core)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
