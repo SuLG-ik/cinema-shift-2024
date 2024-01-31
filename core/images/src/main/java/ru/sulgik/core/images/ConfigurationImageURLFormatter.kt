@@ -5,7 +5,7 @@ internal class ConfigurationImageURLFormatter(
 ) : ImageURLFormatter {
 
     override fun format(url: String): String {
-        return "$config$url"
+        return "${config.baseUrl}$url"
     }
 
 }

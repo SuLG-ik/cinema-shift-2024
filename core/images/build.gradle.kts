@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.apolloGraphql)
 }
 
 android {
@@ -60,4 +59,6 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
 
     implementation(libs.koin.core)
+    implementation(libs.coil.core)
+    implementation(libs.coil.okhttp)
 }
