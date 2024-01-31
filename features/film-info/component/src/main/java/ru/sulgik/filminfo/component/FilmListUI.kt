@@ -16,6 +16,7 @@ fun FilmInfoUI(
     FilmScreen(
         film = state.value.film?.convert(),
         onSchedule = component::onSchedule,
+        onBack = component::onBack,
         modifier = modifier,
     )
 }

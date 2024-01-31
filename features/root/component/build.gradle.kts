@@ -62,6 +62,7 @@ dependencies {
 
     implementation(projects.features.filmList.component)
     implementation(projects.features.filmInfo.component)
+    implementation(projects.features.tickets.root.component)
 
     api(projects.core.component)
 

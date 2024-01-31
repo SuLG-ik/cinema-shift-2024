@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import ru.sulgik.filminfo.component.FilmInfoUI
 import ru.sulgik.filmlist.component.FilmListUI
+import ru.sulgik.tickets.host.component.TicketsRootUI
 
 @Composable
 fun FilmsUI(
@@ -24,5 +25,9 @@ fun FilmsNavHost(
     when (child) {
         is Films.Child.FilmInfo -> FilmInfoUI(component = child.component, modifier = modifier)
         is Films.Child.FilmList -> FilmListUI(component = child.component, modifier = modifier)
+        is Films.Child.TicketOrder -> TicketsRootUI(
+            component = child.component,
+            modifier = modifier
+        )
     }
 }

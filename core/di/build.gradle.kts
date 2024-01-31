@@ -51,10 +51,16 @@ dependencies {
 
     implementation(projects.core.dataGraphql)
     implementation(projects.core.mvi)
+    implementation(projects.core.datetime)
     implementation(projects.features.filmInfo.data)
     implementation(projects.features.filmInfo.domain)
     implementation(projects.features.filmInfo.presentation)
     implementation(projects.features.filmList.data)
     implementation(projects.features.filmList.domain)
     implementation(projects.features.filmList.presentation)
+
+    implementation(projects.features.tickets.domain)
+    implementation(projects.features.tickets.data)
+    implementation(projects.features.tickets.presentation)
+    implementation(projects.features.tickets.schedule.presentation)
 }

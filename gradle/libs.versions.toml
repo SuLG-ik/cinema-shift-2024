@@ -19,8 +19,10 @@ decompose = "3.0.0-alpha05"
 kotlinx-serialization = "1.6.2"
 essenty = "2.0.0-alpha04"
 volley = "1.2.1"
+desugaring = "2.0.4"
 
 [libraries]
+desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref="desugaring"}
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

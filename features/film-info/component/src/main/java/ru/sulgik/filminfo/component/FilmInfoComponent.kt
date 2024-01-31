@@ -15,6 +15,7 @@ class FilmInfoComponent(
     componentContext: DIComponentContext,
     filmId: String,
     private val onSchedule: () -> Unit,
+    private val onBack: () -> Unit,
 ) : AppComponentContext(componentContext), FilmInfo {
 
     private val coroutineScope = coroutineScope()
@@ -22,6 +23,10 @@ class FilmInfoComponent(
     private val store: FilmInfoStore = getStore(FilmInfoStore.Params(filmId))
     override fun onSchedule() {
         onSchedule.invoke()
+    }
+
+    override fun onBack() {
+        onBack.invoke()
     }
 
     override val state: StateFlow<FilmInfo.State> = store.stateFlow.map { it.convert() }

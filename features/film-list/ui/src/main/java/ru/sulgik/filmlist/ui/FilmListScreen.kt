@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -24,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
+import ru.sulgik.uikit.UIKitTopBar
 import ru.sulgik.uikit.film.FilmDetails
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
@@ -73,7 +73,7 @@ fun FilmListScreen(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = { Text(text = "Афиша") })
+            UIKitTopBar(title = { Text(text = "Афиша") })
         },
         modifier = modifier
     ) {
