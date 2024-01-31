@@ -51,6 +51,9 @@ dependencies {
 
     implementation(projects.core.dataGraphql)
     implementation(projects.core.mvi)
+    implementation(projects.features.filmInfo.data)
+    implementation(projects.features.filmInfo.domain)
+    implementation(projects.features.filmInfo.presentation)
     implementation(projects.features.filmList.data)
     implementation(projects.features.filmList.domain)
     implementation(projects.features.filmList.presentation)

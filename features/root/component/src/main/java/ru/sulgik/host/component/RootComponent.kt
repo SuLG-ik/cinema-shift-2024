@@ -6,7 +6,7 @@ import com.arkivanov.decompose.value.Value
 import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.diChildStack
-import ru.sulgik.filmlist.component.FilmListComponent
+import ru.sulgik.host.component.films.FilmsComponent
 
 class RootComponent(
     componentContext: DIComponentContext
@@ -27,9 +27,9 @@ class RootComponent(
         diComponentContext: DIComponentContext
     ): Root.Child {
         return when (config) {
-            Root.Config.FilmList -> Root.Child.FilmList(
-                component = FilmListComponent(
-                    componentContext = diComponentContext,
+            Root.Config.FilmList -> Root.Child.Films(
+                component = FilmsComponent(
+                    diComponentContext,
                 )
             )
 

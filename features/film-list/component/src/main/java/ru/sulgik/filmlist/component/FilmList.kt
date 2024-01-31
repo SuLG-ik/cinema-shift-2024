@@ -8,7 +8,7 @@ interface FilmList {
 
     val state: StateFlow<State>
 
-    fun onFilmAbout(film: Film)
+    fun onFilmAbout(filmId: String)
 
     data class State(
         val isLoading: Boolean,

@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 fun FilmItemPreview() {
     FilmItem(
         film = Film(
+            id = "1",
             title = "Title",
             subtitle = "subtitle",
             userRating = Film.UserRating(imdb = 4.5f, kinopoisk = 6.7f),
@@ -18,6 +19,7 @@ fun FilmItemPreview() {
             countryName = null,
             imageUrl = "https://www.google.com/#q=vim",
         ),
+        onFilmAbout = {},
         modifier = Modifier.width(240.dp)
     )
 }
@@ -28,6 +30,7 @@ fun FilmListPreview() {
     FilmListScreen(
         films = listOf(
             Film(
+                id = "1",
                 title = "integer",
                 subtitle = "fabellas",
                 userRating = Film.UserRating(imdb = 14.15f, kinopoisk = 16.17f),
@@ -36,6 +39,7 @@ fun FilmListPreview() {
                 imageUrl = "http://www.bing.com/search?q=noluisse",
             ),
             Film(
+                id = "1",
                 title = "veri",
                 subtitle = "mucius",
                 userRating = Film.UserRating(imdb = 22.23f, kinopoisk = 24.25f),
@@ -44,6 +48,7 @@ fun FilmListPreview() {
                 imageUrl = "https://www.google.com/#q=senectus"
             ),
             Film(
+                id = "1",
                 title = "",
                 subtitle = "",
                 userRating = Film.UserRating(imdb = 0.0f, kinopoisk = 0.0f),
@@ -52,6 +57,7 @@ fun FilmListPreview() {
                 imageUrl = ""
             )
         ),
+        onFilmAbout = {},
         modifier = Modifier.width(240.dp)
     )
 }

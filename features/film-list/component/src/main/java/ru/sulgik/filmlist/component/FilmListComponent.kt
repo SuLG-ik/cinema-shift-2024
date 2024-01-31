@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.stateIn
 import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.getStore
-import ru.sulgik.filmlist.domain.entity.Film
 import ru.sulgik.filmlist.presentation.FilmListStore
 
 class FilmListComponent(
     componentContext: DIComponentContext,
+    private val onFilmInfo: (String) -> Unit,
 ) : AppComponentContext(componentContext), FilmList {
 
     private val coroutineScope = coroutineScope()
@@ -23,8 +23,8 @@ class FilmListComponent(
     override val state: StateFlow<FilmList.State> = store.stateFlow.map { it.convert() }
         .stateIn(coroutineScope, SharingStarted.Lazily, store.state.convert())
 
-    override fun onFilmAbout(film: Film) {
-        TODO("Not yet implemented")
+    override fun onFilmAbout(filmId: String) {
+        onFilmInfo.invoke(filmId)
     }
 
 }

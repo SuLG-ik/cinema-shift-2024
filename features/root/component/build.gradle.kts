@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.serialization.core)
 
     implementation(projects.features.filmList.component)
+    implementation(projects.features.filmInfo.component)
 
     api(projects.core.component)
 

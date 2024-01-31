@@ -1,6 +1,7 @@
 package ru.sulgik.filmlist.data
 
 data class RemoteFilm(
+    val id: String,
     val title: String,
     val subtitle: String,
     val userRating: UserRating,

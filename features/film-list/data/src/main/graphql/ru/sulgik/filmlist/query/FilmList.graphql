@@ -1,6 +1,7 @@
 query LoadFilmList {
     getCinemaToday {
         films {
+            id
             name
             originalName
             genres

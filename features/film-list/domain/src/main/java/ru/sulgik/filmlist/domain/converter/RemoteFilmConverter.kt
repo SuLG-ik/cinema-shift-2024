@@ -14,6 +14,7 @@ class RemoteFilmConverter(
 
     fun convert(remoteFilm: RemoteFilm): Film {
         return Film(
+            id = remoteFilm.id,
             title = remoteFilm.title,
             subtitle = remoteFilm.subtitle,
             userRating = Film.UserRating(

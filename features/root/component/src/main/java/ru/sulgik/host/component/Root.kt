@@ -28,7 +28,7 @@ interface Root {
 
     sealed interface Child {
 
-        data class FilmList(val component: ru.sulgik.filmlist.component.FilmList) : Child
+        data class Films(val component: ru.sulgik.host.component.films.Films) : Child
 
         //TODO
 

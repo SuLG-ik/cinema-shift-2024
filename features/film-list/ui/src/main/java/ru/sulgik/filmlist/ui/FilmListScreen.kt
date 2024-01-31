@@ -1,12 +1,13 @@
 package ru.sulgik.filmlist.ui
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -16,17 +17,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
 import ru.sulgik.uikit.film.FilmDetails
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
 data class Film(
+    val id: String,
     val title: String,
     val subtitle: String,
     val userRating: UserRating,
@@ -43,6 +45,7 @@ data class Film(
 @Composable
 fun FilmList(
     films: List<Film>,
+    onFilmAbout: (Film) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -50,9 +53,10 @@ fun FilmList(
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
         contentPadding = PaddingValues(horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding)
     ) {
-        items(films) {
+        items(films, contentType = { "film" }, key = { it.id }) {
             FilmItem(
                 film = it,
+                onFilmAbout = { onFilmAbout(it) },
                 modifier = Modifier.fillMaxWidth(),
             )
         }
@@ -64,6 +68,7 @@ fun FilmList(
 @Composable
 fun FilmListScreen(
     films: List<Film>,
+    onFilmAbout: (Film) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -74,7 +79,8 @@ fun FilmListScreen(
     ) {
         FilmList(
             films = films,
-            modifier  = Modifier
+            onFilmAbout = onFilmAbout,
+            modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
         )
@@ -84,11 +90,16 @@ fun FilmListScreen(
 @Composable
 fun FilmItem(
     film: Film,
+    onFilmAbout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         shape = MaterialTheme.shapes.large,
-        modifier = modifier,
+        modifier = modifier.clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null,
+            onClick = onFilmAbout,
+        ),
     ) {
         Column(
             modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
@@ -100,7 +111,7 @@ fun FilmItem(
                 ratingImdb = film.userRating.imdb,
                 ratingKinopoisk = film.userRating.kinopoisk,
             )
-            FilmAboutButton(onClick = {}, modifier = Modifier.fillMaxWidth())
+            FilmAboutButton(onClick = onFilmAbout, modifier = Modifier.fillMaxWidth())
         }
     }
 }

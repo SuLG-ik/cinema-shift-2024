@@ -6,7 +6,7 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 inline fun <reified T : Store<*, *, *>> DIComponentContext.getStore(
-    params: Array<*> = emptyArray<Any>()
+    vararg params: Any,
 ): T {
     return instanceKeeper.getStore { get<T>{ parametersOf(*params) } }
 }

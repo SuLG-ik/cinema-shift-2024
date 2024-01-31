@@ -3,7 +3,7 @@ package ru.sulgik.host.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import ru.sulgik.filmlist.component.FilmListUI
+import ru.sulgik.host.component.films.FilmsUI
 
 @Composable
 fun RootUI(
@@ -21,7 +21,7 @@ fun RootNavHost(
     modifier: Modifier,
 ) {
     when (child) {
-        is Root.Child.FilmList -> FilmListUI(child.component, modifier)
+        is Root.Child.Films -> FilmsUI(child.component, modifier)
         Root.Child.Profile -> TODO()
         Root.Child.Tickets -> TODO()
     }
