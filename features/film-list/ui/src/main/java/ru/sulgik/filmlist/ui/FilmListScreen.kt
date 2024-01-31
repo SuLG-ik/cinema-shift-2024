@@ -3,13 +3,17 @@ package ru.sulgik.filmlist.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
-import ru.sulgik.uikit.tokens.UIKitContainedButtonTokens
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 
 data class Film(
@@ -37,21 +40,43 @@ data class Film(
 }
 
 @Composable
-fun FilmListScreen(
+fun FilmList(
     films: List<Film>,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
-        contentPadding = PaddingValues(UIKitPaddingDefaultTokens.DefaultContentPadding)
-        ) {
+        contentPadding = PaddingValues(horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding)
+    ) {
         items(films) {
             FilmItem(
                 film = it,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FilmListScreen(
+    films: List<Film>,
+    modifier: Modifier = Modifier,
+) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(title = { Text(text = "Афиша") })
+        },
+        modifier = modifier
+    ) {
+        FilmList(
+            films = films,
+            modifier  = Modifier
+                .padding(it)
+                .fillMaxSize()
+        )
     }
 }
 
@@ -67,9 +92,11 @@ fun FilmItem(
         Column(
             modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
         ) {
-            FilmImage(film, modifier = Modifier
-                .sizeIn(maxHeight = 300.dp)
-                .fillMaxWidth())
+            FilmImage(
+                film, modifier = Modifier
+                    .sizeIn(maxHeight = 300.dp)
+                    .fillMaxWidth()
+            )
             FilmItemTitle(film)
             FilmRating(film.userRating)
             FilmAboutButton(onClick = {}, modifier = Modifier.fillMaxWidth())
