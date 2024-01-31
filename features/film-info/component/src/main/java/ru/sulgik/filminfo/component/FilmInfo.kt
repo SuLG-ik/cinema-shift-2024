@@ -7,6 +7,8 @@ interface FilmInfo {
 
     fun onSchedule()
 
+    fun onBack()
+
     val state: StateFlow<State>
 
     data class State(

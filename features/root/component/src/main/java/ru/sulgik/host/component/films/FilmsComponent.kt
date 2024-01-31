@@ -3,6 +3,7 @@ package ru.sulgik.host.component.films
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import ru.sulgik.core.component.AppComponentContext
@@ -33,6 +34,7 @@ class FilmsComponent(componentContext: DIComponentContext) : AppComponentContext
                     componentContext = diComponentContext,
                     filmId = config.filmId,
                     onSchedule = this::onSchedule,
+                    onBack = this::onBack,
                 )
             )
 
@@ -47,6 +49,10 @@ class FilmsComponent(componentContext: DIComponentContext) : AppComponentContext
 
     private fun onFilmAbout(filmId: String) {
         navigation.bringToFront(FilmsComponent.Config.FilmInfo(filmId))
+    }
+
+    private fun onBack() {
+        navigation.pop()
     }
 
 
