@@ -57,6 +57,7 @@ dependencies {
     implementation(projects.features.root.component)
     implementation(projects.core.di)
     implementation(projects.uikit)
+    implementation(projects.core.datetime)
 
     implementation(libs.compose.activity)
 
