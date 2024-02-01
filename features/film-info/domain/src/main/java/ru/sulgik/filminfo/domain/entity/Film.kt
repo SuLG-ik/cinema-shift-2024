@@ -13,6 +13,7 @@ data class Film(
     val runtime: Int,
     val directors: List<Director>,
     val actors: List<Actor>,
+    val releaseDate: String,
 ) {
 
     data class Director(

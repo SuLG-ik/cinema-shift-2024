@@ -9,6 +9,7 @@ data class Film(
     val genres: List<String>,
     val countryName: String?,
     val imageUrl: String,
+    val releaseDate: String,
 ) {
     data class UserRating(
         val imdb: Float,

@@ -19,6 +19,7 @@ fun FilmItemPreview() {
             countryName = null,
             imageUrl = "https://www.google.com/#q=vim",
             description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+            releaseDate = "2024",
         ),
         onFilmAbout = {},
         modifier = Modifier.width(240.dp)
@@ -39,6 +40,7 @@ fun FilmListPreview() {
                 countryName = null,
                 imageUrl = "http://www.bing.com/search?q=noluisse",
                 description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             ),
             Film(
                 id = "1",
@@ -49,6 +51,7 @@ fun FilmListPreview() {
                 countryName = null,
                 imageUrl = "https://www.google.com/#q=senectus",
                 description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             ),
             Film(
                 id = "1",
@@ -59,6 +62,7 @@ fun FilmListPreview() {
                 countryName = null,
                 imageUrl = "",
                 description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             )
         ),
         onFilmAbout = {},

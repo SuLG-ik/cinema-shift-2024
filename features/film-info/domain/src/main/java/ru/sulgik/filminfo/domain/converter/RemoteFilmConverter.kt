@@ -24,6 +24,7 @@ class RemoteFilmConverter(
             runtime = remoteFilm.runtime,
             directors = remoteFilm.directors.map { it.convert() },
             actors = remoteFilm.actors.map { it.convert() },
+            releaseDate = remoteFilm.releaseDate
         )
     }
 

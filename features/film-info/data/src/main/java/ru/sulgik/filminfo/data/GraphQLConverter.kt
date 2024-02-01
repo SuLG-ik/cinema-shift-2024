@@ -15,11 +15,12 @@ fun FindFilmByIdQuery.Film.convert(): RemoteFilm {
         ),
         genres = genres,
         countryName = country?.name,
-        description = description,
-        imageUrl = img, ageRating = ageRating.convert(),
+        imageUrl = img,
+        description = description, ageRating = ageRating.convert(),
         runtime = runtime.toInt(),
         directors = directors.map { it.convert() },
-        actors = actors.map { it.convert() }
+        actors = actors.map { it.convert() },
+        releaseDate = releaseDate,
     )
 }
 

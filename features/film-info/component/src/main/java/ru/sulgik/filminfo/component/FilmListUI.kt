@@ -37,8 +37,8 @@ private fun FilmEntity.convert(): Film {
         ageRating = ageRating.convert(),
         runtime = runtime,
         directors = directors.map { it.convert() },
+        releaseDate = releaseDate,
         actors = actors.map { it.convert() },
-
     )
 }
 

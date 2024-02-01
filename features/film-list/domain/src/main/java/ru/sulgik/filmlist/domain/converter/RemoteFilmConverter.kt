@@ -24,7 +24,8 @@ class RemoteFilmConverter(
             ),
             genres = remoteFilm.genres,
             countryName = remoteFilm.countryName,
-            imageUrl = imageURLFormatter.format(remoteFilm.imageUrl)
+            imageUrl = imageURLFormatter.format(remoteFilm.imageUrl),
+            releaseDate = remoteFilm.releaseDate,
         )
     }
 

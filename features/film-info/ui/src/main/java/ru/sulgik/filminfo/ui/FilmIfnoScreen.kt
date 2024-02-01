@@ -46,6 +46,7 @@ data class Film(
     val runtime: Int,
     val directors: List<Director>,
     val actors: List<Actor>,
+    val releaseDate: String,
 ) {
 
     data class Director(
@@ -124,7 +125,11 @@ fun FilmInfo(
             title = film.title,
             subtitle = film.subtitle,
             image = film.imageUrl,
+            mainGenre = film.genres.first(),
+            countryName = film.countryName,
+            releaseYear = film.releaseDate.split(" ").last(),
             ratingImdb = film.userRating.imdb,
+            backgroundColor = MaterialTheme.colorScheme.surface,
             ratingKinopoisk = film.userRating.kinopoisk,
         )
         UIKitContainedButton(

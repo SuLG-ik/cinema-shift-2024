@@ -36,6 +36,7 @@ private fun FilmEntity.convert(): Film {
         ),
         genres = genres,
         countryName = countryName,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        releaseDate = releaseDate,
     )
 }

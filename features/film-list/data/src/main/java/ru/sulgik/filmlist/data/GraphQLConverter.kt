@@ -20,5 +20,6 @@ fun LoadFilmListQuery.Film.convert(): RemoteFilm {
         genres = genres,
         countryName = country?.name,
         imageUrl = img,
+        releaseDate = releaseDate,
     )
 }

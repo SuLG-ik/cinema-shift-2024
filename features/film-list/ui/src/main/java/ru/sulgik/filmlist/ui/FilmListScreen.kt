@@ -37,6 +37,7 @@ data class Film(
     val genres: List<String>,
     val countryName: String?,
     val imageUrl: String,
+    val releaseDate: String,
 ) {
     data class UserRating(
         val imdb: Float,
@@ -108,9 +109,13 @@ fun FilmItem(
         ) {
             FilmDetails(
                 title = film.title,
+                countryName = film.countryName,
+                mainGenre = film.genres.first(),
+                releaseYear = film.releaseDate.split(" ").last(),
                 subtitle = film.subtitle,
                 image = film.imageUrl,
                 ratingImdb = film.userRating.imdb,
+                backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
                 ratingKinopoisk = film.userRating.kinopoisk,
             )
             Text(film.description, maxLines = 2, overflow = TextOverflow.Ellipsis)
