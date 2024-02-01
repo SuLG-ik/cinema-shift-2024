@@ -17,13 +17,15 @@ class RemoteFilmConverter(
             id = remoteFilm.id,
             title = remoteFilm.title,
             subtitle = remoteFilm.subtitle,
+            description = remoteFilm.description,
             userRating = Film.UserRating(
                 remoteFilm.userRating.imdb,
                 remoteFilm.userRating.kinopoisk,
             ),
             genres = remoteFilm.genres,
             countryName = remoteFilm.countryName,
-            imageUrl = imageURLFormatter.format(remoteFilm.imageUrl)
+            imageUrl = imageURLFormatter.format(remoteFilm.imageUrl),
+            releaseDate = remoteFilm.releaseDate,
         )
     }
 

@@ -50,6 +50,7 @@ class FilmsComponent(componentContext: DIComponentContext) : AppComponentContext
                 TicketsRootComponent(
                     componentContext = diComponentContext,
                     filmId = config.filmId,
+                    onBack = this::onBack,
                 )
             )
         }

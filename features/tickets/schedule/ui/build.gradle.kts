@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation(libs.core.ktx)
+    implementation(projects.core.datetime)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.compose.activity)
     implementation(libs.compose.ui)

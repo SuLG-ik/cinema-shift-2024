@@ -18,6 +18,8 @@ fun FilmItemPreview() {
             genres = listOf("Драма"),
             countryName = null,
             imageUrl = "https://www.google.com/#q=vim",
+            description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+            releaseDate = "2024",
         ),
         onFilmAbout = {},
         modifier = Modifier.width(240.dp)
@@ -37,6 +39,8 @@ fun FilmListPreview() {
                 genres = listOf(),
                 countryName = null,
                 imageUrl = "http://www.bing.com/search?q=noluisse",
+                description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             ),
             Film(
                 id = "1",
@@ -45,7 +49,9 @@ fun FilmListPreview() {
                 userRating = Film.UserRating(imdb = 22.23f, kinopoisk = 24.25f),
                 genres = listOf(),
                 countryName = null,
-                imageUrl = "https://www.google.com/#q=senectus"
+                imageUrl = "https://www.google.com/#q=senectus",
+                description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             ),
             Film(
                 id = "1",
@@ -54,7 +60,9 @@ fun FilmListPreview() {
                 userRating = Film.UserRating(imdb = 0.0f, kinopoisk = 0.0f),
                 genres = listOf(),
                 countryName = null,
-                imageUrl = ""
+                imageUrl = "",
+                description = "meliufsadfoiidosaofidois mafoimdsoi fma osmfio sadmofmdsaoif dsaf asdpmfo dsamoifmod smf ss",
+                releaseDate = "2024",
             )
         ),
         onFilmAbout = {},

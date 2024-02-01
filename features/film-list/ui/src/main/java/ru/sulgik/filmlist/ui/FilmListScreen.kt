@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
 import ru.sulgik.uikit.UIKitTopBar
@@ -31,10 +32,12 @@ data class Film(
     val id: String,
     val title: String,
     val subtitle: String,
+    val description: String,
     val userRating: UserRating,
     val genres: List<String>,
     val countryName: String?,
     val imageUrl: String,
+    val releaseDate: String,
 ) {
     data class UserRating(
         val imdb: Float,
@@ -106,11 +109,16 @@ fun FilmItem(
         ) {
             FilmDetails(
                 title = film.title,
+                countryName = film.countryName,
+                mainGenre = film.genres.first(),
+                releaseYear = film.releaseDate.split(" ").last(),
                 subtitle = film.subtitle,
                 image = film.imageUrl,
                 ratingImdb = film.userRating.imdb,
+                backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
                 ratingKinopoisk = film.userRating.kinopoisk,
             )
+            Text(film.description, maxLines = 2, overflow = TextOverflow.Ellipsis)
             FilmAboutButton(onClick = onFilmAbout, modifier = Modifier.fillMaxWidth())
         }
     }

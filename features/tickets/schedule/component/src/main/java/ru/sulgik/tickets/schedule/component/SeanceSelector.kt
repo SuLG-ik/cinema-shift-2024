@@ -9,12 +9,15 @@ interface SeanceSelector {
 
     val state: Value<State>
 
-    fun onSelect(date: LocalDate, time: LocalTime)
+    fun onSelect(date: LocalDate, time: LocalTime, hall: State.Schedule.Hall)
 
     fun onBack()
 
+    fun onContinue()
+
     data class State(
         val isLoading: Boolean,
+        val isContinueAvailable: Boolean,
         val schedule: List<Schedule>?,
     ) {
         data class Schedule(

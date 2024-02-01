@@ -6,6 +6,7 @@ import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.getStore
 import ru.sulgik.core.component.values
 import ru.sulgik.core.component.zip
+import ru.sulgik.tickets.domain.entity.Schedule
 import ru.sulgik.tickets.presentation.FilmScheduleStore
 import ru.sulgik.tickets.schedule.presentation.SeanceSelectorStore
 import java.time.LocalDate
@@ -25,14 +26,18 @@ class SeanceSelectorComponent(
     override val state: Value<SeanceSelector.State> =
         zip(this, scheduleState, seanceSelectorState) { first, second ->
             SeanceSelector.State(
-                isLoading = first.isLoading, schedule = first.schedule.orEmpty().map { schedule ->
+                isLoading = first.isLoading,
+                isContinueAvailable = second.isContinueAvailable,
+                schedule = first.schedule.orEmpty().map { schedule ->
                     SeanceSelector.State.Schedule(
                         schedule.date,
                         schedule.seances.map {
                             SeanceSelector.State.Schedule.Seance(
                                 hall = it.hall.name.toState(),
                                 time = it.time,
-                                isSelected = it.time == second.selectedSeance?.time && schedule.date == second.selectedSeance?.date,
+                                isSelected = it.time == second.selectedSeance?.time &&
+                                        schedule.date == second.selectedSeance?.date &&
+                                        it.hall.name.toState() == second.selectedSeance?.hall?.toState()
                             )
                         }
                     )
@@ -40,15 +45,32 @@ class SeanceSelectorComponent(
             )
         }
 
-    override fun onSelect(date: LocalDate, time: LocalTime) {
-        store.accept(SeanceSelectorStore.Intent.Select(date, time))
+    override fun onSelect(
+        date: LocalDate,
+        time: LocalTime,
+        hall: SeanceSelector.State.Schedule.Hall
+    ) {
+        store.accept(SeanceSelectorStore.Intent.Select(date, time, hall.toData()))
     }
 
     override fun onBack() {
         onBack.invoke()
     }
 
+    override fun onContinue() {
 
+    }
+
+
+}
+
+private fun SeanceSelector.State.Schedule.Hall.toData(): Schedule.HallType {
+    return when (this) {
+        SeanceSelector.State.Schedule.Hall.RED -> Schedule.HallType.RED
+        SeanceSelector.State.Schedule.Hall.GREEN -> Schedule.HallType.GREEN
+        SeanceSelector.State.Schedule.Hall.BLUE -> Schedule.HallType.BLUE
+        SeanceSelector.State.Schedule.Hall.SIMPLE -> Schedule.HallType.UNKNOWN
+    }
 }
 
 private fun String.toState(): SeanceSelector.State.Schedule.Hall {
@@ -57,5 +79,14 @@ private fun String.toState(): SeanceSelector.State.Schedule.Hall {
         "Green" -> SeanceSelector.State.Schedule.Hall.GREEN
         "Blue" -> SeanceSelector.State.Schedule.Hall.BLUE
         else -> SeanceSelector.State.Schedule.Hall.SIMPLE
+    }
+}
+
+private fun Schedule.HallType.toState(): SeanceSelector.State.Schedule.Hall {
+    return when (this) {
+        Schedule.HallType.RED -> SeanceSelector.State.Schedule.Hall.RED
+        Schedule.HallType.GREEN -> SeanceSelector.State.Schedule.Hall.GREEN
+        Schedule.HallType.BLUE -> SeanceSelector.State.Schedule.Hall.BLUE
+        Schedule.HallType.UNKNOWN -> SeanceSelector.State.Schedule.Hall.SIMPLE
     }
 }

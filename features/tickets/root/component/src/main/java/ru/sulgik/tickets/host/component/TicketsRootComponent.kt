@@ -15,6 +15,7 @@ import ru.sulgik.tickets.schedule.component.SeanceSelectorComponent
 class TicketsRootComponent(
     componentContext: DIComponentContext,
     filmId: String,
+    private val onBack: () -> Unit,
 ) : AppComponentContext(componentContext), TicketsRoot {
 
     private val store: FilmScheduleStore = getStore(FilmScheduleStore.Params(filmId))
@@ -44,7 +45,10 @@ class TicketsRootComponent(
     }
 
     private fun onBack() {
-        navigation.pop()
+        navigation.pop {
+            if (!it)
+                onBack.invoke()
+        }
     }
 
     @Serializable

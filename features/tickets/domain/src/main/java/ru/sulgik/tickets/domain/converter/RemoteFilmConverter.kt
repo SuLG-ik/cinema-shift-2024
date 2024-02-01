@@ -33,7 +33,6 @@ private fun RemoteSchedule.PayedTicket.convert(): Schedule.PayedTicket {
 private fun RemoteSchedule.Hall.convert(): Schedule.Hall {
     return Schedule.Hall(
         name = name, places = places.map { it.map { it.convert() } }
-
     )
 }
 

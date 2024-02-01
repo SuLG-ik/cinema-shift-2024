@@ -29,12 +29,14 @@ private fun FilmEntity.convert(): Film {
         id = id,
         title = title,
         subtitle = subtitle,
+        description = description,
         userRating = Film.UserRating(
             userRating.imdb,
             userRating.kinopoisk,
         ),
         genres = genres,
         countryName = countryName,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        releaseDate = releaseDate,
     )
 }

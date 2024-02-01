@@ -29,6 +29,7 @@ android {
         buildConfig = true
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -43,7 +44,9 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugaring)
     implementation(libs.core.ktx)
+    implementation(libs.compose.runtime)
     implementation(libs.lifecycle.runtime.ktx)
 
     implementation(libs.koin.core)
