@@ -1,6 +1,6 @@
-package ru.sulgik.filminfo.data
+package ru.sulgik.filminfo.domain.entity
 
-data class RemoteFilm(
+data class Film(
     val id: String,
     val title: String,
     val subtitle: String,
@@ -31,7 +31,6 @@ data class RemoteFilm(
     enum class Profession {
         ACTOR,
         DIRECTOR,
-        UNKNOWN
     }
 
     data class UserRating(
@@ -47,5 +46,4 @@ data class RemoteFilm(
         R,
         UNKNOWN
     }
-
 }

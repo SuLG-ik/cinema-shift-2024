@@ -32,6 +32,45 @@ private fun FilmEntity.convert(): Film {
         ),
         genres = genres,
         countryName = countryName,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        id = id,
+        ageRating = ageRating.convert(),
+        runtime = runtime,
+        directors = directors.map { it.convert() },
+        actors = actors.map { it.convert() },
+
     )
 }
+
+
+
+private fun FilmEntity.Actor.convert(): Film.Actor {
+    return Film.Actor(
+        fullName = fullName, id = id, professions = professions.map { it.convert() }
+    )
+}
+
+private fun FilmEntity.Director.convert(): Film.Director {
+    return Film.Director(
+        fullName = fullName, id = id, professions = professions.map { it.convert() }
+    )
+}
+
+private fun FilmEntity.Profession.convert(): Film.Profession {
+    return when (this) {
+        FilmEntity.Profession.ACTOR -> Film.Profession.ACTOR
+        FilmEntity.Profession.DIRECTOR -> Film.Profession.DIRECTOR
+    }
+}
+
+private fun FilmEntity.AgeRating.convert(): Film.AgeRating {
+    return when (this) {
+        FilmEntity.AgeRating.G -> Film.AgeRating.G
+        FilmEntity.AgeRating.NC17 -> Film.AgeRating.NC17
+        FilmEntity.AgeRating.PG -> Film.AgeRating.PG
+        FilmEntity.AgeRating.PG13 -> Film.AgeRating.PG13
+        FilmEntity.AgeRating.R -> Film.AgeRating.R
+        FilmEntity.AgeRating.UNKNOWN -> Film.AgeRating.UNKNOWN
+    }
+}
+

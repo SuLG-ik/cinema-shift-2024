@@ -2,6 +2,7 @@ package ru.sulgik.uikit.iconpack
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import ru.sulgik.uikit.iconpack.uikiticonpack.BackButton
+import ru.sulgik.uikit.iconpack.uikiticonpack.ImageNotFound
 import kotlin.collections.List as ____KtList
 
 public object UIKitIconPack
@@ -13,6 +14,6 @@ public val UIKitIconPack.AllIcons: ____KtList<ImageVector>
     if (__AllIcons != null) {
       return __AllIcons!!
     }
-    __AllIcons= listOf(BackButton)
+    __AllIcons= listOf(ImageNotFound, BackButton)
     return __AllIcons!!
   }

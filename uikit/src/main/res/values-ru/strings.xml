@@ -2,4 +2,5 @@
 <resources>
     <string name="film_s_image">Изображение фильма</string>
     <string name="go_back">Назад</string>
+    <string name="image_not_found">Изображение не найдено</string>
 </resources>

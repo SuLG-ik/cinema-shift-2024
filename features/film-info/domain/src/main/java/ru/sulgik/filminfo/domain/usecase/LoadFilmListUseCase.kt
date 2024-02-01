@@ -1,5 +1,6 @@
 package ru.sulgik.filminfo.domain.usecase
 
+import ru.sulgik.filminfo.data.RemoteFilm
 import ru.sulgik.filminfo.data.RemoteFilmInfoRepository
 import ru.sulgik.filminfo.domain.converter.RemoteFilmConverter
 import ru.sulgik.filminfo.domain.entity.Film
@@ -10,7 +11,8 @@ class LoadFilmInfoUseCase(
 ) {
 
     suspend operator fun invoke(filmId: String): Film {
-        return remoteFilmConverter.convert(remoteFilmInfoRepository.getFilmById(filmId))
+        val film = remoteFilmInfoRepository.getFilmById(filmId)
+        return remoteFilmConverter.convert(film)
     }
 
 }

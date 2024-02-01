@@ -1,22 +1,35 @@
 query FindFilmById($id: String!) {
     getFilm(filmId: $id) {
         film {
+            ageRating
+            description
+            genres
+            id
+            img
             name
             originalName
-            genres
-            img
-            description
-            userRatings {
-                kinopoisk
-                imdb
+            releaseDate
+            runtime
+            country {
+                code
+                code2
+                id
+                name
             }
             directors {
                 fullName
+                id
+                professions
             }
-            country {
-                name
+            actors {
+                fullName
+                id
+                professions
             }
-            releaseDate
+            userRatings {
+                imdb
+                kinopoisk
+            }
         }
     }
 }
