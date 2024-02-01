@@ -15,8 +15,9 @@ fun SeanceSelectorUI(
 
     ScheduleScreen(
         seances = state.value.schedule?.toUI(),
-        isContinueAvailable = true,
+        isContinueAvailable = state.value.isContinueAvailable,
         onBack = component::onBack,
+        onContinue = component::onContinue,
         onSelect = { component.onSelect(it.time.date, it.time.time, it.hallType.toData()) },
         modifier = modifier,
     )

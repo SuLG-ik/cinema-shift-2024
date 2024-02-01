@@ -17,6 +17,7 @@ interface SeanceSelectorStore :
     }
 
     data class State(
+        val isContinueAvailable: Boolean = false,
         val selectedSeance: SelectedSeance? = null,
     ) {
         data class SelectedSeance(

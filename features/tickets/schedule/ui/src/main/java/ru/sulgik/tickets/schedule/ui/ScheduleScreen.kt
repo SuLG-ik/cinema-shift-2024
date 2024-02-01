@@ -1,6 +1,14 @@
 package ru.sulgik.tickets.schedule.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -63,6 +71,7 @@ data class Seance(
 fun ScheduleScreen(
     seances: List<Seance>?,
     isContinueAvailable: Boolean,
+    onContinue: () -> Unit,
     onBack: () -> Unit,
     onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
@@ -77,14 +86,20 @@ fun ScheduleScreen(
             )
         },
         bottomBar = {
-            UIKitContainedButton(
-                onClick = { /*TODO*/ },
-                largeCorners = false,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
+            AnimatedVisibility(
+                visible = isContinueAvailable,
+                enter = fadeIn() + slideInVertically { it / 2 },
+                exit = fadeOut() + slideOutVertically { it / 2 }
             ) {
-                Text(text = "Продолжить")
+                UIKitContainedButton(
+                    onClick = onContinue,
+                    largeCorners = false,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
+                ) {
+                    Text(text = "Продолжить")
+                }
             }
         },
         modifier = modifier,

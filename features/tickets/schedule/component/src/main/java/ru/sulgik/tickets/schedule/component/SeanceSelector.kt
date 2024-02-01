@@ -13,8 +13,11 @@ interface SeanceSelector {
 
     fun onBack()
 
+    fun onContinue()
+
     data class State(
         val isLoading: Boolean,
+        val isContinueAvailable: Boolean,
         val schedule: List<Schedule>?,
     ) {
         data class Schedule(

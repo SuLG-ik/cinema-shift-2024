@@ -26,7 +26,9 @@ class SeanceSelectorComponent(
     override val state: Value<SeanceSelector.State> =
         zip(this, scheduleState, seanceSelectorState) { first, second ->
             SeanceSelector.State(
-                isLoading = first.isLoading, schedule = first.schedule.orEmpty().map { schedule ->
+                isLoading = first.isLoading,
+                isContinueAvailable = second.isContinueAvailable,
+                schedule = first.schedule.orEmpty().map { schedule ->
                     SeanceSelector.State.Schedule(
                         schedule.date,
                         schedule.seances.map {
@@ -53,6 +55,10 @@ class SeanceSelectorComponent(
 
     override fun onBack() {
         onBack.invoke()
+    }
+
+    override fun onContinue() {
+
     }
 
 

@@ -20,6 +20,7 @@ class SeanceSelectorStoreImpl(
         reducer = {
             when (it) {
                 is Message.Select -> copy(
+                    isContinueAvailable = true,
                     selectedSeance = SeanceSelectorStore.State.SelectedSeance(
                         date = it.date,
                         time = it.time,
@@ -27,16 +28,19 @@ class SeanceSelectorStoreImpl(
                     )
                 )
 
-                is Message.Unselect -> copy(selectedSeance = null)
+                is Message.Unselect -> copy(
+                    isContinueAvailable = false,
+                    selectedSeance = null,
+                )
             }
         },
         executorFactory = coroutineExecutorFactory(coroutineDispatcher) {
             onIntent<SeanceSelectorStore.Intent.Select> {
                 val selectedSeance = state().selectedSeance
-                if (selectedSeance == null || selectedSeance.time == it.time && selectedSeance.date == it.date && selectedSeance.hall == it.hall)
+                if (selectedSeance != null && selectedSeance.time == it.time && selectedSeance.date == it.date && selectedSeance.hall == it.hall)
                     dispatch(Message.Unselect)
-
-                dispatch(Message.Select(it.date, it.time, it.hall))
+                else
+                    dispatch(Message.Select(it.date, it.time, it.hall))
             }
         },
     ) {
