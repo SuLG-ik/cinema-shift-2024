@@ -16,6 +16,7 @@ import ru.sulgik.filmlist.domain.filmListDomainModule
 import ru.sulgik.filmlist.presentation.filmListPresentationModule
 import ru.sulgik.tickets.data.ticketsDataModule
 import ru.sulgik.tickets.domain.ticketsDomainModule
+import ru.sulgik.tickets.places.presentation.placesSelectorPresentationModule
 import ru.sulgik.tickets.presentation.ticketsPresentationModule
 import ru.sulgik.tickets.schedule.presentation.seanceSelectorPresentationModule
 
@@ -41,6 +42,7 @@ fun Application.startDI() {
             ticketsPresentationModule,
             ticketsDataModule,
             seanceSelectorPresentationModule,
+            placesSelectorPresentationModule,
         )
     }
 }

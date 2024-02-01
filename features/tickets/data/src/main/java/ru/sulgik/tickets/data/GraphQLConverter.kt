@@ -31,7 +31,7 @@ class GraphQLConverter(
 
     private fun GetFilmScheduleQuery.PayedTicket.convert(): RemoteSchedule.PayedTicket {
         return RemoteSchedule.PayedTicket(
-            column = column, filmId = filmId, phone = phone, row = row
+            column = column.toInt(), filmId = filmId, phone = phone, row = row.toInt()
         )
     }
 
@@ -43,7 +43,7 @@ class GraphQLConverter(
     }
     private fun GetFilmScheduleQuery.Place.convert(): RemoteSchedule.Place {
         return RemoteSchedule.Place(
-            price = price, type = type.convert(),
+            price = price.toInt(), type = type.convert(),
         )
     }
 

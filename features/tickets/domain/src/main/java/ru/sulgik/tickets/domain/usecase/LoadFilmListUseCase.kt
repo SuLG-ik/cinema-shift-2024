@@ -8,7 +8,6 @@ class LoadFilmScheduleUseCase(
     private val remoteFilmInfoRepository: RemoteFilmInfoRepository,
     private val remoteFilmConverter: RemoteFilmConverter,
 ) {
-
     suspend operator fun invoke(filmId: String): List<Schedule> {
         return remoteFilmConverter.convert(remoteFilmInfoRepository.getFilmScheduleById(filmId))
     }

@@ -3,6 +3,7 @@ package ru.sulgik.tickets.host.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import ru.sulgik.tickets.places.component.PlacesSelectorUI
 import ru.sulgik.tickets.schedule.component.SeanceSelectorUI
 
 @Composable
@@ -22,5 +23,6 @@ fun TicketsRootNavHost(
 ) {
     when (child) {
         is TicketsRoot.Child.SeanceSelector -> SeanceSelectorUI(child.component, modifier)
+        is TicketsRoot.Child.PlacesSelector -> PlacesSelectorUI(child.component, modifier)
     }
 }

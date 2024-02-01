@@ -18,8 +18,13 @@ class RemoteFilmConverter {
 
 
 private fun RemoteSchedule.Seance.convert(): Schedule.Seance {
+    val isSelectedTickets = List(hall.places.size) { row ->
+        List(hall.places[row].size) { column ->
+            payedTickets.any { it.column == column + 1 && it.row == row + 1 }
+        }
+    }
     return Schedule.Seance(
-        time = time, hall = hall.convert(), payedTickets = payedTickets.map { it.convert() }
+        time = time, hall = hall.convert(isSelectedTickets), payedTickets = payedTickets.map { it.convert() }
 
     )
 }
@@ -30,16 +35,21 @@ private fun RemoteSchedule.PayedTicket.convert(): Schedule.PayedTicket {
     )
 }
 
-private fun RemoteSchedule.Hall.convert(): Schedule.Hall {
+private fun RemoteSchedule.Hall.convert(isSelectedTickets: List<List<Boolean>>): Schedule.Hall {
     return Schedule.Hall(
-        name = name, places = places.map { it.map { it.convert() } }
+        name = name,
+        places = places.mapIndexed { rowIndex, row ->
+            row.mapIndexed { columnIndex, column ->
+                column.convert()
+            }
+        }
     )
 }
 
 private fun RemoteSchedule.Place.convert(): Schedule.Place {
     return Schedule.Place(
         price = price,
-        type = type.convert()
+        type = type.convert(),
     )
 }
 

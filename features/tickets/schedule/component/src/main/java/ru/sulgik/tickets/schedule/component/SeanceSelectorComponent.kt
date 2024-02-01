@@ -15,6 +15,7 @@ import java.time.LocalTime
 class SeanceSelectorComponent(
     componentContext: DIComponentContext,
     private val onBack: () -> Unit,
+    private val onSeanceSelected: (SeanceSelector.SelectedSeance) -> Unit,
     scheduleStore: FilmScheduleStore,
 ) : AppComponentContext(componentContext), SeanceSelector {
 
@@ -58,7 +59,15 @@ class SeanceSelectorComponent(
     }
 
     override fun onContinue() {
-
+        val selectedSeance = store.state.selectedSeance
+        if (selectedSeance != null)
+            onSeanceSelected.invoke(
+                SeanceSelector.SelectedSeance(
+                    date = selectedSeance.date,
+                    time = selectedSeance.time,
+                    hallType = selectedSeance.hall
+                )
+            )
     }
 
 

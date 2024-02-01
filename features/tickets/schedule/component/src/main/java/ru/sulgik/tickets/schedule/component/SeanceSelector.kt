@@ -1,6 +1,7 @@
 package ru.sulgik.tickets.schedule.component
 
 import com.arkivanov.decompose.value.Value
+import ru.sulgik.tickets.domain.entity.Schedule
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -14,6 +15,12 @@ interface SeanceSelector {
     fun onBack()
 
     fun onContinue()
+
+    data class SelectedSeance(
+        val date: LocalDate,
+        val time: LocalTime,
+        val hallType: Schedule.HallType,
+    )
 
     data class State(
         val isLoading: Boolean,

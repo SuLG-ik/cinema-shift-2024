@@ -10,6 +10,7 @@ interface TicketsRoot {
     sealed interface Child {
 
         data class SeanceSelector(val component: ru.sulgik.tickets.schedule.component.SeanceSelector) : Child
+        data class PlacesSelector(val component: ru.sulgik.tickets.places.component.PlacesSelector) : Child
 
     }
 }
