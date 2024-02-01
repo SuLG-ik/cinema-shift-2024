@@ -26,3 +26,11 @@ query GetFilmSchedule($id: String!) {
         }
     }
 }
+
+query GetFilmTitle($id: String!) {
+    getFilm(filmId: $id) {
+        film {
+            name
+        }
+    }
+}

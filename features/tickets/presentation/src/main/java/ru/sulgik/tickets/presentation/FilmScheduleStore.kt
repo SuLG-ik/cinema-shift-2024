@@ -1,6 +1,7 @@
 package ru.sulgik.tickets.presentation
 
 import com.arkivanov.mvikotlin.core.store.Store
+import ru.sulgik.tickets.domain.entity.Film
 import ru.sulgik.tickets.domain.entity.Schedule
 
 interface FilmScheduleStore :
@@ -16,6 +17,7 @@ interface FilmScheduleStore :
 
     data class State(
         val isLoading: Boolean = true,
+        val film: Film? = null,
         val schedule: List<Schedule>? = null,
     )
 

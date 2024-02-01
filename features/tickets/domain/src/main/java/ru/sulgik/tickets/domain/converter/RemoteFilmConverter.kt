@@ -1,6 +1,8 @@
 package ru.sulgik.tickets.domain.converter
 
+import ru.sulgik.tickets.data.RemoteFilm
 import ru.sulgik.tickets.data.RemoteSchedule
+import ru.sulgik.tickets.domain.entity.Film
 import ru.sulgik.tickets.domain.entity.Schedule
 
 class RemoteFilmConverter {
@@ -12,6 +14,10 @@ class RemoteFilmConverter {
 
     fun convert(remoteFilm: List<RemoteSchedule>): List<Schedule> {
         return remoteFilm.map { convert(it) }
+    }
+
+    fun convert(remoteFilm: RemoteFilm): Film {
+        return Film(remoteFilm.title)
     }
 
 }

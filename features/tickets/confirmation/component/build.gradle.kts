@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    namespace = "ru.sulgik.root.component"
+    namespace = "ru.sulgik.tickets.confirmation.component"
     compileSdk = 34
 
     defaultConfig {
@@ -58,14 +57,7 @@ dependencies {
     implementation(libs.mvikotlin.coroutines)
     implementation(libs.decompose.compose)
 
-    implementation(libs.serialization.core)
-    implementation(libs.datetime)
-
-    implementation(projects.features.tickets.presentation)
-    implementation(projects.features.tickets.schedule.component)
-    implementation(projects.features.tickets.places.component)
-    implementation(projects.features.tickets.confirmation.component)
-
+    api(projects.features.tickets.confirmation.ui)
     api(projects.core.component)
 
     testImplementation(libs.junit)

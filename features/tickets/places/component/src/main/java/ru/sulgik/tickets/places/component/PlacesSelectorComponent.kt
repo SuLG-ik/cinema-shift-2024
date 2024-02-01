@@ -13,6 +13,7 @@ import ru.sulgik.tickets.presentation.FilmScheduleStore
 class PlacesSelectorComponent(
     componentContext: DIComponentContext,
     private val onBack: () -> Unit,
+    private val onContinue: (PlacesSelector.SelectedPlaces) -> Unit,
     private val selectedSeance: PlacesSelector.SelectedSeance,
     scheduleStore: FilmScheduleStore,
 ) : AppComponentContext(componentContext), PlacesSelector {
@@ -107,7 +108,17 @@ class PlacesSelectorComponent(
     }
 
     override fun onContinue() {
+        if (store.state.isContinueAvailable)
+            onContinue.invoke(
+                PlacesSelector.SelectedPlaces(
+                    totalCost = store.state.totalCost,
+                    places = store.state.selectedPlaces.map {
+                        PlacesSelector.SelectedPlace(
+                            it.row, it.column
+                        )
 
+                    })
+            )
     }
 
     override fun onSelect(row: Int, column: Int, price: Int) {

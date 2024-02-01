@@ -12,5 +12,7 @@ interface TicketsRoot {
         data class SeanceSelector(val component: ru.sulgik.tickets.schedule.component.SeanceSelector) : Child
         data class PlacesSelector(val component: ru.sulgik.tickets.places.component.PlacesSelector) : Child
 
+        data class OrderConfirmation(val component: ru.sulgik.tickets.confirmation.component.Confirmation) : Child
+
     }
 }

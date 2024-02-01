@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirmation">Подтверждение</string>
+    <string name="continue_button">Купить</string>
+    <string name="places">Места</string>
+    <string name="total_cost">Сумма: %1$s ₽</string>
+    <string name="date_time">Дата и время</string>
+    <string name="movie">Фильм</string>
+    <string name="hall">Зал</string>
+    <string name="row_columns">%1$s ряд - %2$s</string>
+    <string name="red_hall">Красный</string>
+    <string name="green_hall">Зелёный</string>
+    <string name="blue_hall">Синий</string>
+    <string name="unknown_hall">Неизвестен</string>
+</resources>

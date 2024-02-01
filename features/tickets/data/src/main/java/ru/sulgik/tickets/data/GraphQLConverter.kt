@@ -1,6 +1,7 @@
 package ru.sulgik.tickets.data
 
 import filmlist.GetFilmScheduleQuery
+import filmlist.GetFilmTitleQuery
 import ru.sulgik.core.datetime.DateTimeParser
 import type.FilmHallCellType
 
@@ -9,6 +10,11 @@ class GraphQLConverter(
     private val dateTimeParser: DateTimeParser,
 ) {
 
+    fun convert(film: GetFilmTitleQuery.Film): RemoteFilm {
+        return RemoteFilm(
+            film.name
+        )
+    }
     private fun convert(schedule: GetFilmScheduleQuery.Schedule): RemoteSchedule {
         return RemoteSchedule(
             date = dateTimeParser.parseDate(schedule.date), seances = schedule.seances.map { it.convert() }

@@ -38,4 +38,6 @@ data class Schedule(
         BLOCKED, COMPORT, ECONOM
     }
 
+
+
 }

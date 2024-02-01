@@ -23,6 +23,18 @@ interface PlacesSelector {
         val hallType: Schedule.HallType,
     )
 
+    data class SelectedPlaces(
+        val totalCost: Int,
+        val places: List<SelectedPlace>,
+    )
+
+
+    data class SelectedPlace(
+        val row: Int,
+        val column: Int,
+    )
+
+
     data class State(
         val isLoading: Boolean,
         val isContinueAvailable: Boolean,

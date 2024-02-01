@@ -33,6 +33,14 @@ class DateTimeParserImpl : DateTimeParser {
         }
     }
 
+    override fun formatDateWithTime(date: LocalDate, time: LocalTime): String {
+        return buildString {
+            append(date.dayOfMonth)
+            append(" ${date.month.formatMonth()} ")
+            append(formatTime(time))
+        }
+    }
+
     private fun DayOfWeek.formatWeekShort(): String {
         return when(this) {
             DayOfWeek.MONDAY -> "Пн"
@@ -44,22 +52,39 @@ class DateTimeParserImpl : DateTimeParser {
             DayOfWeek.SUNDAY -> "Вс"
         }
     }
-
-}
-
-private fun Month.formatMonthShort(): String {
-    return when(this) {
-        Month.JANUARY -> "янв"
-        Month.FEBRUARY -> "фев"
-        Month.MARCH -> "мар"
-        Month.APRIL -> "апр"
-        Month.MAY -> "май"
-        Month.JUNE -> "июл"
-        Month.JULY -> "июн"
-        Month.AUGUST -> "авг"
-        Month.SEPTEMBER -> "сен"
-        Month.OCTOBER -> "окт"
-        Month.NOVEMBER -> "ноя"
-        Month.DECEMBER -> "дек"
+    private fun Month.formatMonthShort(): String {
+        return when(this) {
+            Month.JANUARY -> "янв"
+            Month.FEBRUARY -> "фев"
+            Month.MARCH -> "мар"
+            Month.APRIL -> "апр"
+            Month.MAY -> "май"
+            Month.JUNE -> "июл"
+            Month.JULY -> "июн"
+            Month.AUGUST -> "авг"
+            Month.SEPTEMBER -> "сен"
+            Month.OCTOBER -> "окт"
+            Month.NOVEMBER -> "ноя"
+            Month.DECEMBER -> "дек"
+        }
     }
+
+    private fun Month.formatMonth(): String {
+        return when(this) {
+            Month.JANUARY -> "января"
+            Month.FEBRUARY -> "февраля"
+            Month.MARCH -> "марта"
+            Month.APRIL -> "апреля"
+            Month.MAY -> "мая"
+            Month.JUNE -> "июля"
+            Month.JULY -> "июня"
+            Month.AUGUST -> "августа"
+            Month.SEPTEMBER -> "сентября"
+            Month.OCTOBER -> "октября"
+            Month.NOVEMBER -> "ноября"
+            Month.DECEMBER -> "декабря"
+        }
+    }
+
+
 }
