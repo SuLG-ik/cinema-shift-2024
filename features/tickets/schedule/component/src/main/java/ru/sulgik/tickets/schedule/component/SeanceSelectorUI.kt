@@ -17,8 +17,18 @@ fun SeanceSelectorUI(
         seances = state.value.schedule?.toUI(),
         isContinueAvailable = true,
         onBack = component::onBack,
+        onSelect = { component.onSelect(it.time.date, it.time.time, it.hallType.toData()) },
         modifier = modifier,
     )
+}
+
+private fun Seance.HallType.toData(): SeanceSelector.State.Schedule.Hall {
+    return when (this) {
+        Seance.HallType.RED -> SeanceSelector.State.Schedule.Hall.RED
+        Seance.HallType.GREEN -> SeanceSelector.State.Schedule.Hall.GREEN
+        Seance.HallType.BLUE -> SeanceSelector.State.Schedule.Hall.BLUE
+        Seance.HallType.SIMPLE -> SeanceSelector.State.Schedule.Hall.SIMPLE
+    }
 }
 
 private fun List<SeanceSelector.State.Schedule>.toUI(): List<Seance> {
@@ -27,13 +37,14 @@ private fun List<SeanceSelector.State.Schedule>.toUI(): List<Seance> {
 
 private fun SeanceSelector.State.Schedule.convert(): Seance {
     return Seance(
-        date,
-        seances.map {
+        date = date,
+        time = seances.map {
             Seance.ZonedSeanceTime(
-                it.hall.toUI(),
-                Seance.SeanceTime(
-                    it.time,
-                    it.isSelected,
+                hallType = it.hall.toUI(),
+                time = Seance.SeanceTime(
+                    time = it.time,
+                    date = date,
+                    isSelected = it.isSelected,
                 )
             )
         }

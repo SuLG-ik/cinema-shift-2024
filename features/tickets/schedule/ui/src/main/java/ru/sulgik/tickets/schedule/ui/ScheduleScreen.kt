@@ -1,9 +1,12 @@
 package ru.sulgik.tickets.schedule.ui
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -23,6 +26,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sulgik.core.datetime.LocalDateTimeParser
@@ -50,6 +54,7 @@ data class Seance(
 
     data class SeanceTime(
         val time: LocalTime,
+        val date: LocalDate,
         val isSelected: Boolean,
     )
 }
@@ -59,6 +64,7 @@ fun ScheduleScreen(
     seances: List<Seance>?,
     isContinueAvailable: Boolean,
     onBack: () -> Unit,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -74,7 +80,9 @@ fun ScheduleScreen(
             UIKitContainedButton(
                 onClick = { /*TODO*/ },
                 largeCorners = false,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
             ) {
                 Text(text = "Продолжить")
             }
@@ -84,6 +92,7 @@ fun ScheduleScreen(
         if (seances != null) {
             ScheduleInfo(
                 seances = seances,
+                onSelect = onSelect,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(it)
@@ -95,6 +104,7 @@ fun ScheduleScreen(
 @Composable
 fun ScheduleInfo(
     seances: List<Seance>,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -109,7 +119,11 @@ fun ScheduleInfo(
             onSelect = { selectedItem.intValue = it },
             modifier = Modifier.fillMaxWidth()
         )
-        ScheduleSeances(seances = seances, selectedItem = selectedItem.intValue)
+        ScheduleSeances(
+            seances = seances,
+            onSelect = onSelect,
+            selectedItem = selectedItem.intValue
+        )
     }
 }
 
@@ -151,6 +165,7 @@ fun ScheduleDates(
 fun ScheduleSeances(
     seances: List<Seance>,
     selectedItem: Int,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pageState = rememberPagerState { seances.size }
@@ -166,6 +181,7 @@ fun ScheduleSeances(
     ) {
         SeancePage(
             seance = seances[it],
+            onSelect = onSelect,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(vertical = UIKitPaddingDefaultTokens.DefaultContentPadding)
@@ -176,6 +192,7 @@ fun ScheduleSeances(
 @Composable
 fun SeancePage(
     seance: Seance,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -185,16 +202,19 @@ fun SeancePage(
         NamedSeanceList(
             title = "Красный зал",
             time = seance.time.filter { it.hallType == Seance.HallType.RED },
+            onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
             title = "Синий зал",
             time = seance.time.filter { it.hallType == Seance.HallType.BLUE },
+            onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
             title = "Зелёный зал",
             time = seance.time.filter { it.hallType == Seance.HallType.GREEN },
+            onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -203,33 +223,40 @@ fun SeancePage(
 @Composable
 fun SeanceTime(
     time: Seance.SeanceTime,
+    onSelect: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val parser = LocalDateTimeParser.current
-    Box(
+    val color =
+        animateColorAsState(targetValue = if (time.isSelected) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.background)
+    Text(
+        parser.formatTime(time.time),
+        style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
-    ) {
-        Text(
-            parser.formatTime(time.time),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier
-                .border(
-                    1.dp,
-                    MaterialTheme.colorScheme.outline,
-                    UIKitShapeTokens.CornerMedium,
-                )
-                .padding(
-                    horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding + 5.dp,
-                    vertical = UIKitPaddingDefaultTokens.DefaultContentPadding - 5.dp,
-                ),
-        )
-    }
+            .clip(UIKitShapeTokens.CornerMedium)
+            .background(color.value)
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.outline,
+                UIKitShapeTokens.CornerMedium,
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onSelect,
+            )
+            .padding(
+                horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding + 5.dp,
+                vertical = UIKitPaddingDefaultTokens.DefaultContentPadding - 5.dp,
+            ),
+    )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SeanceList(
     time: List<Seance.ZonedSeanceTime>,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     FlowRow(
@@ -238,7 +265,7 @@ fun SeanceList(
         horizontalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
     ) {
         time.forEach {
-            SeanceTime(time = it.time)
+            SeanceTime(time = it.time, onSelect = { onSelect(it) })
         }
     }
 }
@@ -248,6 +275,7 @@ fun SeanceList(
 fun NamedSeanceList(
     title: String,
     time: List<Seance.ZonedSeanceTime>,
+    onSelect: (Seance.ZonedSeanceTime) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -257,6 +285,7 @@ fun NamedSeanceList(
         Text(title, style = MaterialTheme.typography.titleMedium)
         SeanceList(
             time = time,
+            onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
     }

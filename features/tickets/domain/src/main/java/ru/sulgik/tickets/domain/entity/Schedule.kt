@@ -13,6 +13,10 @@ data class Schedule(
         val payedTickets: List<PayedTicket>,
     )
 
+    enum class HallType {
+        RED, GREEN, BLUE, UNKNOWN,
+    }
+
     data class Hall(
         val name: String,
         val places: List<List<Place>>,

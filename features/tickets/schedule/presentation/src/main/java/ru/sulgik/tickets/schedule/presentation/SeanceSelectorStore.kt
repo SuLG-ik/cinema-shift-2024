@@ -1,6 +1,7 @@
 package ru.sulgik.tickets.schedule.presentation
 
 import com.arkivanov.mvikotlin.core.store.Store
+import ru.sulgik.tickets.domain.entity.Schedule
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -11,7 +12,8 @@ interface SeanceSelectorStore :
         data class Select(
             val date: LocalDate,
             val time: LocalTime,
-        ):  Intent
+            val hall: Schedule.HallType,
+        ) : Intent
     }
 
     data class State(
@@ -20,6 +22,7 @@ interface SeanceSelectorStore :
         data class SelectedSeance(
             val date: LocalDate,
             val time: LocalTime,
+            val hall: Schedule.HallType,
         )
     }
 

@@ -9,7 +9,7 @@ interface SeanceSelector {
 
     val state: Value<State>
 
-    fun onSelect(date: LocalDate, time: LocalTime)
+    fun onSelect(date: LocalDate, time: LocalTime, hall: State.Schedule.Hall)
 
     fun onBack()
 
