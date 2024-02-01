@@ -23,7 +23,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.ImageNotFound
 import ru.sulgik.uikit.UIKitContainedButton
@@ -119,7 +123,8 @@ fun FilmInfo(
     Column(
         modifier = modifier
             .padding(horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         FilmDetails(
             title = film.title,
@@ -158,6 +163,7 @@ fun FilmAdditionalInfo(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace)
     ) {
+        FilmReleaseDate(film, modifier = Modifier.fillMaxWidth())
         FilmGenders(film, modifier = Modifier.fillMaxWidth())
         FilmDirectors(film, modifier = Modifier.fillMaxWidth())
         FilmActors(film, modifier = Modifier.fillMaxWidth())
@@ -175,11 +181,28 @@ fun FilmGenders(
         verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        Text("Жанры: ", style = MaterialTheme.typography.titleMedium)
+        Text(
+            "Жанры: ",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(vertical = 3.dp)
+        )
         film.genres.forEach {
             FilmGenre(genre = it)
         }
     }
+}
+
+@Composable
+fun FilmReleaseDate(
+    film: Film,
+    modifier: Modifier,
+) {
+    Text(buildAnnotatedString {
+        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+            append("Дата релиза: ")
+        }
+        append(film.releaseDate)
+    }, modifier = modifier)
 }
 
 @Composable
