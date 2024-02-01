@@ -9,4 +9,8 @@ interface DateTimeParser {
 
     fun parseTime(value: String): LocalTime
 
+    fun formatTime(time: LocalTime): String
+
+    fun formatDateWithWeek(time: LocalDate): String
+
 }

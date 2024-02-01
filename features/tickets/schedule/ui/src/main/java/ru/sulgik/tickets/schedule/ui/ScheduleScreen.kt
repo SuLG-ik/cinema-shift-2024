@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.sulgik.core.datetime.LocalDateTimeParser
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTab
 import ru.sulgik.uikit.UIKitTabRow
@@ -119,6 +120,7 @@ fun ScheduleDates(
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val parser = LocalDateTimeParser.current
     UIKitTabRow(
         modifier = modifier,
         selectedTabIndex = selectedItem,
@@ -129,11 +131,14 @@ fun ScheduleDates(
                 onClick = { onSelect(index) },
             ) {
                 Text(
-                    "${it.date.dayOfMonth}.${it.date.monthValue}",
-                    style = MaterialTheme.typography.headlineSmall,
+                    parser.formatDateWithWeek(it.date),
+                    style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(5.dp)
+                        .padding(
+                            horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding + 5.dp,
+                            vertical = UIKitPaddingDefaultTokens.DefaultContentPadding - 5.dp,
+                        )
                         .align(Alignment.CenterHorizontally),
                 )
             }
@@ -156,10 +161,13 @@ fun ScheduleSeances(
     HorizontalPager(
         state = pageState,
         key = { it },
+        modifier = modifier,
+        userScrollEnabled = false
     ) {
         SeancePage(
             seance = seances[it],
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(vertical = UIKitPaddingDefaultTokens.DefaultContentPadding)
         )
     }
@@ -197,17 +205,23 @@ fun SeanceTime(
     time: Seance.SeanceTime,
     modifier: Modifier = Modifier,
 ) {
+    val parser = LocalDateTimeParser.current
     Box(
-        modifier = modifier.border(
-            1.dp,
-            MaterialTheme.colorScheme.outline,
-            UIKitShapeTokens.CornerMedium,
-        ),
+        modifier = modifier
     ) {
         Text(
-            "${time.time.hour}:${time.time.minute}",
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
+            parser.formatTime(time.time),
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier
+                .border(
+                    1.dp,
+                    MaterialTheme.colorScheme.outline,
+                    UIKitShapeTokens.CornerMedium,
+                )
+                .padding(
+                    horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding + 5.dp,
+                    vertical = UIKitPaddingDefaultTokens.DefaultContentPadding - 5.dp,
+                ),
         )
     }
 }
