@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitRemoteImage
 import ru.sulgik.uikit.UIKitTopBar
@@ -31,6 +32,7 @@ data class Film(
     val id: String,
     val title: String,
     val subtitle: String,
+    val description: String,
     val userRating: UserRating,
     val genres: List<String>,
     val countryName: String?,
@@ -111,6 +113,7 @@ fun FilmItem(
                 ratingImdb = film.userRating.imdb,
                 ratingKinopoisk = film.userRating.kinopoisk,
             )
+            Text(film.description, maxLines = 2, overflow = TextOverflow.Ellipsis)
             FilmAboutButton(onClick = onFilmAbout, modifier = Modifier.fillMaxWidth())
         }
     }

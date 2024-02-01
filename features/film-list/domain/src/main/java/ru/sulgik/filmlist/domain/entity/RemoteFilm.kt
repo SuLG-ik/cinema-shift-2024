@@ -4,6 +4,7 @@ data class Film(
     val id: String,
     val title: String,
     val subtitle: String,
+    val description: String,
     val userRating: UserRating,
     val genres: List<String>,
     val countryName: String?,

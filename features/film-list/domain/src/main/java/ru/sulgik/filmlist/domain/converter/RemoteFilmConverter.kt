@@ -17,6 +17,7 @@ class RemoteFilmConverter(
             id = remoteFilm.id,
             title = remoteFilm.title,
             subtitle = remoteFilm.subtitle,
+            description = remoteFilm.description,
             userRating = Film.UserRating(
                 remoteFilm.userRating.imdb,
                 remoteFilm.userRating.kinopoisk,

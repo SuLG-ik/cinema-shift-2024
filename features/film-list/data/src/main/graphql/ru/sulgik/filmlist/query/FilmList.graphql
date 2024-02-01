@@ -5,6 +5,7 @@ query LoadFilmList {
             name
             originalName
             genres
+            description
             img
             userRatings {
                 kinopoisk

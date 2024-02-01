@@ -1,18 +1,20 @@
 package ru.sulgik.uikit.film
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.R
+import ru.sulgik.uikit.UIKitRatingStars
 import ru.sulgik.uikit.UIKitRemoteImage
 import ru.sulgik.uikit.tokens.UIKitShapeTokens
 
@@ -28,7 +30,11 @@ fun FilmDetails(
     Column(
         modifier = modifier
     ) {
-        FilmImage(image, modifier = Modifier.height(300.dp).fillMaxWidth())
+        FilmImage(
+            image, modifier = Modifier
+                .height(300.dp)
+                .fillMaxWidth()
+        )
         FilmItemTitle(title, subtitle)
         FilmRating(ratingImdb, ratingKinopoisk)
     }
@@ -40,10 +46,30 @@ fun FilmRating(
     kinopoisk: Float,
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    Row(
         modifier = modifier,
     ) {
-        Text("Kinoposik – ${kinopoisk}", style = MaterialTheme.typography.bodySmall)
+        Rating(
+            service = "IMDB",
+            value = imdb,
+            modifier = Modifier.fillMaxWidth().weight(0.5f),
+        )
+        Rating(
+            service = "Кинопоиск",
+            value = kinopoisk,
+            modifier = Modifier.fillMaxWidth().weight(0.5f),
+        )
+    }
+}
+
+@Composable
+fun Rating(service: String, value: Float, modifier: Modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        UIKitRatingStars(value)
+        Text("$service – ${value}", style = MaterialTheme.typography.bodyMedium)
     }
 }
 
@@ -70,6 +96,7 @@ fun FilmItemTitle(
         modifier = modifier,
     ) {
         Text(title, style = MaterialTheme.typography.headlineSmall)
+        if (subtitle != title)
         Text(subtitle, style = MaterialTheme.typography.bodyLarge)
     }
 }
