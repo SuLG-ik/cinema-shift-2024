@@ -125,7 +125,7 @@ fun FilmInfo(
             subtitle = film.subtitle,
             image = film.imageUrl,
             ratingImdb = film.userRating.imdb,
-            ratingKinopoisk = film.userRating.imdb,
+            ratingKinopoisk = film.userRating.kinopoisk,
         )
         UIKitContainedButton(
             onClick = onSchedule,
