@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.tickets.places.component"
+    namespace = "ru.sulgik.tickets.places"
     compileSdk = 34
 
     defaultConfig {

@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import ru.sulgik.card.component.R
+import ru.sulgik.card.R
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitOutlineTextField
 import ru.sulgik.uikit.UIKitTopBar

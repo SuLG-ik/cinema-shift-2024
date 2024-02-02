@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.card.component"
+    namespace = "ru.sulgik.tickets.userinfo"
     compileSdk = 34
 
     defaultConfig {

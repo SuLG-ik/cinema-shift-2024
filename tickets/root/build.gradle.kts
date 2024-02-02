@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.root.component"
+    namespace = "ru.sulgik.root"
     compileSdk = 34
 
     defaultConfig {

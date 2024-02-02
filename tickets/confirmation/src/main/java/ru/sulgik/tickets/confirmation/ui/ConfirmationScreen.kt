@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import ru.sulgik.core.datetime.LocalDateTimeFormatter
-import ru.sulgik.tickets.confirmation.component.R
+import ru.sulgik.tickets.confirmation.R
 import ru.sulgik.tickets.confirmation.domain.entity.ConfirmationData
 import ru.sulgik.tickets.domain.entity.SelectedSeance
 import ru.sulgik.uikit.UIKitContainedButton

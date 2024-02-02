@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.tickets.confirmation.component"
+    namespace = "ru.sulgik.tickets.confirmation"
     compileSdk = 34
 
     defaultConfig {

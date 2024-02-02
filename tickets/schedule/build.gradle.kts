@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.tickets.schedule.component"
+    namespace = "ru.sulgik.tickets.schedule"
     compileSdk = 34
 
     defaultConfig {

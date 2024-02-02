@@ -24,8 +24,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import ru.sulgik.card.component.R
 import ru.sulgik.core.validation.user.UserInputError
+import ru.sulgik.tickets.userinfo.R
 import ru.sulgik.tickets.userinfo.domain.entity.UserInfo
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitOutlineTextField

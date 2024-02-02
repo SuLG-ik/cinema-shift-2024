@@ -39,7 +39,7 @@ import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.tickets.domain.entity.Schedule
 import ru.sulgik.tickets.domain.entity.SelectedSeance
 import ru.sulgik.tickets.domain.entity.toSelectedHallType
-import ru.sulgik.tickets.schedule.component.R
+import ru.sulgik.tickets.schedule.R
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTab
 import ru.sulgik.uikit.UIKitTabRow
