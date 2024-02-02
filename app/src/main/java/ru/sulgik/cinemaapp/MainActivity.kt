@@ -17,8 +17,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import ru.sulgik.cinemaapp.ui.theme.CinemaAppTheme
 import ru.sulgik.core.component.withDI
-import ru.sulgik.core.datetime.DateTimeParser
-import ru.sulgik.core.datetime.LocalDateTimeParser
+import ru.sulgik.core.datetime.DateTimeFormatter
+import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.host.component.RootComponent
 import ru.sulgik.host.component.RootUI
 import ru.sulgik.uikit.LocalImageLoader
@@ -28,12 +28,12 @@ class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         val component = RootComponent(defaultComponentContext().withDI())
         val imageLoader = get<ImageLoader>()
-        val dateTimeParser = get<DateTimeParser>()
+        val dateTimeFormatter = get<DateTimeFormatter>()
         setContent {
             CinemaAppTheme {
                 CompositionLocalProvider(
                     LocalImageLoader provides imageLoader,
-                    LocalDateTimeParser provides dateTimeParser,
+                    LocalDateTimeFormatter provides dateTimeFormatter,
                 ) {
                     Surface(
                         modifier = Modifier.fillMaxSize(),

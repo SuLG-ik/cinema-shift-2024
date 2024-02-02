@@ -4,10 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -35,9 +32,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.sulgik.core.datetime.LocalDateTimeParser
+import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTab
 import ru.sulgik.uikit.UIKitTabRow
@@ -80,7 +78,7 @@ fun ScheduleScreen(
         topBar = {
             UIKitTopBar(
                 title = {
-                    Text(text = "Расписание")
+                    Text(text = stringResource(R.string.schedule_top_bar))
                 },
                 onBack = onBack,
             )
@@ -149,7 +147,7 @@ fun ScheduleDates(
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val parser = LocalDateTimeParser.current
+    val parser = LocalDateTimeFormatter.current
     UIKitTabRow(
         modifier = modifier,
         selectedTabIndex = selectedItem,
@@ -215,19 +213,19 @@ fun SeancePage(
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace * 2)
     ) {
         NamedSeanceList(
-            title = "Красный зал",
+            title = stringResource(R.string.schedule_red_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.RED },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
-            title = "Синий зал",
+            title = stringResource(R.string.schedule_blue_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.BLUE },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
-            title = "Зелёный зал",
+            title = stringResource(R.string.schedule_green_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.GREEN },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
@@ -241,7 +239,7 @@ fun SeanceTime(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val parser = LocalDateTimeParser.current
+    val parser = LocalDateTimeFormatter.current
     val color =
         animateColorAsState(targetValue = if (time.isSelected) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.background)
     Text(
@@ -285,7 +283,6 @@ fun SeanceList(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun NamedSeanceList(
     title: String,

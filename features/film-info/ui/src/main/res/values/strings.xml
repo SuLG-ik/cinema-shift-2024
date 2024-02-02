@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="view_schedule">View schedule</string>
+    <string name="about_top_bar">About movie</string>
+    <string name="about_genre">"Genres: "</string>
+    <string name="about_release_date">"Release date: "</string>
+    <string name="about_directors">Directors:</string>
+    <string name="about_actors">Actors:</string>
+    <string name="about_actor">actor</string>
+    <string name="about_director">director</string>
 </resources>

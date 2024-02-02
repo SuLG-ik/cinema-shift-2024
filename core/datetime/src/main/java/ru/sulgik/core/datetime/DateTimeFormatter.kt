@@ -3,7 +3,7 @@ package ru.sulgik.core.datetime
 import java.time.LocalDate
 import java.time.LocalTime
 
-interface DateTimeParser {
+interface DateTimeFormatter {
 
     fun parseDate(value: String): LocalDate
 
@@ -12,5 +12,7 @@ interface DateTimeParser {
     fun formatTime(time: LocalTime): String
 
     fun formatDateWithWeek(time: LocalDate): String
+
+    fun formatDateWithTime(date: LocalDate, time: LocalTime): String
 
 }

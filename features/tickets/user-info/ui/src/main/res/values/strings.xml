@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_info_input_top_bar">Your data</string>
+    <string name="continue_button">Continue</string>
+    <string name="user_info_input_title">Ticket\'s owner</string>
+    <string name="field_first_name">First name*</string>
+    <string name="field_last_name">Last name*</string>
+    <string name="field_middle_name">Middle name</string>
+</resources>

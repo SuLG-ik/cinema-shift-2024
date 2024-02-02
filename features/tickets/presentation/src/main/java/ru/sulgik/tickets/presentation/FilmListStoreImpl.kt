@@ -7,16 +7,20 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.sulgik.tickets.domain.usecase.LoadFilmScheduleUseCase
+import ru.sulgik.tickets.domain.entity.Film
 import ru.sulgik.tickets.domain.entity.Schedule
+import ru.sulgik.tickets.domain.usecase.LoadFilmScheduleUseCase
+import ru.sulgik.tickets.domain.usecase.LoadShortFilmUseCase
 
 @OptIn(ExperimentalMviKotlinApi::class)
 class FilmScheduleStoreImpl(
     coroutineDispatcher: CoroutineDispatcher,
     storeFactory: StoreFactory,
     loadFilmScheduleUseCase: LoadFilmScheduleUseCase,
+    loadShortFilmUseCase: LoadShortFilmUseCase,
     params: FilmScheduleStore.Params,
 ) : FilmScheduleStore,
     Store<FilmScheduleStore.Intent, FilmScheduleStore.State, FilmScheduleStore.Label> by storeFactory.create<_, Action, Message, _, _>(
@@ -27,6 +31,7 @@ class FilmScheduleStoreImpl(
                 is Message.SetScheduleList -> copy(
                     isLoading = false,
                     schedule = it.schedule,
+                    film = it.film,
                 )
             }
         },
@@ -34,9 +39,10 @@ class FilmScheduleStoreImpl(
         executorFactory = coroutineExecutorFactory(coroutineDispatcher) {
             onAction<Action.Setup> {
                 launch {
-                    val schedule = loadFilmScheduleUseCase(params.filmId)
+                    val schedule = async { loadFilmScheduleUseCase(params.filmId) }
+                    val film = async { loadShortFilmUseCase(params.filmId) }
                     withContext(Dispatchers.Main) {
-                        dispatch(Message.SetScheduleList(schedule))
+                        dispatch(Message.SetScheduleList(film.await(), schedule.await()))
                     }
                 }
             }
@@ -48,6 +54,9 @@ class FilmScheduleStoreImpl(
     }
 
     sealed interface Message {
-        data class SetScheduleList(val schedule: List<Schedule>) : Message
+        data class SetScheduleList(
+            val film: Film,
+            val schedule: List<Schedule>
+        ) : Message
     }
 }

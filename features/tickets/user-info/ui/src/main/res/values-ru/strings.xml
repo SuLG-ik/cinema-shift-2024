@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_info_input_top_bar">Ваши данные</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="user_info_input_title">Владелец билетов</string>
+    <string name="field_first_name">Имя*</string>
+    <string name="field_last_name">Фамилия*</string>
+    <string name="field_middle_name">Отчество</string>
+</resources>

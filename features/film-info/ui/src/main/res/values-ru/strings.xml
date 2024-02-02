@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="view_schedule">Посмотреть расписание</string>
+    <string name="about_top_bar">О фильме</string>
+    <string name="about_genre">"Жанры: "</string>
+    <string name="about_release_date">"Дата релиза: "</string>
+    <string name="about_directors">Режисёры:</string>
+    <string name="about_actors">Актёры:</string>
+    <string name="about_actor">актёр</string>
+    <string name="about_director">режисёр</string>
 </resources>

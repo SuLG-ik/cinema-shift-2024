@@ -1,17 +1,23 @@
 package ru.sulgik.tickets.data
 
 import filmlist.GetFilmScheduleQuery
-import ru.sulgik.core.datetime.DateTimeParser
+import filmlist.GetFilmTitleQuery
+import ru.sulgik.core.datetime.DateTimeFormatter
 import type.FilmHallCellType
 
 
 class GraphQLConverter(
-    private val dateTimeParser: DateTimeParser,
+    private val dateTimeFormatter: DateTimeFormatter,
 ) {
 
+    fun convert(film: GetFilmTitleQuery.Film): RemoteFilm {
+        return RemoteFilm(
+            film.name
+        )
+    }
     private fun convert(schedule: GetFilmScheduleQuery.Schedule): RemoteSchedule {
         return RemoteSchedule(
-            date = dateTimeParser.parseDate(schedule.date), seances = schedule.seances.map { it.convert() }
+            date = dateTimeFormatter.parseDate(schedule.date), seances = schedule.seances.map { it.convert() }
         )
     }
 
@@ -21,7 +27,7 @@ class GraphQLConverter(
 
     private fun GetFilmScheduleQuery.Seance.convert(): RemoteSchedule.Seance {
         return RemoteSchedule.Seance(
-            time = dateTimeParser.parseTime(time),
+            time = dateTimeFormatter.parseTime(time),
             hall = hall.convert(),
             payedTickets = payedTickets.map{ it.convert() }
 
@@ -31,7 +37,7 @@ class GraphQLConverter(
 
     private fun GetFilmScheduleQuery.PayedTicket.convert(): RemoteSchedule.PayedTicket {
         return RemoteSchedule.PayedTicket(
-            column = column, filmId = filmId, phone = phone, row = row
+            column = column.toInt(), filmId = filmId, phone = phone, row = row.toInt()
         )
     }
 
@@ -43,7 +49,7 @@ class GraphQLConverter(
     }
     private fun GetFilmScheduleQuery.Place.convert(): RemoteSchedule.Place {
         return RemoteSchedule.Place(
-            price = price, type = type.convert(),
+            price = price.toInt(), type = type.convert(),
         )
     }
 

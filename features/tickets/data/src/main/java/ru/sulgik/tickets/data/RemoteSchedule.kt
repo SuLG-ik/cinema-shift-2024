@@ -19,15 +19,15 @@ data class RemoteSchedule(
     )
 
     data class Place(
-        val price: Double,
+        val price: Int,
         val type: FilmHallCellType,
     )
 
     data class PayedTicket(
-        val column: Double,
+        val column: Int,
         val filmId: String,
         val phone: String,
-        val row: Double,
+        val row: Int,
     )
 
     enum class FilmHallCellType {

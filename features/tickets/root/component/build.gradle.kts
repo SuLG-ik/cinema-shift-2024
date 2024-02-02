@@ -59,9 +59,14 @@ dependencies {
     implementation(libs.decompose.compose)
 
     implementation(libs.serialization.core)
+    implementation(libs.datetime)
 
     implementation(projects.features.tickets.presentation)
     implementation(projects.features.tickets.schedule.component)
+    implementation(projects.features.tickets.places.component)
+    implementation(projects.features.tickets.confirmation.component)
+    implementation(projects.features.tickets.userInfo.component)
+    implementation(projects.features.card.component)
 
     api(projects.core.component)
 

@@ -5,5 +5,5 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val dateTimeModule = module {
-    singleOf(::DateTimeParserImpl) bind DateTimeParser::class
+    singleOf(::DateTimeFormatterImpl) bind DateTimeFormatter::class
 }

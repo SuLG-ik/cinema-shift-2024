@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="view_schedule">Посмотреть расписание</string>
+    <string name="places">Места</string>
+    <string name="places_row_column_price">%1$s ряд, %2$s место — %3$s ₽</string>
+    <string name="place_selection">Выбор места</string>
+    <string name="total_cost">Сумма: %1$s ₽</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="places_screen">Экран</string>
+    <string name="places_row">Ряд</string>
+</resources>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="view_schedule">View schedule</string>
+    <string name="schedule_top_bar">Schedule</string>
+    <string name="schedule_red_hall">Red hall</string>
+    <string name="schedule_blue_hall">Blue hall</string>
+    <string name="schedule_green_hall">Green hall</string>
 </resources>

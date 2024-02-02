@@ -20,6 +20,7 @@ kotlinx-serialization = "1.6.2"
 essenty = "2.0.0-alpha04"
 volley = "1.2.1"
 desugaring = "2.0.4"
+datetime = "0.5.0"
 
 [libraries]
 desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref="desugaring"}
@@ -54,7 +55,7 @@ decompose-android = { module = "com.arkivanov.decompose:extensions-android", ver
 essenty-core = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
-volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
