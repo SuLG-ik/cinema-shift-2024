@@ -31,6 +31,7 @@ include(":tickets:confirmation")
 include(":tickets:user-info")
 include(":tickets:root")
 
+include(":core:auth")
 include(":core:data-graphql")
 include(":core:data-ktor")
 include(":core:di")

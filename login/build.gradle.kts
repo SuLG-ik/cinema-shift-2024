@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.root"
+    namespace = "ru.sulgik.login"
     compileSdk = 34
 
     defaultConfig {
@@ -56,16 +56,16 @@ dependencies {
 
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.coroutines)
+
+    implementation(libs.ktor.core)
+
     implementation(libs.decompose.compose)
 
-    implementation(libs.serialization.core)
-
-    implementation(projects.filmList)
-    implementation(projects.filmInfo)
-    implementation(projects.tickets.root)
+    implementation(projects.uikit)
+    implementation(projects.core.validation)
+    implementation(projects.core.auth)
 
     api(projects.core.component)
-    implementation(projects.uikit)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

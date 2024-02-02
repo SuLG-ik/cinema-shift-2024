@@ -4,8 +4,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import ru.sulgik.uikit.iconpack.uikiticonpack.BackButton
 import ru.sulgik.uikit.iconpack.uikiticonpack.ImageNotFound
 import ru.sulgik.uikit.iconpack.uikiticonpack.Minus
+import ru.sulgik.uikit.iconpack.uikiticonpack.Movie
 import ru.sulgik.uikit.iconpack.uikiticonpack.Plus
 import ru.sulgik.uikit.iconpack.uikiticonpack.RatingStar
+import ru.sulgik.uikit.iconpack.uikiticonpack.Ticket
+import ru.sulgik.uikit.iconpack.uikiticonpack.User
 import kotlin.collections.List as ____KtList
 
 public object UIKitIconPack
@@ -17,6 +20,6 @@ public val UIKitIconPack.AllIcons: ____KtList<ImageVector>
     if (__AllIcons != null) {
       return __AllIcons!!
     }
-    __AllIcons= listOf(RatingStar, Plus, ImageNotFound, BackButton, Minus)
+    __AllIcons= listOf(User, Ticket, Movie, RatingStar, Plus, ImageNotFound, BackButton, Minus)
     return __AllIcons!!
   }

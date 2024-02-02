@@ -13,7 +13,10 @@ class RegexUserInputValidator : UserInputValidator {
                 error = UserInputError.IncorrectLength,
             )
         }
-        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(
+                value
+            )
+        ) {
             return UserFirstNameValidationResult(
                 value = value,
                 error = UserInputError.DifferentLanguages,
@@ -38,7 +41,10 @@ class RegexUserInputValidator : UserInputValidator {
                 error = UserInputError.IncorrectLength,
             )
         }
-        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(
+                value
+            )
+        ) {
             return UserLastNameValidationResult(
                 value = value,
                 error = UserInputError.DifferentLanguages,
@@ -64,7 +70,10 @@ class RegexUserInputValidator : UserInputValidator {
             )
         }
 
-        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(
+                value
+            )
+        ) {
             return UserMiddleNameValidationResult(
                 value = value,
                 error = UserInputError.DifferentLanguages,
@@ -98,6 +107,25 @@ class RegexUserInputValidator : UserInputValidator {
         return UserPhoneValidationResult(
             value = value,
             error = UserInputError.IncorrectInput
+        )
+    }
+
+    override fun validateCode(value: String): UserCodeValidationResult {
+        if (value.isEmpty()) {
+            return UserCodeValidationResult(
+                value = value,
+                error = UserInputError.IncorrectLength
+            )
+        }
+        if (value.matches(CODE)) {
+            return UserCodeValidationResult(
+                value = value,
+                error = null,
+            )
+        }
+        return UserCodeValidationResult(
+            value = value,
+            error = UserInputError.IncorrectLength,
         )
     }
 

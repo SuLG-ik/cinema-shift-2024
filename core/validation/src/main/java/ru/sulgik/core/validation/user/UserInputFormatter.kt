@@ -10,4 +10,6 @@ interface UserInputFormatter {
 
     fun formatPhone(value: String): String
 
+    fun formatCode(value: String): String
+
 }
