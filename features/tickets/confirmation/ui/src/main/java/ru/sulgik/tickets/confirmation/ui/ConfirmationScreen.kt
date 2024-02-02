@@ -107,7 +107,7 @@ fun OrderCard(
                 .padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
             verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace)
         ) {
-            Title("Ожидание заказа")
+            Title(stringResource(R.string.confirmation_await))
             ConfirmationInfo(
                 confirmation = confirmation,
                 modifier = Modifier

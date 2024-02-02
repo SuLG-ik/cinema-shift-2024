@@ -11,7 +11,7 @@
     <string name="card_ccv">CCV*</string>
     <string name="card_ccv_placeholder" translatable="false">0000</string>
     <string name="card_date_placeholder" translatable="false">00/00</string>
-    <string name="incorrect_value_error">Неправильное значение</string>
-    <string name="required_field_error">Обязательное поле</string>
+    <string name="incorrect_value_error">Incorrect value</string>
+    <string name="required_field_error">Required field</string>
     <string name="card_number_placeholder" translatable="false">0000 0000</string>
 </resources>

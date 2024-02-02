@@ -175,12 +175,12 @@ fun PlaceSelecting(
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace)
     ) {
         Text(
-            text = "Экран",
+            text = stringResource(R.string.places_screen),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         HorizontalDivider(modifier = Modifier.padding(horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding))
         Text(
-            text = "Ряд",
+            text = stringResource(R.string.places_row),
             modifier = Modifier.padding(horizontal = UIKitPaddingDefaultTokens.DefaultContentPadding)
         )
         Row(

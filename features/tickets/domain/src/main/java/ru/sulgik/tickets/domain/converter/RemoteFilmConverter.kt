@@ -39,8 +39,8 @@ private fun RemoteSchedule.PayedTicket.convert(): Schedule.PayedTicket {
 private fun RemoteSchedule.Hall.convert(): Schedule.Hall {
     return Schedule.Hall(
         name = name,
-        places = places.mapIndexed { rowIndex, row ->
-            row.mapIndexed { columnIndex, column ->
+        places = places.map { row ->
+            row.map { column ->
                 column.convert()
             }
         }

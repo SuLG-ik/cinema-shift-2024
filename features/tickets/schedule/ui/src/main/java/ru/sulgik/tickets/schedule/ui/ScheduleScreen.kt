@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.sulgik.core.datetime.LocalDateTimeParser
@@ -80,7 +81,7 @@ fun ScheduleScreen(
         topBar = {
             UIKitTopBar(
                 title = {
-                    Text(text = "Расписание")
+                    Text(text = stringResource(R.string.schedule_top_bar))
                 },
                 onBack = onBack,
             )
@@ -215,19 +216,19 @@ fun SeancePage(
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace * 2)
     ) {
         NamedSeanceList(
-            title = "Красный зал",
+            title = stringResource(R.string.schedule_red_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.RED },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
-            title = "Синий зал",
+            title = stringResource(R.string.schedule_blue_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.BLUE },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
         )
         NamedSeanceList(
-            title = "Зелёный зал",
+            title = stringResource(R.string.schedule_green_hall),
             time = seance.time.filter { it.hallType == Seance.HallType.GREEN },
             onSelect = onSelect,
             modifier = Modifier.fillMaxWidth(),
@@ -285,7 +286,6 @@ fun SeanceList(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun NamedSeanceList(
     title: String,

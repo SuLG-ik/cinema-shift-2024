@@ -76,7 +76,7 @@ fun FilmListScreen(
 ) {
     Scaffold(
         topBar = {
-            UIKitTopBar(title = { Text(text = "Афиша") })
+            UIKitTopBar(title = { Text(text = stringResource(R.string.film_list_top_bar)) })
         },
         modifier = modifier
     ) {
@@ -135,43 +135,5 @@ fun FilmAboutButton(
         modifier = modifier,
     ) {
         Text(stringResource(id = R.string.more_info))
-    }
-}
-
-@Composable
-fun FilmRating(
-    rating: Film.UserRating,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier,
-    ) {
-        Text("Kinoposik – ${rating.kinopoisk}", style = MaterialTheme.typography.bodySmall)
-    }
-}
-
-@Composable
-fun FilmImage(
-    film: Film,
-    modifier: Modifier = Modifier,
-) {
-    UIKitRemoteImage(
-        url = film.imageUrl,
-        contentDescription = stringResource(R.string.film_s_image),
-        contentScale = ContentScale.Crop,
-        modifier = modifier.clip(MaterialTheme.shapes.large),
-    )
-}
-
-@Composable
-fun FilmItemTitle(
-    film: Film,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier,
-    ) {
-        Text(film.title, style = MaterialTheme.typography.headlineMedium)
-        Text(film.subtitle, style = MaterialTheme.typography.bodyLarge)
     }
 }

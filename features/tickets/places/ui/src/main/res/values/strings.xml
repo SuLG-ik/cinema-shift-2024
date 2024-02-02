@@ -6,4 +6,6 @@
     <string name="place_selection">Place selection</string>
     <string name="continue_button">Continue</string>
     <string name="total_cost">Total cost: %1$s ₽</string>
+    <string name="places_screen">Экран</string>
+    <string name="places_row">Ряд</string>
 </resources>

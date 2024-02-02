@@ -12,4 +12,5 @@
     <string name="green_hall">Green</string>
     <string name="blue_hall">Blue</string>
     <string name="unknown_hall">Unknown</string>
+    <string name="confirmation_await">Wait order…</string>
 </resources>

@@ -12,4 +12,5 @@
     <string name="green_hall">Зелёный</string>
     <string name="blue_hall">Синий</string>
     <string name="unknown_hall">Неизвестен</string>
+    <string name="confirmation_await">Ожидание заказа</string>
 </resources>

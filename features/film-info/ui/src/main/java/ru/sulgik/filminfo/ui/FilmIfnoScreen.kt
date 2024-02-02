@@ -27,6 +27,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import ru.sulgik.uikit.ImageNotFound
@@ -97,7 +98,7 @@ fun FilmScreen(
         topBar = {
             UIKitTopBar(
                 title = {
-                    Text(text = "О фильме")
+                    Text(text = stringResource(R.string.about_top_bar))
                 },
                 onBack = onBack,
             )
@@ -182,7 +183,7 @@ fun FilmGenders(
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Text(
-            "Жанры: ",
+            stringResource(R.string.about_genre),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(vertical = 3.dp)
         )
@@ -199,7 +200,7 @@ fun FilmReleaseDate(
 ) {
     Text(buildAnnotatedString {
         withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-            append("Дата релиза: ")
+            append(stringResource(R.string.about_release_date))
         }
         append(film.releaseDate)
     }, modifier = modifier)
@@ -228,7 +229,7 @@ fun FilmDirectors(
     film: Film,
     modifier: Modifier,
 ) {
-    InfoBlock("Режисёры:") {
+    InfoBlock(stringResource(R.string.about_directors)) {
         Row(
             modifier = modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -277,11 +278,13 @@ fun PersonCard(
                 text = name,
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = professions.map { it.asString() }.joinToString(", "),
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }
@@ -292,7 +295,7 @@ fun FilmActors(
     film: Film,
     modifier: Modifier,
 ) {
-    InfoBlock(title = "Актёры:", modifier = modifier) {
+    InfoBlock(title = stringResource(R.string.about_actors), modifier = modifier) {
         Row(
             modifier = Modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -320,8 +323,8 @@ fun FilmActor(
 @Composable
 fun Film.Profession.asString(): String {
     return when (this) {
-        Film.Profession.ACTOR -> "актёр"
-        Film.Profession.DIRECTOR -> "режисёр"
+        Film.Profession.ACTOR -> stringResource(R.string.about_actor)
+        Film.Profession.DIRECTOR -> stringResource(R.string.about_director)
     }
 }
 
