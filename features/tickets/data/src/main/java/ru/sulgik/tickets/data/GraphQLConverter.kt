@@ -2,12 +2,12 @@ package ru.sulgik.tickets.data
 
 import filmlist.GetFilmScheduleQuery
 import filmlist.GetFilmTitleQuery
-import ru.sulgik.core.datetime.DateTimeParser
+import ru.sulgik.core.datetime.DateTimeFormatter
 import type.FilmHallCellType
 
 
 class GraphQLConverter(
-    private val dateTimeParser: DateTimeParser,
+    private val dateTimeFormatter: DateTimeFormatter,
 ) {
 
     fun convert(film: GetFilmTitleQuery.Film): RemoteFilm {
@@ -17,7 +17,7 @@ class GraphQLConverter(
     }
     private fun convert(schedule: GetFilmScheduleQuery.Schedule): RemoteSchedule {
         return RemoteSchedule(
-            date = dateTimeParser.parseDate(schedule.date), seances = schedule.seances.map { it.convert() }
+            date = dateTimeFormatter.parseDate(schedule.date), seances = schedule.seances.map { it.convert() }
         )
     }
 
@@ -27,7 +27,7 @@ class GraphQLConverter(
 
     private fun GetFilmScheduleQuery.Seance.convert(): RemoteSchedule.Seance {
         return RemoteSchedule.Seance(
-            time = dateTimeParser.parseTime(time),
+            time = dateTimeFormatter.parseTime(time),
             hall = hall.convert(),
             payedTickets = payedTickets.map{ it.convert() }
 

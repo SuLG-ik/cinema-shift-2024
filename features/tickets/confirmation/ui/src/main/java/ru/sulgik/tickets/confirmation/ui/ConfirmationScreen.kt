@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ru.sulgik.core.datetime.LocalDateTimeParser
+import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTopBar
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
@@ -126,7 +126,7 @@ fun ConfirmationInfo(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace)
     ) {
-        val formatter = LocalDateTimeParser.current
+        val formatter = LocalDateTimeFormatter.current
         TitledText(
             title = stringResource(R.string.movie),
             text = confirmation.film.title,

@@ -4,10 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -38,7 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.sulgik.core.datetime.LocalDateTimeParser
+import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTab
 import ru.sulgik.uikit.UIKitTabRow
@@ -150,7 +147,7 @@ fun ScheduleDates(
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val parser = LocalDateTimeParser.current
+    val parser = LocalDateTimeFormatter.current
     UIKitTabRow(
         modifier = modifier,
         selectedTabIndex = selectedItem,
@@ -242,7 +239,7 @@ fun SeanceTime(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val parser = LocalDateTimeParser.current
+    val parser = LocalDateTimeFormatter.current
     val color =
         animateColorAsState(targetValue = if (time.isSelected) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.background)
     Text(

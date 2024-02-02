@@ -3,7 +3,7 @@ package ru.sulgik.core.datetime
 import java.time.LocalDate
 import java.time.LocalTime
 
-interface DateTimeParser {
+interface DateTimeFormatter {
 
     fun parseDate(value: String): LocalDate
 

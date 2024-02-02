@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="monday_short">Пн</string>
+    <string name="tuesday_short">Вт</string>
+    <string name="wednesday_short">Ср</string>
+    <string name="thursday_short">Чт</string>
+    <string name="friday_short">Пт</string>
+    <string name="saturday_short">Сб</string>
+    <string name="sunday_short">Вс</string>
+    <string name="january_short">янв</string>
+    <string name="february_short">фев</string>
+    <string name="march_short">мар</string>
+    <string name="april_short">апр</string>
+    <string name="may_short">май</string>
+    <string name="july_short">июл</string>
+    <string name="june_short">июн</string>
+    <string name="august_short">авг</string>
+    <string name="september_short">сен</string>
+    <string name="october_short">окт</string>
+    <string name="november_short">ноя</string>
+    <string name="december_short">дек</string>
+    <string name="january">января</string>
+    <string name="february">февраля</string>
+    <string name="march">марта</string>
+    <string name="april">апреля</string>
+    <string name="may">мая</string>
+    <string name="july">июля</string>
+    <string name="june">июня</string>
+    <string name="august">августа</string>
+    <string name="september">сентября</string>
+    <string name="october">октября</string>
+    <string name="november">ноября</string>
+    <string name="december">декабря</string>
+</resources>
