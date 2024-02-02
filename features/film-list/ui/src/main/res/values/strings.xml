@@ -2,5 +2,5 @@
 <resources>
     <string name="more_info">More info</string>
     <string name="film_s_image">Film\'s image</string>
-    <string name="film_list_top_bar">Афиша</string>
+    <string name="film_list_top_bar">Today\'s movies</string>
 </resources>

@@ -13,13 +13,17 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -119,6 +123,7 @@ fun CardInput(
             onCardNumberInput = onCardNumberInput,
             onCardDateInput = onCardDateInput,
             onCardCCVInput = onCardCCVInput,
+            onContinue = onContinue,
             modifier = Modifier.fillMaxWidth()
         )
         ContinueButton(
@@ -157,6 +162,7 @@ fun CardFields(
     onCardNumberInput: (String) -> Unit,
     onCardDateInput: (String) -> Unit,
     onCardCCVInput: (String) -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -182,6 +188,7 @@ fun CardFields(
             CardCCVField(
                 field = card.ccv,
                 onInput = onCardCCVInput,
+                onContinue = onContinue,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.5f),
@@ -196,6 +203,7 @@ fun CardNumberField(
     onInput: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
     TitledOutlineTextField(
         title = stringResource(R.string.card_number),
         value = field.value,
@@ -208,6 +216,12 @@ fun CardNumberField(
                 error = field.error,
             )
         },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+        ),
         isError = field.error != null,
         visualTransformation = CardNumberVisualTransformation(),
         modifier = modifier,
@@ -218,8 +232,10 @@ fun CardNumberField(
 fun CardCCVField(
     field: Card.CardCCVField,
     onInput: (String) -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
     TitledOutlineTextField(
         title = stringResource(R.string.card_ccv),
         value = field.value,
@@ -232,6 +248,16 @@ fun CardCCVField(
                 error = field.error,
             )
         },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Go
+        ),
+        keyboardActions = KeyboardActions(
+            onGo = {
+                focusManager.clearFocus()
+                onContinue()
+            }
+        ),
         isError = field.error != null,
         visualTransformation = PasswordVisualTransformation(),
         modifier = modifier,
@@ -244,6 +270,7 @@ fun CardDateField(
     onInput: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
     TitledOutlineTextField(
         title = "Срок*",
         value = field.value,
@@ -256,6 +283,15 @@ fun CardDateField(
                 error = field.error,
             )
         },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = {
+                focusManager.clearFocus()
+            }
+        ),
         isError = field.error != null,
         visualTransformation = DateVisualTransformation(),
         modifier = modifier,
@@ -292,6 +328,7 @@ fun TitledOutlineTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Number,
     ),
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     UIKitOutlineTextField(
         title = title,
