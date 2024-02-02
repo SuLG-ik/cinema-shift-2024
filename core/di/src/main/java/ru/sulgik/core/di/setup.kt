@@ -21,6 +21,7 @@ import ru.sulgik.tickets.domain.ticketsDomainModule
 import ru.sulgik.tickets.places.presentation.placesSelectorPresentationModule
 import ru.sulgik.tickets.presentation.ticketsPresentationModule
 import ru.sulgik.tickets.schedule.presentation.seanceSelectorPresentationModule
+import ru.sulgik.tickets.userinfo.presentation.userInfoInputPresentationModule
 
 fun Application.startDI() {
     startKoin {
@@ -46,6 +47,7 @@ fun Application.startDI() {
             ticketsDataModule,
             seanceSelectorPresentationModule,
             placesSelectorPresentationModule,
+            userInfoInputPresentationModule,
 
             cardInputPresentationModule,
         )

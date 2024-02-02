@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    namespace = "ru.sulgik.root.component"
+    namespace = "ru.sulgik.card.component"
     compileSdk = 34
 
     defaultConfig {
@@ -58,16 +57,8 @@ dependencies {
     implementation(libs.mvikotlin.coroutines)
     implementation(libs.decompose.compose)
 
-    implementation(libs.serialization.core)
-    implementation(libs.datetime)
-
-    implementation(projects.features.tickets.presentation)
-    implementation(projects.features.tickets.schedule.component)
-    implementation(projects.features.tickets.places.component)
-    implementation(projects.features.tickets.confirmation.component)
-    implementation(projects.features.tickets.userInfo.component)
-    implementation(projects.features.card.component)
-
+    api(projects.features.tickets.userInfo.ui)
+    api(projects.features.tickets.userInfo.presentation)
     api(projects.core.component)
 
     testImplementation(libs.junit)

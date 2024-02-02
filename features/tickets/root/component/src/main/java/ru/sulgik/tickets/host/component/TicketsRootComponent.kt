@@ -17,15 +17,17 @@ import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.diChildStack
 import ru.sulgik.core.component.getStore
+import ru.sulgik.ticket.userinfo.component.UserInfoInput
+import ru.sulgik.ticket.userinfo.component.UserInfoInputComponent
 import ru.sulgik.tickets.confirmation.component.Confirmation
 import ru.sulgik.tickets.confirmation.component.ConfirmationComponent
+import ru.sulgik.tickets.domain.entity.Film
 import ru.sulgik.tickets.domain.entity.Schedule
 import ru.sulgik.tickets.places.component.PlacesSelector
 import ru.sulgik.tickets.places.component.PlacesSelectorComponent
 import ru.sulgik.tickets.presentation.FilmScheduleStore
 import ru.sulgik.tickets.schedule.component.SeanceSelector
 import ru.sulgik.tickets.schedule.component.SeanceSelectorComponent
-
 
 class TicketsRootComponent(
     componentContext: DIComponentContext,
@@ -53,23 +55,18 @@ class TicketsRootComponent(
                 SeanceSelectorComponent(
                     componentContext = diComponentContext,
                     onBack = this::onBack,
-                    onSeanceSelected = this::onSeanceSelected,
+                    onSeanceSelected = { onSeanceSelected(it.convert()) },
                     scheduleStore = store,
                 )
             )
 
             is Config.PlacesSelector -> {
-                val seance = PlacesSelector.SelectedSeance(
-                    date = config.seanceDate.toJavaLocalDate(),
-                    time = config.seanceTime.toJavaLocalTime(),
-                    hallType = config.hallType.covert(),
-                )
                 TicketsRoot.Child.PlacesSelector(
                     PlacesSelectorComponent(
                         componentContext = diComponentContext,
                         onBack = this::onBack,
-                        onContinue = { onPlacesSelected(seance, it) },
-                        selectedSeance = seance,
+                        onContinue = { onPlacesSelected(config.film, config.seance, it.convert()) },
+                        selectedSeance = config.seance.convert(),
                         scheduleStore = store,
                     )
                 )
@@ -78,78 +75,106 @@ class TicketsRootComponent(
             is Config.OrderConfirmation -> TicketsRoot.Child.OrderConfirmation(
                 ConfirmationComponent(
                     this::onBack,
-                    this::onOrderConfirmed,
+                    { onOrderConfirmed(config.film, config.order, config.seance) },
                     config.convert(),
                 )
             )
 
-            Config.CardInput -> TicketsRoot.Child.CardInput(
+            is Config.CardInput -> TicketsRoot.Child.CardInput(
                 CardInputComponent(
                     componentContext = diComponentContext,
                     onBack = this::onBack,
-                    onContinue = {},
+                    onContinue = {
+
+                    },
+                )
+            )
+
+            is Config.UserInput -> TicketsRoot.Child.UserInput(
+                UserInfoInputComponent(
+                    componentContext = diComponentContext,
+                    onBack = this::onBack,
+                    onContinue = {
+                        onUserInfoInput(
+                            film = config.film,
+                            order = config.order,
+                            seance = config.seance,
+                            user = it.convert()
+                        )
+                    },
                 )
             )
         }
     }
 
 
-    private fun TicketsRootComponent.Config.OrderConfirmation.convert(): Confirmation.ConfirmationData {
+    private fun Config.OrderConfirmation.convert(): Confirmation.ConfirmationData {
         return Confirmation.ConfirmationData(
-            film = Confirmation.ConfirmationData.FilmInfo(filmId, filmTitle),
+            film = Confirmation.ConfirmationData.FilmInfo(film.filmId, film.title),
             seance = Confirmation.ConfirmationData.SeanceInfo(
-                date = seanceDate.toJavaLocalDate(),
-                time = seanceTime.toJavaLocalTime(),
-                hallType = hallType.covert()
+                date = seance.date.toJavaLocalDate(),
+                time = seance.time.toJavaLocalTime(),
+                hallType = seance.hallType.covert()
             ),
             place = Confirmation.ConfirmationData.PlaceInfo(
-                places = places.map {
+                places = order.places.map {
                     Confirmation.ConfirmationData.Place(it.row, it.column)
                 }
             ),
             order = Confirmation.ConfirmationData.OrderInfo(
-                totalCost = totalCost
+                totalCost = order.totalCost
             ),
         )
     }
 
-    private fun onSeanceSelected(selectedSeance: SeanceSelector.SelectedSeance) {
+    private fun onSeanceSelected(seanceInfo: SeanceInfo) {
+        val currentFilm = store.state.film
+        if (currentFilm != null)
+            navigation.bringToFront(Config.PlacesSelector(currentFilm.convert(filmId), seanceInfo))
+    }
+
+    private fun onOrderConfirmed(
+        film: FilmInfo,
+        order: OrderInfo,
+        seance: SeanceInfo,
+    ) {
         navigation.bringToFront(
-            Config.PlacesSelector(
-                selectedSeance.date.toKotlinLocalDate(),
-                selectedSeance.time.toKotlinLocalTime(),
-                selectedSeance.hallType.convert(),
+            Config.UserInput(
+                film = film,
+                order = order,
+                seance = seance
             )
         )
     }
 
-    private fun onOrderConfirmed() {
-        navigation.bringToFront(Config.CardInput)
+    private fun onUserInfoInput(
+        film: FilmInfo,
+        order: OrderInfo,
+        seance: SeanceInfo,
+        user: UserInfo,
+    ) {
+        navigation.bringToFront(
+            Config.CardInput(
+                film = film,
+                order = order,
+                seance = seance,
+                user = user
+            )
+        )
     }
 
     private fun onPlacesSelected(
-        selectedSeance: PlacesSelector.SelectedSeance,
-        selectedPlaces: PlacesSelector.SelectedPlaces,
+        film: FilmInfo,
+        seance: SeanceInfo,
+        order: OrderInfo,
     ) {
-        val currentFilm = store.state.film
-        if (currentFilm != null)
-            navigation.bringToFront(
-                Config.OrderConfirmation(
-                    filmId = filmId,
-                    filmTitle = currentFilm.title,
-                    places = selectedPlaces.places.map {
-                        Config.OrderConfirmation.Place(
-                            row = it.row,
-                            column = it.column
-                        )
-                    },
-                    totalCost = selectedPlaces.totalCost,
-                    seanceDate = selectedSeance.date.toKotlinLocalDate(),
-                    seanceTime = selectedSeance.time.toKotlinLocalTime(),
-                    hallType = Config.OrderConfirmation.HallType.GREEN
-
-                )
+        navigation.bringToFront(
+            Config.OrderConfirmation(
+                film = film,
+                order = order,
+                seance = seance,
             )
+        )
     }
 
     private fun onBack() {
@@ -166,70 +191,145 @@ class TicketsRootComponent(
 
         @Serializable
         data class PlacesSelector(
-            val seanceDate: LocalDate,
-            val seanceTime: LocalTime,
-            val hallType: HallType
-        ) : Config {
-            @Serializable
-            enum class HallType {
-                RED, GREEN, BLUE, UNKNOWN
-            }
-        }
+            val film: FilmInfo,
+            val seance: SeanceInfo,
+        ) : Config
 
         @Serializable
         data class OrderConfirmation(
-            val filmId: String,
-            val filmTitle: String,
-            val places: List<Place>,
-            val totalCost: Int,
-            val seanceDate: LocalDate,
-            val seanceTime: LocalTime,
-            val hallType: HallType
-        ) : Config {
-            @Serializable
-            enum class HallType {
-                RED, GREEN, BLUE, UNKNOWN
-            }
-
-            @Serializable
-            data class Place(
-                val row: Int,
-                val column: Int,
-            )
-
-
-        }
+            val film: FilmInfo,
+            val order: OrderInfo,
+            val seance: SeanceInfo,
+        ) : Config
 
         @Serializable
-        data object CardInput : Config
+        data class CardInput(
+            val film: FilmInfo,
+            val order: OrderInfo,
+            val seance: SeanceInfo,
+            val user: UserInfo,
+        ) : Config
+
+        @Serializable
+        data class UserInput(
+            val film: FilmInfo,
+            val order: OrderInfo,
+            val seance: SeanceInfo,
+        ) : Config
 
     }
 
-    private fun Schedule.HallType.convert(): TicketsRootComponent.Config.PlacesSelector.HallType {
-        return when (this) {
-            Schedule.HallType.RED -> TicketsRootComponent.Config.PlacesSelector.HallType.RED
-            Schedule.HallType.GREEN -> TicketsRootComponent.Config.PlacesSelector.HallType.GREEN
-            Schedule.HallType.BLUE -> TicketsRootComponent.Config.PlacesSelector.HallType.BLUE
-            Schedule.HallType.UNKNOWN -> TicketsRootComponent.Config.PlacesSelector.HallType.UNKNOWN
+    @Serializable
+    data class SeanceInfo(
+        val date: LocalDate,
+        val time: LocalTime,
+        val hallType: HallType
+    ) {
+        @Serializable
+        enum class HallType {
+            RED, GREEN, BLUE, UNKNOWN
         }
+
     }
 
-    private fun TicketsRootComponent.Config.PlacesSelector.HallType.covert(): Schedule.HallType {
-        return when (this) {
-            TicketsRootComponent.Config.PlacesSelector.HallType.RED -> Schedule.HallType.RED
-            TicketsRootComponent.Config.PlacesSelector.HallType.GREEN -> Schedule.HallType.GREEN
-            TicketsRootComponent.Config.PlacesSelector.HallType.BLUE -> Schedule.HallType.BLUE
-            TicketsRootComponent.Config.PlacesSelector.HallType.UNKNOWN -> Schedule.HallType.UNKNOWN
-        }
+    @Serializable
+    data class FilmInfo(
+        val filmId: String,
+        val title: String,
+    )
+
+    @Serializable
+    data class OrderInfo(
+        val totalCost: Int,
+        val places: List<Place>,
+    ) {
+        @Serializable
+        data class Place(
+            val row: Int,
+            val column: Int,
+        )
     }
 
-    private fun TicketsRootComponent.Config.OrderConfirmation.HallType.covert(): Confirmation.ConfirmationData.HallType {
-        return when (this) {
-            TicketsRootComponent.Config.OrderConfirmation.HallType.RED -> Confirmation.ConfirmationData.HallType.RED
-            TicketsRootComponent.Config.OrderConfirmation.HallType.GREEN -> Confirmation.ConfirmationData.HallType.GREEN
-            TicketsRootComponent.Config.OrderConfirmation.HallType.BLUE -> Confirmation.ConfirmationData.HallType.BLUE
-            TicketsRootComponent.Config.OrderConfirmation.HallType.UNKNOWN -> Confirmation.ConfirmationData.HallType.UNKNOWN
-        }
-    }
+    @Serializable
+    data class UserInfo(
+        val firstName: String,
+        val lastName: String,
+        val middleName: String,
+        val phone: String,
+    )
 
 }
+
+private fun TicketsRootComponent.SeanceInfo.HallType.covert(): Confirmation.ConfirmationData.HallType {
+    return when (this) {
+        TicketsRootComponent.SeanceInfo.HallType.RED -> Confirmation.ConfirmationData.HallType.RED
+        TicketsRootComponent.SeanceInfo.HallType.GREEN -> Confirmation.ConfirmationData.HallType.GREEN
+        TicketsRootComponent.SeanceInfo.HallType.BLUE -> Confirmation.ConfirmationData.HallType.BLUE
+        TicketsRootComponent.SeanceInfo.HallType.UNKNOWN -> Confirmation.ConfirmationData.HallType.UNKNOWN
+    }
+}
+
+private fun Film.convert(filmId: String): TicketsRootComponent.FilmInfo {
+    return TicketsRootComponent.FilmInfo(
+        filmId = filmId,
+        title = title,
+    )
+}
+
+private fun UserInfoInput.UserData.convert(): TicketsRootComponent.UserInfo {
+    return TicketsRootComponent.UserInfo(
+        firstName = firstName,
+        lastName = lastName,
+        middleName = middleName,
+        phone = phone,
+    )
+}
+
+private fun SeanceSelector.SelectedSeance.convert(): TicketsRootComponent.SeanceInfo {
+    return TicketsRootComponent.SeanceInfo(
+        date = date.toKotlinLocalDate(),
+        time = time.toKotlinLocalTime(),
+        hallType = hallType.convert(),
+    )
+}
+
+private fun Schedule.HallType.convert(): TicketsRootComponent.SeanceInfo.HallType {
+    return when (this) {
+        Schedule.HallType.RED -> TicketsRootComponent.SeanceInfo.HallType.RED
+        Schedule.HallType.GREEN -> TicketsRootComponent.SeanceInfo.HallType.GREEN
+        Schedule.HallType.BLUE -> TicketsRootComponent.SeanceInfo.HallType.BLUE
+        Schedule.HallType.UNKNOWN -> TicketsRootComponent.SeanceInfo.HallType.UNKNOWN
+    }
+}
+
+private fun TicketsRootComponent.SeanceInfo.convert(): PlacesSelector.SelectedSeance {
+    return PlacesSelector.SelectedSeance(
+        date = date.toJavaLocalDate(),
+        time = time.toJavaLocalTime(),
+        hallType = hallType.covertToPlacesSelector(),
+    )
+}
+
+private fun TicketsRootComponent.SeanceInfo.HallType.covertToPlacesSelector(): Schedule.HallType {
+    return when (this) {
+        TicketsRootComponent.SeanceInfo.HallType.RED -> Schedule.HallType.RED
+        TicketsRootComponent.SeanceInfo.HallType.GREEN -> Schedule.HallType.GREEN
+        TicketsRootComponent.SeanceInfo.HallType.BLUE -> Schedule.HallType.BLUE
+        TicketsRootComponent.SeanceInfo.HallType.UNKNOWN -> Schedule.HallType.UNKNOWN
+    }
+}
+
+private fun PlacesSelector.SelectedPlaces.convert(): TicketsRootComponent.OrderInfo {
+    return TicketsRootComponent.OrderInfo(
+        places = places.map { it.convert() },
+        totalCost = totalCost
+    )
+}
+
+private fun PlacesSelector.SelectedPlace.convert(): TicketsRootComponent.OrderInfo.Place {
+    return TicketsRootComponent.OrderInfo.Place(
+        row = row,
+        column = column
+    )
+}
+

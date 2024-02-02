@@ -3,4 +3,5 @@
     <string name="film_s_image">Изображение фильма</string>
     <string name="go_back">Назад</string>
     <string name="image_not_found">Изображение не найдено</string>
+    <string name="phone_number_title">Номер телефона</string>
 </resources>

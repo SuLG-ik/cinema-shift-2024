@@ -3,4 +3,6 @@
     <string name="film_s_image">Film\'s image</string>
     <string name="go_back">Go back</string>
     <string name="image_not_found">image not found</string>
+    <string name="phone_number_title">Phone number</string>
+    <string name="phone_number_placeholder" translatable="false">+7 900 000 00 00</string>
 </resources>

@@ -17,6 +17,13 @@ interface PlacesSelector {
     fun onSelect(row: Int, column: Int, price: Int)
     fun onUnselect(row: Int, column: Int)
 
+    data class UserInfo(
+        val firstName: String,
+        val lastName: String,
+        val middleName: String,
+        val phone: String,
+    )
+
     data class SelectedSeance(
         val date: LocalDate,
         val time: LocalTime,

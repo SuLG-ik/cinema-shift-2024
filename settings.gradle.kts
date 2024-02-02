@@ -42,6 +42,10 @@ include(":features:tickets:confirmation:component")
 include(":features:tickets:domain")
 include(":features:tickets:data")
 include(":features:tickets:presentation")
+include(":features:tickets:user-info:ui")
+include(":features:tickets:user-info:component")
+include(":features:tickets:user-info:presentation")
+
 
 include(":features:card:ui")
 include(":features:card:component")

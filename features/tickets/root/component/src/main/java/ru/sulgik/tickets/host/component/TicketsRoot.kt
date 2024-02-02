@@ -2,6 +2,7 @@ package ru.sulgik.tickets.host.component
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
+import ru.sulgik.ticket.userinfo.component.UserInfoInput
 
 interface TicketsRoot {
 
@@ -19,6 +20,8 @@ interface TicketsRoot {
             Child
 
         data class CardInput(val component: ru.sulgik.card.component.CardInput) : Child
+
+        data class UserInput(val component: UserInfoInput) : Child
 
     }
 }

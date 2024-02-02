@@ -38,6 +38,7 @@ internal class CardInputStoreImpl(
                         ),
                     )
                 )
+
                 is Message.NumberInput -> copy(
                     card = card.copy(
                         number = CardInputStore.State.Card.CardNumberField(

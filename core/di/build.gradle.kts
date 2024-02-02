@@ -68,4 +68,5 @@ dependencies {
     implementation(projects.features.tickets.presentation)
     implementation(projects.features.tickets.schedule.presentation)
     implementation(projects.features.tickets.places.presentation)
+    implementation(projects.features.tickets.userInfo.presentation)
 }

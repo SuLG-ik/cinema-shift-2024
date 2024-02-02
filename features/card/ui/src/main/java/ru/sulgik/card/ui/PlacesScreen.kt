@@ -31,6 +31,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import ru.sulgik.uikit.UIKitContainedButton
+import ru.sulgik.uikit.UIKitOutlineTextField
 import ru.sulgik.uikit.UIKitTopBar
 import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 import ru.sulgik.uikit.tokens.UIKitShapeTokens
@@ -185,7 +186,6 @@ fun CardNumberField(
         placeholder = {
             Text(text = "0000 0000")
         },
-        singleLine = true,
         visualTransformation = CardNumberVisualTransformation(),
         modifier = modifier,
     )
@@ -204,7 +204,6 @@ fun CardCCVField(
         placeholder = {
             Text(text = "0000")
         },
-        singleLine = true,
         visualTransformation = PasswordVisualTransformation(),
         modifier = modifier,
     )
@@ -223,7 +222,6 @@ fun CardDateField(
         placeholder = {
             Text(text = "00/00")
         },
-        singleLine = true,
         visualTransformation = DateVisualTransformation(),
         modifier = modifier,
     )
@@ -235,57 +233,20 @@ fun TitledOutlineTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    textStyle: TextStyle = LocalTextStyle.current,
-    label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Number,
     ),
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    singleLine: Boolean = false,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    minLines: Int = 1,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = UIKitShapeTokens.CornerMedium,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
 ) {
-    Column(
+    UIKitOutlineTextField(
+        title = title,
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = placeholder,
+        visualTransformation = visualTransformation,
+        singleLine = true,
+        keyboardOptions = keyboardOptions,
         modifier = modifier,
-    ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            readOnly = readOnly,
-            textStyle = textStyle,
-            label = label,
-            placeholder = placeholder,
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            prefix = prefix,
-            suffix = suffix,
-            supportingText = supportingText,
-            isError = isError,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            singleLine = singleLine,
-            maxLines = maxLines,
-            minLines = minLines,
-            interactionSource = interactionSource,
-            shape = shape,
-            colors = colors,
-        )
-    }
+    )
 }
