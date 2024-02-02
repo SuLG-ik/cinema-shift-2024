@@ -11,18 +11,12 @@ import ru.sulgik.core.images.imageURLFormatter
 import ru.sulgik.core.ktor.data.ktorModule
 import ru.sulgik.core.mvi.mviKotlinModule
 import ru.sulgik.core.validation.validationModule
-import ru.sulgik.filminfo.data.filmInfoDataModule
-import ru.sulgik.filminfo.domain.filmInfoDomainModule
-import ru.sulgik.filminfo.presentation.filmInfoPresentationModule
-import ru.sulgik.filmlist.data.filmListDataModule
-import ru.sulgik.filmlist.domain.filmListDomainModule
-import ru.sulgik.filmlist.presentation.filmListPresentationModule
-import ru.sulgik.tickets.data.ticketsDataModule
-import ru.sulgik.tickets.domain.ticketsDomainModule
-import ru.sulgik.tickets.places.presentation.placesSelectorPresentationModule
-import ru.sulgik.tickets.presentation.ticketsPresentationModule
-import ru.sulgik.tickets.schedule.presentation.seanceSelectorPresentationModule
-import ru.sulgik.tickets.userinfo.presentation.userInfoInputPresentationModule
+import ru.sulgik.filminfo.filmInfoModule
+import ru.sulgik.filmlist.filmListModule
+import ru.sulgik.tickets.places.ticketsPlacesSelectorModule
+import ru.sulgik.tickets.ticketsSharedModule
+import ru.sulgik.tickets.schedule.ticketsSeanceSelectorModule
+import ru.sulgik.tickets.userinfo.ticketsUserInfoModule
 
 fun Application.startDI() {
     startKoin {
@@ -36,20 +30,13 @@ fun Application.startDI() {
             dateTimeModule,
             validationModule,
 
-            filmListDataModule,
-            filmListDomainModule,
-            filmListPresentationModule,
+            filmListModule,
+            filmInfoModule,
 
-            filmInfoDataModule,
-            filmInfoPresentationModule,
-            filmInfoDomainModule,
-
-            ticketsDomainModule,
-            ticketsPresentationModule,
-            ticketsDataModule,
-            seanceSelectorPresentationModule,
-            placesSelectorPresentationModule,
-            userInfoInputPresentationModule,
+            ticketsSharedModule,
+            ticketsSeanceSelectorModule,
+            ticketsPlacesSelectorModule,
+            ticketsUserInfoModule,
 
             cardInputPresentationModule,
         )

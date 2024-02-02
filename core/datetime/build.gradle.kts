@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.compose.runtime)
     implementation(libs.lifecycle.runtime.ktx)
+    api(libs.datetime)
 
     implementation(libs.koin.core)
 }

@@ -24,7 +24,7 @@ datetime = "0.5.0"
 ktor = "2.3.8"
 
 [libraries]
-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref="desugaring"}
+desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugaring" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
@@ -49,6 +49,7 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 mvikotlin-core = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
+mvikotlin-logging = { module = "com.arkivanov.mvikotlin:mvikotlin-logging", version.ref = "mvikotlin" }
 mvikotlin-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 decompose-core = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
@@ -57,11 +58,11 @@ essenty-core = { module = "com.arkivanov.essenty:lifecycle", version.ref = "esse
 essenty-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
-ktor-core = { module = "io.ktor:ktor-client-core", version.ref="ktor" }
-ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref="ktor" }
-ktor-contentnegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref="ktor" }
-ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref="ktor" }
-ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref="ktor" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-contentnegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -69,4 +70,7 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 apolloGraphql = { id = "com.apollographql.apollo3", version.ref = "apollo-graphql" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+compose = ["compose-activity", "compose-ui", "compose-ui-graphics", "compose-material3"]
 

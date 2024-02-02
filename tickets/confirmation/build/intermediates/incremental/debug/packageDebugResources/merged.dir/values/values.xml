@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="blue_hall">Blue</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmation_await">Wait order…</string>
+    <string name="continue_button">Buy</string>
+    <string name="date_time">Date and time</string>
+    <string name="green_hall">Green</string>
+    <string name="hall">Hall</string>
+    <string name="movie">Movie</string>
+    <string name="places">Places</string>
+    <string name="red_hall">Red</string>
+    <string name="row_columns">%1$s row - %2$s</string>
+    <string name="total_cost">Total cost: %1$s ₽</string>
+    <string name="unknown_hall">Unknown</string>
+</resources>

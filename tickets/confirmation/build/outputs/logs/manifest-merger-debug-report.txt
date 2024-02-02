@@ -1,0 +1,18 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml:2:1-5:12
+INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml:2:1-5:12
+	package
+		INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml
+INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/volodya/AndroidStudioProjects/CinemaApp/tickets/confirmation/src/main/AndroidManifest.xml

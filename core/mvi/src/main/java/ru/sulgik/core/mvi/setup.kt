@@ -1,6 +1,7 @@
 package ru.sulgik.core.mvi
 
 import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,6 @@ val mviKotlinModule = module {
 }
 
 fun createStoreFactory(): StoreFactory {
-    return DefaultStoreFactory()
+    return LoggingStoreFactory((DefaultStoreFactory()))
 }
 

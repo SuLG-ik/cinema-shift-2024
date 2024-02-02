@@ -50,8 +50,7 @@ dependencies {
 
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
 
     implementation(projects.core.dataGraphql)
-    implementation(projects.features.filmList.data)
-    implementation(projects.features.filmList.domain)
 }

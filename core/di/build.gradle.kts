@@ -25,9 +25,6 @@ android {
             )
         }
     }
-    buildFeatures {
-        buildConfig = true
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,8 +40,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(projects.core.images)
@@ -55,19 +50,11 @@ dependencies {
     implementation(projects.core.datetime)
     implementation(projects.core.validation)
 
-    implementation(projects.features.card.presentation)
-
-    implementation(projects.features.filmInfo.data)
-    implementation(projects.features.filmInfo.domain)
-    implementation(projects.features.filmInfo.presentation)
-    implementation(projects.features.filmList.data)
-    implementation(projects.features.filmList.domain)
-    implementation(projects.features.filmList.presentation)
-
-    implementation(projects.features.tickets.domain)
-    implementation(projects.features.tickets.data)
-    implementation(projects.features.tickets.presentation)
-    implementation(projects.features.tickets.schedule.presentation)
-    implementation(projects.features.tickets.places.presentation)
-    implementation(projects.features.tickets.userInfo.presentation)
+    implementation(projects.card)
+    implementation(projects.filmInfo)
+    implementation(projects.filmList)
+    implementation(projects.tickets.shared)
+    implementation(projects.tickets.schedule)
+    implementation(projects.tickets.userInfo)
+    implementation(projects.tickets.places)
 }
