@@ -55,6 +55,7 @@ include(":features:card:presentation")
 include(":features:root:component")
 
 include(":core:data-graphql")
+include(":core:data-ktor")
 include(":core:di")
 include(":core:mvi")
 include(":core:component")

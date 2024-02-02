@@ -1,4 +1,4 @@
-package ru.sulgik.core.data
+package ru.sulgik.core.graphql.data
 
 import com.apollographql.apollo3.ApolloClient
 import org.koin.core.module.dsl.singleOf

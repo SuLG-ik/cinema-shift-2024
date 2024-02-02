@@ -1,6 +1,5 @@
 package ru.sulgik.filminfo.domain.usecase
 
-import ru.sulgik.filminfo.data.RemoteFilm
 import ru.sulgik.filminfo.data.RemoteFilmInfoRepository
 import ru.sulgik.filminfo.domain.converter.RemoteFilmConverter
 import ru.sulgik.filminfo.domain.entity.Film

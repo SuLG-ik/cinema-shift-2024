@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.apolloGraphql)
 }
 
 android {
-    namespace = "ru.sulgik.core.graphql.data"
+    namespace = "ru.sulgik.core.ktor.data"
     compileSdk = 34
 
     defaultConfig {
@@ -24,10 +23,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com/graphql\"")
+            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com\"")
         }
         debug {
-            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com/graphql\"")
+            buildConfigField("String", "REMOTE_URL", "\"https://shift-backend.onrender.com\"")
         }
     }
     buildFeatures {
@@ -50,18 +49,11 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.apollo.runtime)
+    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.contentnegotiation)
+    implementation(libs.ktor.logging)
 
     implementation(libs.koin.core)
-}
-
-apollo {
-    service("service") {
-        packageNamesFromFilePaths()
-        generateApolloMetadata.set(true)
-        introspection {
-            endpointUrl.set("https://shift-backend.onrender.com/graphql")
-            schemaFile.set(file("src/main/graphql/schema.graphqls"))
-        }
-    }
 }

@@ -50,6 +50,7 @@ dependencies {
     implementation(projects.core.images)
 
     implementation(projects.core.dataGraphql)
+    implementation(projects.core.dataKtor)
     implementation(projects.core.mvi)
     implementation(projects.core.datetime)
     implementation(projects.core.validation)
