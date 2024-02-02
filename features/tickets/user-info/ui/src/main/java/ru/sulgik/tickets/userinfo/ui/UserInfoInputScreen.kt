@@ -12,12 +12,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitOutlineTextField
 import ru.sulgik.uikit.UIKitTopBar
@@ -134,7 +140,10 @@ fun UserInfoInput(
 ) {
     Column(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.surfaceVariant, shape = UIKitShapeTokens.CornerMedium)
+            .background(
+                MaterialTheme.colorScheme.surfaceVariant,
+                shape = UIKitShapeTokens.CornerMedium
+            )
             .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
             .animateContentSize(),
         verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
@@ -149,6 +158,7 @@ fun UserInfoInput(
             onLastNameInput = onLastNameInput,
             onMiddleNameInput = onMiddleNameInput,
             onPhoneInput = onPhoneInput,
+            onContinue = onContinue,
             modifier = Modifier.fillMaxWidth(),
         )
         ContinueButton(
@@ -164,6 +174,7 @@ fun UserInfoFields(
     onLastNameInput: (String) -> Unit,
     onMiddleNameInput: (String) -> Unit,
     onPhoneInput: (String) -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -188,6 +199,7 @@ fun UserInfoFields(
         PhoneField(
             field = info.phone,
             onChanged = onPhoneInput,
+            onContinue = onContinue,
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -199,6 +211,7 @@ private fun NameField(
     onChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
     UIKitOutlineTextField(
         title = stringResource(R.string.field_first_name),
         value = field.value,
@@ -207,6 +220,13 @@ private fun NameField(
                 field.error
             )
         },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+        ),
+        singleLine = true,
         isError = field.error != null,
         onValueChange = onChanged,
         modifier = modifier,
@@ -219,6 +239,7 @@ private fun LastNameField(
     onChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
     UIKitOutlineTextField(
         title = stringResource(R.string.field_last_name),
         value = field.value,
@@ -227,6 +248,13 @@ private fun LastNameField(
                 field.error
             )
         },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+        ),
+        singleLine = true,
         isError = field.error != null,
         onValueChange = onChanged,
         modifier = modifier,
@@ -239,6 +267,7 @@ private fun MiddleNameField(
     onChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
     UIKitOutlineTextField(
         title = stringResource(R.string.field_middle_name),
         value = field.value,
@@ -248,6 +277,13 @@ private fun MiddleNameField(
                 field.error
             )
         },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+        ),
+        singleLine = true,
         isError = field.error != null,
         modifier = modifier,
     )
@@ -294,14 +330,26 @@ fun textForPhoneError(error: UserInfo.Error): String {
 private fun PhoneField(
     field: UserInfo.PhoneField,
     onChanged: (String) -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
     UIKitPhoneTextField(
         phone = field.value,
         onPhoneChanged = onChanged,
         errorText = {
             PhoneError(field.error)
         },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Go,
+            keyboardType = KeyboardType.Phone,
+        ),
+        keyboardActions = KeyboardActions(
+            onGo = {
+                focusManager.clearFocus()
+                onContinue()
+            }
+        ),
         isError = field.error != null,
         modifier = modifier,
     )

@@ -1,5 +1,6 @@
 package ru.sulgik.uikit.field
 
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +21,8 @@ fun UIKitPhoneTextField(
     onPhoneChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
     errorText: @Composable() (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     isError: Boolean = false,
 ) {
     UIKitOutlineTextField(
@@ -31,7 +34,8 @@ fun UIKitPhoneTextField(
         singleLine = true,
         errorText = errorText,
         isError = isError,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         modifier = modifier,
     )
 }
