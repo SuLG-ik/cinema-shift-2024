@@ -3,7 +3,15 @@
     <string name="view_schedule">View schedule</string>
     <string name="places">Places</string>
     <string name="places_row_column_price">%1$s row, %2$s place — %3$s ₽</string>
-    <string name="place_selection">Place selection</string>
+    <string name="top_bar">Payments</string>
     <string name="continue_button">Continue</string>
     <string name="total_cost">Total cost: %1$s ₽</string>
+    <string name="card_data">Card data</string>
+    <string name="card_number">Card number*</string>
+    <string name="card_ccv">CCV*</string>
+    <string name="card_ccv_placeholder" translatable="false">0000</string>
+    <string name="card_date_placeholder" translatable="false">00/00</string>
+    <string name="incorrect_value_error">Неправильное значение</string>
+    <string name="required_field_error">Обязательное поле</string>
+    <string name="card_number_placeholder" translatable="false">0000 0000</string>
 </resources>

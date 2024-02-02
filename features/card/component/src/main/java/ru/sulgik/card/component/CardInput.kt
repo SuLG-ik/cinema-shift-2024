@@ -1,6 +1,7 @@
 package ru.sulgik.card.component
 
 import com.arkivanov.decompose.value.Value
+import ru.sulgik.card.ui.Card
 
 
 interface CardInput {
@@ -37,15 +38,24 @@ interface CardInput {
 
             data class CardNumberField(
                 val value: String,
+                val error: Error?,
             )
 
             data class CardDateField(
                 val value: String,
+                val error: Error?,
             )
 
             data class CardCCVField(
                 val value: String,
+                val error: Error?,
             )
+
+
+            sealed interface Error {
+                data object IncorrectLength : Error
+                data object IncorrectValue : Error
+            }
         }
 
     }

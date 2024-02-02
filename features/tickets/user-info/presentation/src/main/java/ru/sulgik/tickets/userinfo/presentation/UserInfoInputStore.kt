@@ -23,21 +23,33 @@ interface UserInfoInputStore :
             val middleName: MiddleNameField = MiddleNameField(),
             val phone: PhoneField = PhoneField(),
         ) {
+
+            sealed interface Error {
+                data object IncorrectLength : Error
+                data object DifferentLanguages : Error
+                data object IncorrectInput : Error
+            }
+
             data class FirstNameField(
                 val value: String = "",
-            )
+                val error: Error? = Error.IncorrectLength,
+            ) {
+            }
 
             data class LastNameField(
                 val value: String = "",
+                val error: Error? = Error.IncorrectLength,
             )
 
             data class MiddleNameField(
                 val value: String = "",
+                val error: Error? = null,
             )
 
             data class PhoneField(
                 val value: String = "",
                 val isEditable: Boolean = true,
+                val error: Error? = Error.IncorrectLength,
             )
         }
 

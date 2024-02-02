@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="view_schedule">Посмотреть расписание</string>
-    <string name="places">Places</string>
+    <string name="places">Места</string>
     <string name="places_row_column_price">%1$s ряд, %2$s место — %3$s ₽</string>
-    <string name="place_selection">Выбор места</string>
     <string name="total_cost">Сумма: %1$s ₽</string>
     <string name="continue_button">Продолжить</string>
+    <string name="top_bar">Данные для оплаты</string>
+    <string name="card_data">Данные карты</string>
+    <string name="card_number">Номер карты*</string>
+    <string name="card_ccv">CCV*</string>
+    <string name="incorrect_value_error">Неправильное значение</string>
+    <string name="required_field_error">Обязательное поле</string>
 </resources>

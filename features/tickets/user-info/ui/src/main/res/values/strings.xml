@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="view_schedule">View schedule</string>
-    <string name="places">Places</string>
-    <string name="places_row_column_price">%1$s row, %2$s place — %3$s ₽</string>
-    <string name="place_selection">Place selection</string>
+    <string name="user_info_input_top_bar">Your data</string>
     <string name="continue_button">Continue</string>
-    <string name="total_cost">Total cost: %1$s ₽</string>
+    <string name="user_info_input_title">Ticket\'s owner</string>
+    <string name="field_first_name">First name*</string>
+    <string name="field_last_name">Last name*</string>
+    <string name="field_middle_name">Middle name</string>
 </resources>

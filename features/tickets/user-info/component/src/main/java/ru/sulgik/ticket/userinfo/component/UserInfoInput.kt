@@ -38,20 +38,31 @@ interface UserInfoInput {
         ) {
             data class FirstNameField(
                 val value: String,
+                val error: Error?,
             )
 
             data class LastNameField(
                 val value: String,
+                val error: Error?,
             )
 
             data class MiddleNameField(
                 val value: String,
+                val error: Error?,
             )
 
             data class PhoneField(
                 val value: String,
                 val isEditable: Boolean,
+                val error: Error?,
             )
+
+
+            sealed interface Error {
+                data object IncorrectLength : Error
+                data object DifferentLanguages : Error
+                data object IncorrectInput : Error
+            }
         }
     }
 }

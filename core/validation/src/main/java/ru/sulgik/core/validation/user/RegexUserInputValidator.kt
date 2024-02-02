@@ -2,19 +2,23 @@ package ru.sulgik.core.validation.user
 
 class RegexUserInputValidator : UserInputValidator {
 
+    companion object {
+        const val MAX_LENGTH = 60
+    }
+
     override fun validateFirstName(value: String): UserFirstNameValidationResult {
-        if (value.isEmpty()) {
+        if (value.isEmpty() || value.length > MAX_LENGTH) {
             return UserFirstNameValidationResult(
                 value = value,
                 isFull = false,
-                error = UserFirstNameValidationResult.Error.IncorrectLength,
+                error = UserInputError.IncorrectLength,
             )
         }
-        if (!value.matches(USER_ALL_LANHUAGES_REQUIRED)) {
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
             return UserFirstNameValidationResult(
                 value = value,
                 isFull = true,
-                error = UserFirstNameValidationResult.Error.DifferentLanguages,
+                error = UserInputError.DifferentLanguages,
             )
         }
         if (value.matches(USER_LATIN_REQUIRED) || value.matches(USER_CYRILLIC_REQUIRED)) {
@@ -27,23 +31,23 @@ class RegexUserInputValidator : UserInputValidator {
         return UserFirstNameValidationResult(
             value = value,
             isFull = true,
-            error = UserFirstNameValidationResult.Error.IncorrectInput,
+            error = UserInputError.IncorrectInput,
         )
     }
 
     override fun validateLastName(value: String): UserLastNameValidationResult {
-        if (value.isEmpty()) {
+        if (value.isEmpty() || value.length > MAX_LENGTH) {
             return UserLastNameValidationResult(
                 value = value,
                 isFull = false,
-                error = UserLastNameValidationResult.Error.IncorrectLength,
+                error = UserInputError.IncorrectLength,
             )
         }
-        if (!value.matches(USER_ALL_LANHUAGES_REQUIRED)) {
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
             return UserLastNameValidationResult(
                 value = value,
                 isFull = true,
-                error = UserLastNameValidationResult.Error.DifferentLanguages,
+                error = UserInputError.DifferentLanguages,
             )
         }
         if (value.matches(USER_LATIN_REQUIRED) || value.matches(USER_CYRILLIC_REQUIRED)) {
@@ -56,15 +60,22 @@ class RegexUserInputValidator : UserInputValidator {
         return UserLastNameValidationResult(
             value = value,
             isFull = true,
-            error = UserLastNameValidationResult.Error.IncorrectInput,
+            error = UserInputError.IncorrectInput,
         )
     }
 
     override fun validateMiddleName(value: String): UserMiddleNameValidationResult {
-        if (!value.matches(USER_ALL_LANHUAGES_REQUIRED)) {
+        if (value.length > MAX_LENGTH) {
             return UserMiddleNameValidationResult(
                 value = value,
-                error = UserMiddleNameValidationResult.Error.DifferentLanguages,
+                error = UserInputError.IncorrectLength,
+            )
+        }
+
+        if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
+            return UserMiddleNameValidationResult(
+                value = value,
+                error = UserInputError.DifferentLanguages,
             )
         }
         if (value.matches(USER_LATIN_REQUIRED) || value.matches(USER_CYRILLIC_REQUIRED)) {
@@ -75,7 +86,7 @@ class RegexUserInputValidator : UserInputValidator {
         }
         return UserMiddleNameValidationResult(
             value = value,
-            error = UserMiddleNameValidationResult.Error.IncorrectInput,
+            error = UserInputError.IncorrectInput,
         )
     }
 
@@ -84,7 +95,7 @@ class RegexUserInputValidator : UserInputValidator {
             return UserPhoneValidationResult(
                 value = value,
                 isFull = false,
-                error = UserPhoneValidationResult.Error.IncorrectLength
+                error = UserInputError.IncorrectLength
             )
         }
         if (value.matches(USER_PHONE)) {
@@ -97,7 +108,7 @@ class RegexUserInputValidator : UserInputValidator {
         return UserPhoneValidationResult(
             value = value,
             isFull = false,
-            error = UserPhoneValidationResult.Error.IncorrectInput
+            error = UserInputError.IncorrectInput
         )
     }
 

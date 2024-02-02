@@ -20,8 +20,8 @@ class UserInfoInputComponent(
 
     private fun convert(state: UserInfoInputStore.State): UserInfoInput.State {
         return UserInfoInput.State(
-            isContinueAvailable = state.isContinueAvailable, userInfo = state.userInfo.convert()
-
+            isContinueAvailable = state.isContinueAvailable,
+            userInfo = state.userInfo.convert()
         )
     }
 
@@ -74,24 +74,36 @@ private fun UserInfoInputStore.State.UserInfo.PhoneField.convert(): UserInfoInpu
     return UserInfoInput.State.UserInfo.PhoneField(
         value = value,
         isEditable = isEditable,
+        error = error?.convert(),
     )
 }
 
 private fun UserInfoInputStore.State.UserInfo.MiddleNameField.convert(): UserInfoInput.State.UserInfo.MiddleNameField {
     return UserInfoInput.State.UserInfo.MiddleNameField(
         value = value,
+        error = error?.convert()
     )
 }
 
 private fun UserInfoInputStore.State.UserInfo.LastNameField.convert(): UserInfoInput.State.UserInfo.LastNameField {
     return UserInfoInput.State.UserInfo.LastNameField(
         value = value,
+        error = error?.convert()
     )
+}
+
+private fun UserInfoInputStore.State.UserInfo.Error.convert(): UserInfoInput.State.UserInfo.Error {
+    return when (this) {
+        UserInfoInputStore.State.UserInfo.Error.DifferentLanguages -> UserInfoInput.State.UserInfo.Error.DifferentLanguages
+        UserInfoInputStore.State.UserInfo.Error.IncorrectInput -> UserInfoInput.State.UserInfo.Error.IncorrectInput
+        UserInfoInputStore.State.UserInfo.Error.IncorrectLength -> UserInfoInput.State.UserInfo.Error.IncorrectLength
+    }
 }
 
 private fun UserInfoInputStore.State.UserInfo.FirstNameField.convert(): UserInfoInput.State.UserInfo.FirstNameField {
     return UserInfoInput.State.UserInfo.FirstNameField(
         value = value,
+        error = error?.convert(),
     )
 }
 

@@ -1,32 +1,25 @@
 package ru.sulgik.card.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Card
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -45,15 +38,23 @@ data class Card(
 
     data class CardNumberField(
         val value: String,
+        val error: Error?,
     )
 
     data class CardDateField(
         val value: String,
+        val error: Error?,
     )
 
     data class CardCCVField(
         val value: String,
+        val error: Error?,
     )
+
+    sealed interface Error {
+        data object IncorrectLength : Error
+        data object IncorrectValue : Error
+    }
 }
 
 @Composable
@@ -71,32 +72,17 @@ fun CardInputScreen(
         topBar = {
             UIKitTopBar(
                 title = {
-                    Text(text = stringResource(R.string.place_selection))
+                    Text(text = stringResource(R.string.top_bar))
                 },
                 onBack = onBack,
             )
-        },
-        bottomBar = {
-            AnimatedVisibility(
-                visible = isContinueAvailable,
-                enter = fadeIn() + slideInVertically { it / 2 },
-                exit = fadeOut() + slideOutVertically { it / 2 }
-            ) {
-                UIKitContainedButton(
-                    onClick = onContinue,
-                    largeCorners = false,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
-                ) {
-                    Text(text = stringResource(R.string.continue_button))
-                }
-            }
         },
         modifier = modifier,
     ) {
         CardInput(
             card = card,
+            isContinueAvailable = isContinueAvailable,
+            onContinue = onContinue,
             onCardNumberInput = onCardNumberInput,
             onCardDateInput = onCardDateInput,
             onCardCCVInput = onCardCCVInput,
@@ -110,26 +96,57 @@ fun CardInputScreen(
 @Composable
 fun CardInput(
     card: Card,
+    isContinueAvailable: Boolean,
+    onContinue: () -> Unit,
     onCardNumberInput: (String) -> Unit,
     onCardDateInput: (String) -> Unit,
     onCardCCVInput: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(
-        modifier = modifier,
-    ) {
-        Column(
-            modifier = Modifier.padding(UIKitPaddingDefaultTokens.DefaultContentPadding),
-            verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
-        ) {
-            Text(text = "Данные карты", style = MaterialTheme.typography.titleLarge)
-            CardFields(
-                card = card,
-                onCardNumberInput = onCardNumberInput,
-                onCardDateInput = onCardDateInput,
-                onCardCCVInput = onCardCCVInput,
-                modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = modifier
+            .background(
+                MaterialTheme.colorScheme.surfaceVariant,
+                shape = UIKitShapeTokens.CornerMedium
             )
+            .padding(UIKitPaddingDefaultTokens.DefaultContentPadding)
+            .animateContentSize(),
+        verticalArrangement = Arrangement.spacedBy(UIKitPaddingDefaultTokens.DefaultItemsBetweenSpace),
+    ) {
+        Text(text = stringResource(R.string.card_data), style = MaterialTheme.typography.titleLarge)
+        CardFields(
+            card = card,
+            onCardNumberInput = onCardNumberInput,
+            onCardDateInput = onCardDateInput,
+            onCardCCVInput = onCardCCVInput,
+            modifier = Modifier.fillMaxWidth()
+        )
+        ContinueButton(
+            isContinueAvailable = isContinueAvailable,
+            onContinue = onContinue,
+        )
+    }
+}
+
+
+@Composable
+fun ColumnScope.ContinueButton(
+    isContinueAvailable: Boolean,
+    onContinue: () -> Unit,
+) {
+    AnimatedVisibility(
+        visible = isContinueAvailable,
+        enter = fadeIn() + slideInVertically(),
+        exit = fadeOut() + slideOutVertically(),
+        modifier = Modifier
+    ) {
+        UIKitContainedButton(
+            onClick = onContinue,
+            largeCorners = false,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(text = stringResource(R.string.continue_button))
         }
     }
 }
@@ -180,12 +197,18 @@ fun CardNumberField(
     modifier: Modifier = Modifier,
 ) {
     TitledOutlineTextField(
-        title = "Номер карты*",
+        title = stringResource(R.string.card_number),
         value = field.value,
         onValueChange = onInput,
         placeholder = {
-            Text(text = "0000 0000")
+            Text(text = stringResource(R.string.card_number_placeholder))
         },
+        errorText = {
+            DefaultError(
+                error = field.error,
+            )
+        },
+        isError = field.error != null,
         visualTransformation = CardNumberVisualTransformation(),
         modifier = modifier,
     )
@@ -198,12 +221,18 @@ fun CardCCVField(
     modifier: Modifier = Modifier,
 ) {
     TitledOutlineTextField(
-        title = "CCV*",
+        title = stringResource(R.string.card_ccv),
         value = field.value,
         onValueChange = onInput,
         placeholder = {
-            Text(text = "0000")
+            Text(text = stringResource(R.string.card_ccv_placeholder))
         },
+        errorText = {
+            DefaultError(
+                error = field.error,
+            )
+        },
+        isError = field.error != null,
         visualTransformation = PasswordVisualTransformation(),
         modifier = modifier,
     )
@@ -220,11 +249,34 @@ fun CardDateField(
         value = field.value,
         onValueChange = onInput,
         placeholder = {
-            Text(text = "00/00")
+            Text(text = stringResource(R.string.card_date_placeholder))
         },
+        errorText = {
+            DefaultError(
+                error = field.error,
+            )
+        },
+        isError = field.error != null,
         visualTransformation = DateVisualTransformation(),
         modifier = modifier,
     )
+}
+
+@Composable
+fun DefaultError(
+    error: Card.Error?,
+    modifier: Modifier = Modifier
+) {
+    if (error != null)
+        Text(text = getDefaultErrorText(error), modifier = modifier)
+}
+
+@Composable
+fun getDefaultErrorText(error: Card.Error): String {
+    return when (error) {
+        Card.Error.IncorrectLength -> stringResource(R.string.required_field_error)
+        Card.Error.IncorrectValue -> stringResource(R.string.incorrect_value_error)
+    }
 }
 
 @Composable
@@ -233,6 +285,8 @@ fun TitledOutlineTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    errorText: @Composable() (() -> Unit)? = null,
+    isError: Boolean,
     placeholder: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
@@ -245,6 +299,8 @@ fun TitledOutlineTextField(
         onValueChange = onValueChange,
         placeholder = placeholder,
         visualTransformation = visualTransformation,
+        errorText = errorText,
+        isError = isError,
         singleLine = true,
         keyboardOptions = keyboardOptions,
         modifier = modifier,

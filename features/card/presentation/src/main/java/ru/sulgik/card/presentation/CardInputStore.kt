@@ -24,15 +24,24 @@ interface CardInputStore :
 
             data class CardNumberField(
                 val value: String = "",
+                val error: Error? = Error.IncorrectLength,
             )
 
             data class CardDateField(
                 val value: String = "",
+                val error: Error? = Error.IncorrectLength,
             )
 
             data class CardCCVField(
                 val value: String = "",
+                val error: Error? = Error.IncorrectLength,
             )
+
+
+            sealed interface Error {
+                data object IncorrectLength : Error
+                data object IncorrectValue : Error
+            }
         }
     }
 

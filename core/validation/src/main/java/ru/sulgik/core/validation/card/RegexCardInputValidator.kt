@@ -7,7 +7,7 @@ internal class RegexCardInputValidator : CardInputValidator {
             return CardNumberValidationResult(
                 value,
                 isFull = false,
-                error = CardNumberValidationResult.Error.IncorrectLength,
+                error = CardDataError.IncorrectLength,
             )
         }
         if (value.matches(CARD_NUMBER_REGEX)) {
@@ -20,7 +20,7 @@ internal class RegexCardInputValidator : CardInputValidator {
         return CardNumberValidationResult(
             value = value,
             isFull = true,
-            error = CardNumberValidationResult.Error.IncorrectNumber,
+            error = CardDataError.IncorrectValue,
         )
     }
 
@@ -29,7 +29,7 @@ internal class RegexCardInputValidator : CardInputValidator {
             return CardDateValidationResult(
                 value = value,
                 isFull = false,
-                error = CardDateValidationResult.Error.IncorrectLength
+                error = CardDataError.IncorrectLength
             )
         }
         if (value.matches(CARD_DATE_REGEX_STARTS_ZERO) || value.matches(CARD_DATE_REGEX_STARTS_ONE)) {
@@ -43,7 +43,7 @@ internal class RegexCardInputValidator : CardInputValidator {
         return CardDateValidationResult(
             value = value,
             isFull = true,
-            error = CardDateValidationResult.Error.IncorrectDate
+            error = CardDataError.IncorrectValue
         )
     }
 
@@ -52,7 +52,7 @@ internal class RegexCardInputValidator : CardInputValidator {
             return CardCCVValidationResult(
                 value = value,
                 isFull = false,
-                error = CardCCVValidationResult.Error.IncorrectLength,
+                error = CardDataError.IncorrectLength,
             )
         }
         if (value.matches(CARD_CCV_REGEX)) {
@@ -65,7 +65,7 @@ internal class RegexCardInputValidator : CardInputValidator {
         return CardCCVValidationResult(
             value = value,
             isFull = true,
-            error = CardCCVValidationResult.Error.IncorrectLength
+            error = CardDataError.IncorrectValue
         )
     }
 

@@ -2,6 +2,7 @@ package ru.sulgik.uikit.field
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -13,11 +14,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import ru.sulgik.uikit.R
 import ru.sulgik.uikit.UIKitOutlineTextField
 
-@androidx.compose.runtime.Composable
+@Composable
 fun UIKitPhoneTextField(
     phone: String,
     onPhoneChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
+    errorText: @Composable() (() -> Unit)? = null,
+    isError: Boolean = false,
 ) {
     UIKitOutlineTextField(
         title = stringResource(R.string.phone_number_title),
@@ -26,6 +29,8 @@ fun UIKitPhoneTextField(
         placeholder = { Text(stringResource(R.string.phone_number_placeholder)) },
         visualTransformation = PhoneVisualTransformation(),
         singleLine = true,
+        errorText = errorText,
+        isError = isError,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         modifier = modifier,
     )
@@ -93,10 +98,10 @@ object PhoneOffsetMapping : OffsetMapping {
 
     override fun transformedToOriginal(offset: Int): Int {
         return when {
-            offset < BASE_OFFSET + 3 -> offset - BASE_OFFSET
+            offset < BASE_OFFSET + 3 -> maxOf(0, offset - BASE_OFFSET)
             offset < BASE_OFFSET + 6 -> offset - BASE_OFFSET - 1
             offset < BASE_OFFSET + 8 -> offset - BASE_OFFSET - 2
-            else -> offset - BASE_OFFSET
+            else -> minOf(offset - BASE_OFFSET - 3, 10)
         }
     }
 }

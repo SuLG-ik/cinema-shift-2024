@@ -34,13 +34,20 @@ private fun CardInput.State.Card.toUI(): Card {
 }
 
 private fun CardInput.State.Card.CardCCVField.toUI(): Card.CardCCVField {
-    return Card.CardCCVField(value)
+    return Card.CardCCVField(value, error?.toUI())
 }
 
 private fun CardInput.State.Card.CardDateField.toUI(): Card.CardDateField {
-    return Card.CardDateField(value)
+    return Card.CardDateField(value, error?.toUI())
+}
+
+private fun CardInput.State.Card.Error.toUI(): Card.Error {
+    return when (this) {
+        CardInput.State.Card.Error.IncorrectLength -> Card.Error.IncorrectLength
+        CardInput.State.Card.Error.IncorrectValue -> Card.Error.IncorrectValue
+    }
 }
 
 private fun CardInput.State.Card.CardNumberField.toUI(): Card.CardNumberField {
-    return Card.CardNumberField(value)
+    return Card.CardNumberField(value, error?.toUI())
 }

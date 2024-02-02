@@ -67,18 +67,28 @@ private fun CardInputStore.State.Card.convert(): CardInput.State.Card {
 private fun CardInputStore.State.Card.CardCCVField.convert(): CardInput.State.Card.CardCCVField {
     return CardInput.State.Card.CardCCVField(
         value = value,
+        error = error?.convert(),
     )
+}
+
+private fun CardInputStore.State.Card.Error.convert(): CardInput.State.Card.Error {
+    return when (this) {
+        CardInputStore.State.Card.Error.IncorrectLength -> CardInput.State.Card.Error.IncorrectLength
+        CardInputStore.State.Card.Error.IncorrectValue -> CardInput.State.Card.Error.IncorrectValue
+    }
 }
 
 private fun CardInputStore.State.Card.CardDateField.convert(): CardInput.State.Card.CardDateField {
     return CardInput.State.Card.CardDateField(
         value = value,
+        error = error?.convert()
     )
 }
 
 private fun CardInputStore.State.Card.CardNumberField.convert(): CardInput.State.Card.CardNumberField {
     return CardInput.State.Card.CardNumberField(
         value = value,
+        error = error?.convert()
     )
 }
 
