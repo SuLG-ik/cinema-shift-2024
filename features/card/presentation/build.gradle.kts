@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.core.di"
+    namespace = "ru.sulgik.card.presentation"
     compileSdk = 34
 
     defaultConfig {
@@ -25,9 +25,6 @@ android {
             )
         }
     }
-    buildFeatures {
-        buildConfig = true
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -45,27 +42,15 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(projects.core.images)
 
-    implementation(projects.core.dataGraphql)
-    implementation(projects.core.mvi)
-    implementation(projects.core.datetime)
+    implementation(libs.koin.core)
+
+    implementation(libs.mvikotlin.core)
+    implementation(libs.mvikotlin.coroutines)
+
     implementation(projects.core.validation)
 
-    implementation(projects.features.card.presentation)
-
-    implementation(projects.features.filmInfo.data)
-    implementation(projects.features.filmInfo.domain)
-    implementation(projects.features.filmInfo.presentation)
-    implementation(projects.features.filmList.data)
-    implementation(projects.features.filmList.domain)
-    implementation(projects.features.filmList.presentation)
-
-    implementation(projects.features.tickets.domain)
-    implementation(projects.features.tickets.data)
-    implementation(projects.features.tickets.presentation)
-    implementation(projects.features.tickets.schedule.presentation)
-    implementation(projects.features.tickets.places.presentation)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

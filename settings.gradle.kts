@@ -43,6 +43,10 @@ include(":features:tickets:domain")
 include(":features:tickets:data")
 include(":features:tickets:presentation")
 
+include(":features:card:ui")
+include(":features:card:component")
+include(":features:card:presentation")
+
 
 include(":features:root:component")
 
@@ -52,3 +56,4 @@ include(":core:mvi")
 include(":core:component")
 include(":core:images")
 include(":core:datetime")
+include(":core:validation")

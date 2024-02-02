@@ -4,10 +4,12 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import ru.sulgik.card.presentation.cardInputPresentationModule
 import ru.sulgik.core.data.graphQlModule
 import ru.sulgik.core.datetime.dateTimeModule
 import ru.sulgik.core.images.imageURLFormatter
 import ru.sulgik.core.mvi.mviKotlinModule
+import ru.sulgik.core.validation.validationModule
 import ru.sulgik.filminfo.data.filmInfoDataModule
 import ru.sulgik.filminfo.domain.filmInfoDomainModule
 import ru.sulgik.filminfo.presentation.filmInfoPresentationModule
@@ -29,6 +31,7 @@ fun Application.startDI() {
             imageURLFormatter,
             mviKotlinModule,
             dateTimeModule,
+            validationModule,
 
             filmListDataModule,
             filmListDomainModule,
@@ -43,6 +46,8 @@ fun Application.startDI() {
             ticketsDataModule,
             seanceSelectorPresentationModule,
             placesSelectorPresentationModule,
+
+            cardInputPresentationModule,
         )
     }
 }

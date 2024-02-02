@@ -9,10 +9,16 @@ interface TicketsRoot {
 
     sealed interface Child {
 
-        data class SeanceSelector(val component: ru.sulgik.tickets.schedule.component.SeanceSelector) : Child
-        data class PlacesSelector(val component: ru.sulgik.tickets.places.component.PlacesSelector) : Child
+        data class SeanceSelector(val component: ru.sulgik.tickets.schedule.component.SeanceSelector) :
+            Child
 
-        data class OrderConfirmation(val component: ru.sulgik.tickets.confirmation.component.Confirmation) : Child
+        data class PlacesSelector(val component: ru.sulgik.tickets.places.component.PlacesSelector) :
+            Child
+
+        data class OrderConfirmation(val component: ru.sulgik.tickets.confirmation.component.Confirmation) :
+            Child
+
+        data class CardInput(val component: ru.sulgik.card.component.CardInput) : Child
 
     }
 }

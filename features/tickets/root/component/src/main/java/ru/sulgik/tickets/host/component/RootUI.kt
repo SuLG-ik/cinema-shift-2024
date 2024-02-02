@@ -3,6 +3,7 @@ package ru.sulgik.tickets.host.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import ru.sulgik.card.component.CardInputUI
 import ru.sulgik.tickets.confirmation.component.ConfirmationUI
 import ru.sulgik.tickets.places.component.PlacesSelectorUI
 import ru.sulgik.tickets.schedule.component.SeanceSelectorUI
@@ -36,6 +37,11 @@ fun TicketsRootNavHost(
         is TicketsRoot.Child.OrderConfirmation -> ConfirmationUI(
             component = child.component,
             modifier = modifier
+        )
+
+        is TicketsRoot.Child.CardInput -> CardInputUI(
+            component = child.component,
+            modifier = modifier,
         )
     }
 }

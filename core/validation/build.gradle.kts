@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    namespace = "ru.sulgik.root.component"
+    namespace = "ru.sulgik.core.validation"
     compileSdk = 34
 
     defaultConfig {
@@ -27,11 +26,7 @@ android {
         }
     }
     buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -50,26 +45,7 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.compose.ui)
-
-    implementation(libs.koin.core)
-
-    implementation(libs.mvikotlin.core)
-    implementation(libs.mvikotlin.coroutines)
-    implementation(libs.decompose.compose)
-
-    implementation(libs.serialization.core)
     implementation(libs.datetime)
 
-    implementation(projects.features.tickets.presentation)
-    implementation(projects.features.tickets.schedule.component)
-    implementation(projects.features.tickets.places.component)
-    implementation(projects.features.tickets.confirmation.component)
-    implementation(projects.features.card.component)
-
-    api(projects.core.component)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    implementation(libs.koin.core)
 }

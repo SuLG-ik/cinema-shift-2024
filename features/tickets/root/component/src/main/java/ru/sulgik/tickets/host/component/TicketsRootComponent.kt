@@ -12,6 +12,7 @@ import kotlinx.datetime.toJavaLocalTime
 import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toKotlinLocalTime
 import kotlinx.serialization.Serializable
+import ru.sulgik.card.component.CardInputComponent
 import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.diChildStack
@@ -76,9 +77,17 @@ class TicketsRootComponent(
 
             is Config.OrderConfirmation -> TicketsRoot.Child.OrderConfirmation(
                 ConfirmationComponent(
-                    {},
-                    {},
+                    this::onBack,
+                    this::onOrderConfirmed,
                     config.convert(),
+                )
+            )
+
+            Config.CardInput -> TicketsRoot.Child.CardInput(
+                CardInputComponent(
+                    componentContext = diComponentContext,
+                    onBack = this::onBack,
+                    onContinue = {},
                 )
             )
         }
@@ -112,6 +121,10 @@ class TicketsRootComponent(
                 selectedSeance.hallType.convert(),
             )
         )
+    }
+
+    private fun onOrderConfirmed() {
+        navigation.bringToFront(Config.CardInput)
     }
 
     private fun onPlacesSelected(
@@ -186,6 +199,9 @@ class TicketsRootComponent(
 
 
         }
+
+        @Serializable
+        data object CardInput : Config
 
     }
 
