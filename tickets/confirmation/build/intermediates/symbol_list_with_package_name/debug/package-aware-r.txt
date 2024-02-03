@@ -1,0 +1,14 @@
+ru.sulgik.tickets.confirmation.component
+string blue_hall
+string confirmation
+string confirmation_await
+string continue_button
+string date_time
+string green_hall
+string hall
+string movie
+string places
+string red_hall
+string row_columns
+string total_cost
+string unknown_hall

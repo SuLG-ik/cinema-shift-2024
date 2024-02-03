@@ -54,7 +54,7 @@ dependencies {
     coreLibraryDesugaring(libs.desugaring)
 
     implementation(libs.decompose.android)
-    implementation(projects.features.root.component)
+    implementation(projects.root)
     implementation(projects.core.di)
     implementation(projects.uikit)
     implementation(projects.core.datetime)

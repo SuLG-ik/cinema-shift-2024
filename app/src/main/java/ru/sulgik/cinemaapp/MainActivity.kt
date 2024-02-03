@@ -20,7 +20,7 @@ import ru.sulgik.core.component.withDI
 import ru.sulgik.core.datetime.DateTimeFormatter
 import ru.sulgik.core.datetime.LocalDateTimeFormatter
 import ru.sulgik.host.component.RootComponent
-import ru.sulgik.host.component.RootUI
+import ru.sulgik.host.ui.RootUI
 import ru.sulgik.uikit.LocalImageLoader
 
 class MainActivity : ComponentActivity(), KoinComponent {

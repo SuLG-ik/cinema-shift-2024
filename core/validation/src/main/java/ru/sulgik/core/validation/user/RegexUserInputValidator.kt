@@ -10,27 +10,23 @@ class RegexUserInputValidator : UserInputValidator {
         if (value.isEmpty() || value.length > MAX_LENGTH) {
             return UserFirstNameValidationResult(
                 value = value,
-                isFull = false,
                 error = UserInputError.IncorrectLength,
             )
         }
         if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
             return UserFirstNameValidationResult(
                 value = value,
-                isFull = true,
                 error = UserInputError.DifferentLanguages,
             )
         }
         if (value.matches(USER_LATIN_REQUIRED) || value.matches(USER_CYRILLIC_REQUIRED)) {
             return UserFirstNameValidationResult(
                 value = value,
-                isFull = true,
                 error = null,
             )
         }
         return UserFirstNameValidationResult(
             value = value,
-            isFull = true,
             error = UserInputError.IncorrectInput,
         )
     }
@@ -39,27 +35,23 @@ class RegexUserInputValidator : UserInputValidator {
         if (value.isEmpty() || value.length > MAX_LENGTH) {
             return UserLastNameValidationResult(
                 value = value,
-                isFull = false,
                 error = UserInputError.IncorrectLength,
             )
         }
         if (USER_LATIN_LANGUAGES.containsMatchIn(value) && USER_CYRILLIC_LANGUAGES.containsMatchIn(value)) {
             return UserLastNameValidationResult(
                 value = value,
-                isFull = true,
                 error = UserInputError.DifferentLanguages,
             )
         }
         if (value.matches(USER_LATIN_REQUIRED) || value.matches(USER_CYRILLIC_REQUIRED)) {
             return UserLastNameValidationResult(
                 value = value,
-                isFull = true,
                 error = null,
             )
         }
         return UserLastNameValidationResult(
             value = value,
-            isFull = true,
             error = UserInputError.IncorrectInput,
         )
     }
@@ -94,20 +86,17 @@ class RegexUserInputValidator : UserInputValidator {
         if (value.isEmpty()) {
             return UserPhoneValidationResult(
                 value = value,
-                isFull = false,
                 error = UserInputError.IncorrectLength
             )
         }
         if (value.matches(USER_PHONE)) {
             return UserPhoneValidationResult(
                 value = value,
-                isFull = true,
                 error = null,
             )
         }
         return UserPhoneValidationResult(
             value = value,
-            isFull = false,
             error = UserInputError.IncorrectInput
         )
     }

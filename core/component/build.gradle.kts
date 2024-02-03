@@ -54,6 +54,4 @@ dependencies {
     api(libs.essenty.core)
 
     implementation(projects.core.dataGraphql)
-    implementation(projects.features.filmList.data)
-    implementation(projects.features.filmList.domain)
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.sulgik.core.data"
+    namespace = "ru.sulgik.core.graphql.data"
     compileSdk = 34
 
     defaultConfig {

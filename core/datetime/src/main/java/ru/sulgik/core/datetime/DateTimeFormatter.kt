@@ -1,7 +1,7 @@
 package ru.sulgik.core.datetime
 
-import java.time.LocalDate
-import java.time.LocalTime
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
 
 interface DateTimeFormatter {
 

@@ -1,11 +1,16 @@
 package ru.sulgik.core.datetime
 
 import android.content.Context
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.toJavaLocalTime
+import kotlinx.datetime.toKotlinLocalDate
+import kotlinx.datetime.toKotlinLocalTime
 import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.LocalTime
 import java.time.Month
 import java.time.format.DateTimeFormatter
+import java.time.LocalDate as JavaLocalDate
+import java.time.LocalTime as JavaLocalTime
 
 class DateTimeFormatterImpl(
     private val context: Context,
@@ -15,15 +20,15 @@ class DateTimeFormatterImpl(
     private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     override fun parseDate(value: String): LocalDate {
-        return LocalDate.parse(value, dateFormatter)
+        return JavaLocalDate.parse(value, dateFormatter).toKotlinLocalDate()
     }
 
     override fun parseTime(value: String): LocalTime {
-        return LocalTime.parse(value, timeFormatter)
+        return JavaLocalTime.parse(value, timeFormatter).toKotlinLocalTime()
     }
 
     override fun formatTime(time: LocalTime): String {
-        return timeFormatter.format(time)
+        return timeFormatter.format(time.toJavaLocalTime())
     }
 
     override fun formatDateWithWeek(time: LocalDate): String {
