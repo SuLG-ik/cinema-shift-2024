@@ -11,6 +11,8 @@ interface ProfileEdit {
 
     val isContinueAvailable: Value<Boolean>
 
+    val isLoading: Value<Boolean>
+
     fun onContinue()
 
     fun onFirstNameInput(value: String)

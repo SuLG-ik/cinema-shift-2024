@@ -38,6 +38,9 @@ class ProfileEditComponent(
     override val isContinueAvailable: Value<Boolean> =
         state.map { it.isContinueAvailable }
 
+    override val isLoading: Value<Boolean> =
+        state.map { it.isLoading }
+
     override fun onContinue() {
         store.accept(ProfileEditStore.Intent.Save)
     }

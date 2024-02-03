@@ -1,11 +1,16 @@
 package ru.sulgik.profile.edit.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +19,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import ru.sulgik.core.validation.user.UserInputError
 import ru.sulgik.profile.edit.R
 import ru.sulgik.profile.edit.domain.entity.UserProfileInput
@@ -28,6 +34,7 @@ import ru.sulgik.uikit.tokens.UIKitPaddingDefaultTokens
 fun ProfileEditScreen(
     input: UserProfileInput?,
     isContinueAvailable: Boolean,
+    isLoading: Boolean,
     onFirstNameInput: (String) -> Unit,
     onLastNameInput: (String) -> Unit,
     onMiddleNameInput: (String) -> Unit,
@@ -49,6 +56,7 @@ fun ProfileEditScreen(
         if (input != null) {
             ProfileEditInput(
                 input = input,
+                isLoading = isLoading,
                 isContinueAvailable = isContinueAvailable,
                 onFirstNameInput = onFirstNameInput,
                 onLastNameInput = onLastNameInput,
@@ -179,6 +187,7 @@ fun PhoneField(
 @Composable
 fun ProfileEditInput(
     isContinueAvailable: Boolean,
+    isLoading: Boolean,
     input: UserProfileInput,
     onFirstNameInput: (String) -> Unit,
     onLastNameInput: (String) -> Unit,
@@ -201,6 +210,7 @@ fun ProfileEditInput(
             onCityInput = onCityInput,
             modifier = Modifier.fillMaxWidth(),
         )
+
         UIKitContainedButton(
             onClick = onContinue,
             largeCorners = false,
@@ -208,6 +218,9 @@ fun ProfileEditInput(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
+            AnimatedVisibility(visible = isLoading) {
+                CircularProgressIndicator(modifier = Modifier.size(16.dp))
+            }
             Text(text = stringResource(R.string.save_button))
         }
     }

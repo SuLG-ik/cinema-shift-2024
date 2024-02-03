@@ -13,10 +13,12 @@ fun ProfileEditUI(
 ) {
     val input by component.userProfileInput.subscribeAsState()
     val isContinueAvailable by component.isContinueAvailable.subscribeAsState()
+    val isLoading by component.isLoading.subscribeAsState()
     ProfileEditScreen(
         modifier = modifier,
         input = input.value,
         isContinueAvailable = isContinueAvailable,
+        isLoading = isLoading,
         onFirstNameInput = component::onFirstNameInput,
         onLastNameInput = component::onLastNameInput,
         onMiddleNameInput = component::onMiddleNameInput,
