@@ -7,6 +7,7 @@ import org.koin.dsl.module
 import ru.sulgik.profile.edit.data.converter.KtorUserConverter
 import ru.sulgik.profile.edit.data.repository.KtorUserProfileRepository
 import ru.sulgik.profile.edit.domain.repository.UserProfileRepository
+import ru.sulgik.profile.edit.domain.usecase.EditProfileInfoUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatCityUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatEmailUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatFirstNameUseCase
@@ -38,4 +39,5 @@ val profileEditModule = module {
     factoryOf(::ValidateFirstNameUseCase)
     factoryOf(::ValidateLastNameUseCase)
     factoryOf(::IsContinueAvailableUseCase)
+    factoryOf(::EditProfileInfoUseCase)
 }

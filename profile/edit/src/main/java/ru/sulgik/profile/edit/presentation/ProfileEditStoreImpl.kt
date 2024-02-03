@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.sulgik.profile.edit.domain.entity.UserProfile
 import ru.sulgik.profile.edit.domain.entity.UserProfileInput
+import ru.sulgik.profile.edit.domain.usecase.EditProfileInfoUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatCityUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatEmailUseCase
 import ru.sulgik.profile.edit.domain.usecase.FormatFirstNameUseCase
@@ -40,6 +41,7 @@ class ProfileEditStoreImpl(
     formatEmailUseCase: FormatEmailUseCase,
     formatCityUseCase: FormatCityUseCase,
     isContinueAvailableUseCase: IsContinueAvailableUseCase,
+    editProfileInfoUseCase: EditProfileInfoUseCase,
 ) : ProfileEditStore,
     Store<ProfileEditStore.Intent, ProfileEditStore.State, ProfileEditStore.Label> by storeFactory.create<_, Action, Message, _, _>(
         name = "ProfileEditStoreImpl",
@@ -110,6 +112,19 @@ class ProfileEditStoreImpl(
                         profile = profile,
                     )
                 }
+
+                Message.Loading -> {
+                    copy(
+                        isContinueAvailable = false,
+                        isLoading = true
+                    )
+                }
+
+                Message.Saved ->
+                    copy(
+                        isContinueAvailable = isContinueAvailableUseCase(profile),
+                        isLoading = false,
+                    )
             }
         },
         bootstrapper = coroutineBootstrapper(coroutineDispatcher) { dispatch(Action.Setup) },
@@ -124,6 +139,33 @@ class ProfileEditStoreImpl(
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
                             publish(ProfileEditStore.Label.Unauthorized)
+                        }
+                    }
+                }
+            }
+            onIntent<ProfileEditStore.Intent.Save> {
+                if (state().isLoading)
+                    return@onIntent
+                val profile = state().profile ?: return@onIntent
+                dispatch(Message.Loading)
+                launch {
+                    try {
+                        editProfileInfoUseCase(
+                            UserProfile(
+                                firstName = profile.firstName.value,
+                                lastName = profile.lastName.value,
+                                middleName = profile.middleName.value,
+                                email = profile.email.value,
+                                city = profile.city.value,
+                                phone = profile.phone.value
+                            )
+                        )
+                        withContext(Dispatchers.Main) {
+                            dispatch(Message.Saved)
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            dispatch(Message.Saved)
                         }
                     }
                 }
@@ -166,6 +208,8 @@ class ProfileEditStoreImpl(
     }
 
     sealed interface Message {
+        data object Loading : Message
+        data object Saved : Message
         data class SetProfile(
             val userProfile: UserProfile,
         ) : Message

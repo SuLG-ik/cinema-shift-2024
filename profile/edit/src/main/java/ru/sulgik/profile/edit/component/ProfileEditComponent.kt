@@ -39,7 +39,7 @@ class ProfileEditComponent(
         state.map { it.isContinueAvailable }
 
     override fun onContinue() {
-        TODO("Not yet implemented")
+        store.accept(ProfileEditStore.Intent.Save)
     }
 
     override fun onFirstNameInput(value: String) {

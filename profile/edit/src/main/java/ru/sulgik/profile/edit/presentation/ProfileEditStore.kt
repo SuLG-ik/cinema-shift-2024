@@ -7,6 +7,7 @@ interface ProfileEditStore :
     Store<ProfileEditStore.Intent, ProfileEditStore.State, ProfileEditStore.Label> {
 
     sealed interface Intent {
+        data object Save: Intent
         data class FirstNameInput(val value: String): Intent
         data class LastNameInput(val value: String): Intent
         data class MiddleNameInput(val value: String): Intent
