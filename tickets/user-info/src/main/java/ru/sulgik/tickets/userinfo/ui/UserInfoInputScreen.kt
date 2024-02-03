@@ -274,6 +274,7 @@ fun PhoneError(error: UserInputError?, modifier: Modifier = Modifier) {
         )
 }
 
+//TODO
 @Composable
 fun textForError(error: UserInputError): String {
     return when (error) {
@@ -284,6 +285,7 @@ fun textForError(error: UserInputError): String {
 }
 
 
+//TODO
 @Composable
 fun textForPhoneError(error: UserInputError): String {
     return when (error) {

@@ -5,6 +5,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import ru.sulgik.card.presentation.cardInputPresentationModule
+import ru.sulgik.core.auth.localAuthModule
 import ru.sulgik.core.datetime.dateTimeModule
 import ru.sulgik.core.graphql.data.graphQlModule
 import ru.sulgik.core.images.imageURLFormatter
@@ -14,6 +15,7 @@ import ru.sulgik.core.validation.validationModule
 import ru.sulgik.filminfo.filmInfoModule
 import ru.sulgik.filmlist.filmListModule
 import ru.sulgik.login.loginModule
+import ru.sulgik.profile.edit.profileEditModule
 import ru.sulgik.tickets.places.ticketsPlacesSelectorModule
 import ru.sulgik.tickets.schedule.ticketsSeanceSelectorModule
 import ru.sulgik.tickets.ticketsSharedModule
@@ -30,6 +32,7 @@ fun Application.startDI() {
             mviKotlinModule,
             dateTimeModule,
             validationModule,
+            localAuthModule,
 
             filmListModule,
             filmInfoModule,
@@ -40,6 +43,7 @@ fun Application.startDI() {
             ticketsUserInfoModule,
 
             loginModule,
+            profileEditModule,
 
             cardInputPresentationModule,
         )

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="confirmation">Подтверждение</string>
-    <string name="continue_button">Купить</string>
-    <string name="places">Места</string>
-    <string name="total_cost">Сумма: %1$s ₽</string>
-    <string name="date_time">Дата и время</string>
-    <string name="movie">Фильм</string>
-    <string name="hall">Зал</string>
-    <string name="row_columns">%1$s ряд - %2$s</string>
-    <string name="red_hall">Красный</string>
-    <string name="green_hall">Зелёный</string>
-    <string name="blue_hall">Синий</string>
-    <string name="unknown_hall">Неизвестен</string>
-    <string name="confirmation_await">Ожидание заказа</string>
+    <string name="profile_top_bar">Профиль</string>
+    <string name="save_button">Сохранить изменения</string>
+    <string name="profile_error_different_languages">Нельзя смешивать латиницу и кирилицу</string>
+    <string name="profile_error_incorrect_input">Можно использовать только алфавиты кирилицы и латиницы</string>
+    <string name="profile_error_incorrent_length">Поле не может быть пустым</string>
+    <string name="profile_firstname">Имя*</string>
+    <string name="profile_lastname">Фамилия*</string>
+    <string name="profile_middlename">Отчество</string>
+    <string name="profile_email">Почта</string>
+    <string name="profile_city">Город</string>
+    <string name="profile_firstname_placeholder">Иван</string>
+    <string name="profile_lastname_placeholder">Иванов</string>
+    <string name="profile_middlename_placeholder">Иванович</string>
+    <string name="profile_city_placeholder">Новосибирск</string>
 </resources>

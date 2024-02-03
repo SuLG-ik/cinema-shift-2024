@@ -52,6 +52,7 @@ dependencies {
     implementation(projects.core.auth)
 
     implementation(projects.login)
+    implementation(projects.profile.edit)
     implementation(projects.card)
     implementation(projects.filmInfo)
     implementation(projects.filmList)

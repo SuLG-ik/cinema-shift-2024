@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import ru.sulgik.login.ui.LoginInputUI
+import ru.sulgik.profile.edit.ui.ProfileEditUI
 import ru.sulgik.profile.host.component.ProfileRoot
 
 @Composable
@@ -22,8 +23,14 @@ fun ProfileRootNavHost(
     modifier: Modifier,
 ) {
     when (child) {
-        ProfileRoot.Child.Edit -> TODO()
+        is ProfileRoot.Child.Edit -> ProfileEditUI(
+            component = child.component,
+            modifier = modifier
+        )
         ProfileRoot.Child.Loading -> TODO()
-        is ProfileRoot.Child.Login -> LoginInputUI(child.component, modifier)
+        is ProfileRoot.Child.Login -> LoginInputUI(
+            component = child.component,
+            modifier = modifier,
+        )
     }
 }

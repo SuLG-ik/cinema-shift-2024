@@ -12,4 +12,7 @@ interface UserInputValidator {
 
     fun validateCode(value: String): UserCodeValidationResult
 
+    fun validateEmail(value: String): UserEmailValidationResult
+
+    fun validateCity(value: String): UserCityValidationResult
 }

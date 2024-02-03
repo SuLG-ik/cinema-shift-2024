@@ -1,9 +1,12 @@
 package ru.sulgik.core.validation.user
 
+import org.apache.commons.validator.routines.EmailValidator
+
 class RegexUserInputValidator : UserInputValidator {
 
     companion object {
         const val MAX_LENGTH = 60
+        val emailValidator = EmailValidator.getInstance()
     }
 
     override fun validateFirstName(value: String): UserFirstNameValidationResult {
@@ -126,6 +129,26 @@ class RegexUserInputValidator : UserInputValidator {
         return UserCodeValidationResult(
             value = value,
             error = UserInputError.IncorrectLength,
+        )
+    }
+
+    override fun validateEmail(value: String): UserEmailValidationResult {
+        if (value.isEmpty() || emailValidator.isValid(value)) {
+            return UserEmailValidationResult(
+                value,
+                null,
+            )
+        }
+        return UserEmailValidationResult(
+            value,
+            UserInputError.IncorrectInput,
+        )
+    }
+
+    override fun validateCity(value: String): UserCityValidationResult {
+        return UserCityValidationResult(
+            value,
+            null
         )
     }
 

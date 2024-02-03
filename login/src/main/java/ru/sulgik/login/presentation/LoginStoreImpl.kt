@@ -13,6 +13,7 @@ import ru.sulgik.login.domain.entity.LoginInput
 import ru.sulgik.login.domain.usecase.FormatCodeUseCase
 import ru.sulgik.login.domain.usecase.FormatPhoneUseCase
 import ru.sulgik.login.domain.usecase.IsContinueAvailableUseCase
+import ru.sulgik.login.domain.usecase.SaveAuthScopeUseCase
 import ru.sulgik.login.domain.usecase.SendCodeUseCase
 import ru.sulgik.login.domain.usecase.SignInUseCase
 import ru.sulgik.login.domain.usecase.ValidateCodeUseCase
@@ -29,6 +30,7 @@ class LoginStoreImpl(
     validateCodeUseCase: ValidateCodeUseCase,
     validatePhoneUseCase: ValidatePhoneUseCase,
     isContinueAvailableUseCase: IsContinueAvailableUseCase,
+    saveAuthScopeUseCase: SaveAuthScopeUseCase,
 ) : LoginStore,
     Store<LoginStore.Intent, LoginStore.State, LoginStore.Label> by storeFactory.create<_, _, Message, _, _>(
         name = "LoginStoreImpl",
@@ -133,10 +135,11 @@ class LoginStoreImpl(
                     LoginInput.Step.CODE_INPUT -> {
                         launch {
                             try {
-                                signInUseCase(
+                                val result = signInUseCase(
                                     state().loginInput.phone.value,
                                     state().loginInput.code.value
                                 )
+                                saveAuthScopeUseCase(state().loginInput.phone.value, result.token)
                                 withContext(Dispatchers.Main) {
                                     publish(LoginStore.Label.AuthorizationCompleted)
                                 }

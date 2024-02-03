@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="confirmation">Confirmation</string>
-    <string name="continue_button">Buy</string>
-    <string name="total_cost">Total cost: %1$s ₽</string>
-    <string name="places">Places</string>
-    <string name="date_time">Date and time</string>
-    <string name="movie">Movie</string>
-    <string name="hall">Hall</string>
-    <string name="row_columns">%1$s row - %2$s</string>
-    <string name="red_hall">Red</string>
-    <string name="green_hall">Green</string>
-    <string name="blue_hall">Blue</string>
-    <string name="unknown_hall">Unknown</string>
-    <string name="confirmation_await">Wait order…</string>
+    <string name="profile_top_bar">Profile</string>
+    <string name="save_button">Save changes</string>
+    <string name="profile_error_different_languages">Don\'t use latin and cyrillic together</string>
+    <string name="profile_error_incorrect_input">Use only cyrillic or latin alphabet</string>
+    <string name="profile_error_incorrent_length">Required field</string>
+    <string name="profile_firstname">First name*</string>
+    <string name="profile_lastname">Last name*</string>
+    <string name="profile_middlename">Middle name</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_city">City</string>
+    <string name="profile_firstname_placeholder">Ivan</string>
+    <string name="profile_lastname_placeholder">Ivanov</string>
+    <string name="profile_middlename_placeholder">Ivanovich</string>
+    <string name="profile_email_placeholder" translatable="false">example@example.com</string>
+    <string name="profile_city_placeholder">Novosibirsk</string>
 </resources>

@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.datetime)
+    implementation(libs.validator)
 
     implementation(libs.koin.core)
 }

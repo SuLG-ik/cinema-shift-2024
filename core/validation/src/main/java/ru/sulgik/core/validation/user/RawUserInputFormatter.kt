@@ -16,11 +16,20 @@ class RawUserInputFormatter : UserInputFormatter {
         return value.trimStart()
     }
 
-    override fun formatPhone(value: String): String {
-        return value.filter(Char::isDigit).sliceIfAvailable(0 until  10)
+    override fun formatEmail(value: String): String {
+        return value.filterNot(Char::isWhitespace)
     }
+
+    override fun formatCity(value: String): String {
+        return value.trimStart()
+    }
+
+    override fun formatPhone(value: String): String {
+        return value.filter(Char::isDigit).sliceIfAvailable(0 until 10)
+    }
+
     override fun formatCode(value: String): String {
-        return value.filter(Char::isDigit).sliceIfAvailable(0 until  6)
+        return value.filter(Char::isDigit).sliceIfAvailable(0 until 6)
     }
 
 }

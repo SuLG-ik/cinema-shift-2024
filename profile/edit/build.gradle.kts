@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.bundles.compose)
 
     implementation(libs.koin.core)
+    implementation(libs.ktor.core)
 
     implementation(libs.mvikotlin.core)
     implementation(libs.mvikotlin.coroutines)
@@ -62,6 +63,7 @@ dependencies {
     api(projects.core.datetime)
     api(projects.tickets.shared)
     implementation(projects.uikit)
+    implementation(projects.core.validation)
     implementation(libs.coil.core)
     implementation(libs.coil.compose)
 
