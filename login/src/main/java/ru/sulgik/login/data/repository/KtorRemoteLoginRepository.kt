@@ -8,6 +8,7 @@ import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.contentType
 import ru.sulgik.login.data.model.SendOTPRequest
 import ru.sulgik.login.data.model.SendOTPResponse
+import ru.sulgik.login.data.model.SignInRequest
 import ru.sulgik.login.data.model.SignInResponse
 import ru.sulgik.login.domain.entity.SentOTP
 import ru.sulgik.login.domain.entity.SignInCompleted
@@ -19,7 +20,7 @@ class KtorRemoteLoginRepository(
     override suspend fun sendOTP(phone: String): SentOTP {
         val response = client.post("/auth/otp") {
             contentType(Json)
-            setBody(SendOTPRequest(phone))
+            setBody(SendOTPRequest("7$phone"))
         }.body<SendOTPResponse>()
         return SentOTP(response.retryDelay)
     }
@@ -27,7 +28,7 @@ class KtorRemoteLoginRepository(
     override suspend fun signIn(phone: String, otp: String): SignInCompleted {
         val response = client.post("/users/signin") {
             contentType(Json)
-            setBody(SignInResponse(phone))
+            setBody(SignInRequest("7$phone", otp))
         }.body<SignInResponse>()
         return SignInCompleted(response.token)
     }

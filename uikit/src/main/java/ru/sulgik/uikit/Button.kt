@@ -27,12 +27,14 @@ fun UIKitContainedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     largeCorners: Boolean = true,
+    enabled: Boolean = true,
     text: @Composable () -> Unit,
 ) {
     FilledTonalButton(
         onClick = onClick,
         modifier = modifier,
         shape = if (largeCorners) UIKitShapeTokens.CornerLarge else UIKitShapeTokens.CornerMedium,
+        enabled = enabled,
         colors = containedButtonColors(),
     ) {
         text()

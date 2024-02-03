@@ -1,4 +1,4 @@
-ru.sulgik.tickets.confirmation.component
+ru.sulgik.tickets.confirmation
 string blue_hall
 string confirmation
 string confirmation_await

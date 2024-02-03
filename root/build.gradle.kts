@@ -63,6 +63,7 @@ dependencies {
     implementation(projects.filmList)
     implementation(projects.filmInfo)
     implementation(projects.tickets.root)
+    implementation(projects.profile.root)
 
     api(projects.core.component)
     implementation(projects.uikit)

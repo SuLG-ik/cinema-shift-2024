@@ -1,8 +1,12 @@
 package ru.sulgik.host.ui
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -12,7 +16,7 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import ru.sulgik.host.component.Root
 import ru.sulgik.host.ui.films.FilmsUI
-import ru.sulgik.root.R
+import ru.sulgik.profile.host.ui.ProfileRootUI
 import ru.sulgik.uikit.iconpack.UIKitIconPack
 import ru.sulgik.uikit.iconpack.uikiticonpack.Movie
 import ru.sulgik.uikit.iconpack.uikiticonpack.Ticket
@@ -28,18 +32,20 @@ fun RootUI(
         bottomBar = {
             BottomAppBar {
                 NavItem.values().forEach {
-
                     NavigationBarItem(
-                        selected = childStack.active.configuration,
-                        onClick = { /*TODO*/ },
-                        icon = { /*TODO*/ })
+                        selected = childStack.active.configuration == it.config,
+                        onClick = { component.onNavigate(it.config) },
+                        icon = { Icon(it.image, contentDescription = null) },
+                        label = { Text(stringResource(id = it.title)) }
+                    )
                 }
             }
         },
         modifier = modifier,
-    )
-    Children(stack = component.childStack) {
-        RootNavHost(it.instance, modifier)
+    ) { paddingValues ->
+        Children(childStack, modifier = Modifier.padding(paddingValues)) {
+            RootNavHost(it.instance, modifier = Modifier.fillMaxWidth())
+        }
     }
 }
 
@@ -61,7 +67,7 @@ enum class NavItem(
     Profile(
         ru.sulgik.root.R.string.nav_item_profile,
         UIKitIconPack.User,
-        Root.Config.Tickets,
+        Root.Config.Profile,
     )
 }
 
@@ -72,7 +78,7 @@ fun RootNavHost(
 ) {
     when (child) {
         is Root.Child.Films -> FilmsUI(child.component, modifier)
-        Root.Child.Profile -> TODO()
+        is Root.Child.Profile -> ProfileRootUI(child.component, modifier)
         Root.Child.Tickets -> TODO()
     }
 }

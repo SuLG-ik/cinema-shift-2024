@@ -49,7 +49,9 @@ dependencies {
     implementation(projects.core.mvi)
     implementation(projects.core.datetime)
     implementation(projects.core.validation)
+    implementation(projects.core.auth)
 
+    implementation(projects.login)
     implementation(projects.card)
     implementation(projects.filmInfo)
     implementation(projects.filmList)

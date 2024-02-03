@@ -2,11 +2,13 @@ package ru.sulgik.host.component
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.value.Value
 import ru.sulgik.core.component.AppComponentContext
 import ru.sulgik.core.component.DIComponentContext
 import ru.sulgik.core.component.diChildStack
 import ru.sulgik.host.component.films.FilmsComponent
+import ru.sulgik.profile.host.component.ProfileRootComponent
 
 class RootComponent(
     componentContext: DIComponentContext
@@ -33,13 +35,17 @@ class RootComponent(
                 )
             )
 
-            Root.Config.Profile -> Root.Child.Profile
+            Root.Config.Profile -> Root.Child.Profile(
+                ProfileRootComponent(
+                    componentContext =  diComponentContext,
+                )
+            )
             Root.Config.Tickets -> Root.Child.Tickets
         }
     }
 
     override fun onNavigate(config: Root.Config) {
-        TODO("Not yet implemented")
+        navigation.bringToFront(config)
     }
 
 }

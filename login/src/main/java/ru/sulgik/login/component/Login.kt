@@ -12,4 +12,6 @@ interface Login {
     fun onCodeInput(value: String)
 
     fun onContinue()
+
+    fun onNewCode()
 }

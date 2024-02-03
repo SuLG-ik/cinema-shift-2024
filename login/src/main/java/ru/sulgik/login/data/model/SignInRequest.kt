@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SignInRequest(
     val phone: String,
-    val code: Int,
+    val code: String,
 )
 
 @Serializable

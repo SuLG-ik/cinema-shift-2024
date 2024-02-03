@@ -4,7 +4,7 @@
     "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "ru.sulgik.tickets.confirmation.component",
+  "applicationId": "ru.sulgik.tickets.confirmation",
   "variantName": "debug",
   "elements": [
     {

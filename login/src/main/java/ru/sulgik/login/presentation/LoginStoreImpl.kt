@@ -12,6 +12,7 @@ import ru.sulgik.core.validation.user.UserInputError
 import ru.sulgik.login.domain.entity.LoginInput
 import ru.sulgik.login.domain.usecase.FormatCodeUseCase
 import ru.sulgik.login.domain.usecase.FormatPhoneUseCase
+import ru.sulgik.login.domain.usecase.IsContinueAvailableUseCase
 import ru.sulgik.login.domain.usecase.SendCodeUseCase
 import ru.sulgik.login.domain.usecase.SignInUseCase
 import ru.sulgik.login.domain.usecase.ValidateCodeUseCase
@@ -27,38 +28,62 @@ class LoginStoreImpl(
     formatPhoneUseCase: FormatPhoneUseCase,
     validateCodeUseCase: ValidateCodeUseCase,
     validatePhoneUseCase: ValidatePhoneUseCase,
+    isContinueAvailableUseCase: IsContinueAvailableUseCase,
 ) : LoginStore,
     Store<LoginStore.Intent, LoginStore.State, LoginStore.Label> by storeFactory.create<_, _, Message, _, _>(
         name = "LoginStoreImpl",
         initialState = LoginStore.State(),
         reducer = {
             when (it) {
-                is Message.ChangeStep ->
+                is Message.ChangeStep -> {
+                    val loginInput = loginInput.copy(
+                        isContinueAvailable = false,
+                        isLoading = false,
+                        step = it.step,
+                    )
                     copy(
                         loginInput = loginInput.copy(
-                            isContinueAvailable = false,
-                            isLoading = false,
-                            step = it.step,
+                            isContinueAvailable = isContinueAvailableUseCase(
+                                loginInput
+                            )
                         )
                     )
+                }
 
-                is Message.CodeField -> copy(
-                    loginInput = loginInput.copy(
+                is Message.CodeField -> {
+                    val loginInput = loginInput.copy(
                         code = it.field
                     )
-                )
+                    copy(
+                        loginInput = loginInput.copy(
+                            isContinueAvailable = isContinueAvailableUseCase(
+                                loginInput
+                            )
+                        )
+                    )
+                }
 
-                is Message.PhoneField -> copy(
-                    loginInput = loginInput.copy(
+                is Message.PhoneField -> {
+                    val loginInput = loginInput.copy(
                         phone = it.field
                     )
-                )
-
-                Message.Loading -> copy(
-                    loginInput = loginInput.copy(
-                        isLoading = true,
+                    copy(
+                        loginInput = loginInput.copy(
+                            isContinueAvailable = isContinueAvailableUseCase(
+                                loginInput
+                            )
+                        )
                     )
-                )
+                }
+
+                Message.Loading -> {
+                    copy(
+                        loginInput = loginInput.copy(
+                            isLoading = true,
+                            isContinueAvailable = false,
+                        )
+                    )
+                }
 
                 Message.IllegalCode -> copy(
                     loginInput = loginInput.copy(
@@ -82,13 +107,26 @@ class LoginStoreImpl(
                 val formatted = formatCodeUseCase(it.value)
                 dispatch(Message.CodeField(validateCodeUseCase(formatted)))
             }
+            onIntent<LoginStore.Intent.NewCode> {
+                dispatch(Message.Loading)
+                launch {
+                    sendCodeUseCase(state().loginInput.phone.value)
+                    withContext(Dispatchers.Main) {
+                        dispatch(Message.ChangeStep(LoginInput.Step.CODE_INPUT))
+                    }
+                }
+            }
             onIntent<LoginStore.Intent.Continue> {
                 if (!state().loginInput.isContinueAvailable)
                     return@onIntent
+                dispatch(Message.Loading)
                 when (state().loginInput.step) {
                     LoginInput.Step.PHONE_INPUT -> {
                         launch {
                             sendCodeUseCase(state().loginInput.phone.value)
+                            withContext(Dispatchers.Main) {
+                                dispatch(Message.ChangeStep(LoginInput.Step.CODE_INPUT))
+                            }
                         }
                     }
 
@@ -99,6 +137,9 @@ class LoginStoreImpl(
                                     state().loginInput.phone.value,
                                     state().loginInput.code.value
                                 )
+                                withContext(Dispatchers.Main) {
+                                    publish(LoginStore.Label.AuthorizationCompleted)
+                                }
                             } catch (e: Exception) {
                                 withContext(Dispatchers.Main) {
                                     dispatch(Message.IllegalCode)
