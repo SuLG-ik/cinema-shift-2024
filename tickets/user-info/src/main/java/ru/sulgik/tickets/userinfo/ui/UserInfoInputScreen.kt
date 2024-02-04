@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import ru.sulgik.core.validation.user.UserInputError
-import ru.sulgik.tickets.userinfo.R
 import ru.sulgik.tickets.userinfo.domain.entity.UserInfo
+import ru.sulgik.tickets.userinfo.R
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitOutlineTextField
 import ru.sulgik.uikit.UIKitTopBar
@@ -274,6 +274,7 @@ fun PhoneError(error: UserInputError?, modifier: Modifier = Modifier) {
         )
 }
 
+//TODO
 @Composable
 fun textForError(error: UserInputError): String {
     return when (error) {
@@ -284,6 +285,7 @@ fun textForError(error: UserInputError): String {
 }
 
 
+//TODO
 @Composable
 fun textForPhoneError(error: UserInputError): String {
     return when (error) {

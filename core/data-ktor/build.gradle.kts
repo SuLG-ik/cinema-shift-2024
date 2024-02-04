@@ -54,6 +54,9 @@ dependencies {
     implementation(libs.ktor.serialization)
     implementation(libs.ktor.contentnegotiation)
     implementation(libs.ktor.logging)
+    implementation(libs.ktor.auth)
+
+    implementation(projects.core.auth)
 
     implementation(libs.koin.core)
 }

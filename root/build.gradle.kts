@@ -50,7 +50,7 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.compose.ui)
+    implementation(libs.bundles.compose)
 
     implementation(libs.koin.core)
 
@@ -63,8 +63,10 @@ dependencies {
     implementation(projects.filmList)
     implementation(projects.filmInfo)
     implementation(projects.tickets.root)
+    implementation(projects.profile.root)
 
     api(projects.core.component)
+    implementation(projects.uikit)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

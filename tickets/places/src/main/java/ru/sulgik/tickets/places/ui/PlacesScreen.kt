@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import ru.sulgik.tickets.domain.entity.SelectedPlaces
-import ru.sulgik.tickets.places.R
 import ru.sulgik.tickets.places.domain.entity.PlaceWithState
+import ru.sulgik.tickets.places.R
 import ru.sulgik.uikit.UIKitContainedButton
 import ru.sulgik.uikit.UIKitTopBar
 import ru.sulgik.uikit.iconpack.UIKitIconPack

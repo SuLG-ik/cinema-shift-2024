@@ -8,6 +8,12 @@ interface UserInputFormatter {
 
     fun formatMiddleName(value: String): String
 
+    fun formatEmail(value: String): String
+
+    fun formatCity(value: String): String
+
     fun formatPhone(value: String): String
+
+    fun formatCode(value: String): String
 
 }

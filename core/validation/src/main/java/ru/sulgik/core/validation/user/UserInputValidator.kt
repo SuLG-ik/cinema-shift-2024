@@ -10,4 +10,9 @@ interface UserInputValidator {
 
     fun validatePhone(value: String): UserPhoneValidationResult
 
+    fun validateCode(value: String): UserCodeValidationResult
+
+    fun validateEmail(value: String): UserEmailValidationResult
+
+    fun validateCity(value: String): UserCityValidationResult
 }

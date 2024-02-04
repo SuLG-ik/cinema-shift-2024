@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_top_bar">Авторизация</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="login_button">Войти</string>
+    <string name="phone_input_description">Введите номер телефона для входа в личный кабинет</string>
+    <string name="one_time_code">Одноразовый код</string>
+</resources>
