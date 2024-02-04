@@ -18,7 +18,7 @@ class KtorUserConverter {
             middleName = middleName.orEmpty(),
             email = email.orEmpty(),
             city = city.orEmpty(),
-            phone = phone
+            phone = phone.substring(1)
 
         )
     }
